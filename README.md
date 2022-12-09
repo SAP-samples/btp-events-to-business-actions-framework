@@ -1,11 +1,5 @@
 # Build Events-to-Business Actions scenarios with SAP BTP and Microsoft Azure
 
-Power Industry 4.0 scenarios with “Events-to-Business” actions leveraging SAP BTP and Azure IoT
-Create Business Actions in SAP from Events using SAP BTP
-Manage Events to Business Actions using Events2Actions Framework in SAP BTP
-Translate Events to SAP Business Actions with SAP BTP
-
-
 [![REUSE status](https://api.reuse.software/badge/github.com/SAP-samples/btp-events-to-business-actions-framework)](https://api.reuse.software/info/github.com/SAP-samples/btp-events-to-business-actions-framework)
 
 This repository contains code samples and instructions for developing an extension application  in SAP BTP. The sample application has been developed in a partner collaboration to help customers integrate any type of events from systems into SAP ecosystem via SAP BTP. This application helps to configure  actions that needs to be taken in SAP LoB systems based on the events that is received in SAP Event Mesh.
@@ -80,6 +74,8 @@ These are the technical prerequistics for an integration between Microsoft Azure
     > - Required for securing the extension application in SAP BTP
 - SAP Event Mesh 
     >- Required to receive events from Azure IoT Platform
+- SAP HANA Cloud 
+    >- Required to store action configuration and logs for CAP application
 - SAP Workflow Management
     >- Business Rules service to configure business decisions that needs to be taken based on the type of event received from Azure IoT Platform.
 - SAP Event Mesh Connectivity Plan(Beta)

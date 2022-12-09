@@ -12,75 +12,71 @@ Ensure you have added the required entitlements as described in section **Step1-
 
 ### 3. Deploy the Extension Application
 
-1. Build and deploy the application. Run the following commands:
+Build and deploy the application. Run the following commands:
 
-    **Note**: Ensure you have Cloud MBT Build Tool. Refer [The Cloud MTA Build Tool (MBT)](https://help.sap.com/docs/HANA_CLOUD_DATABASE/c2b99f19e9264c4d9ae9221b22f6f589/1412120094534a23b1a894bc498c2767.html) for more details.
+**Note**: Ensure you have Cloud MBT Build Tool. Refer [The Cloud MTA Build Tool (MBT)](https://help.sap.com/docs/HANA_CLOUD_DATABASE/c2b99f19e9264c4d9ae9221b22f6f589/1412120094534a23b1a894bc498c2767.html) for more details.
 
-    1. Open the Cloud Foundry command line interface (cf CLI).
+1. Open the Cloud Foundry command line interface (cf CLI).
 
-    2. Navigate to **action-management** directory.
+2. Navigate to **action-management** directory.
 
-            ```
-            cd action-management
-            ```
-    3. Fetch the dependencies.
+        ```
+        cd action-management
+        ```
+3. Fetch the dependencies.
 
-            ```
-            npm install
-            ```
-    4. Build action-management modules.
+        ```
+        npm install
+        ```
+4. Build action-management modules.
 
-            ```
-            npm run build
-            ```
-    5. Log in to your subaccount in SAP BTP to deploy the extension application.
-      Check your region and copy the API endpoint accordingly. For example, "https://api.cf.region.hana.ondemand.com"
+        ```
+        npm run build
+        ```
+5. Log in to your subaccount in SAP BTP to deploy the extension application.
+    Check your region and copy the API endpoint accordingly. For example, "https://api.cf.region.hana.ondemand.com"
 
-            ```
-            cf login -a `<CF API endpoint>`
-            ```
-    6. Push the application to your subaccount.
+        ```
+        cf login -a `<CF API endpoint>`
+        ```
+6. Push the application to your subaccount.
 
-            ```
-            npm run deploy
-            ```
-    7. You can also check the status of your applications in the SAP BTP cockpit. Copy the value of the extension application URL.
+        ```
+        npm run deploy
+        ```
+7. You can also check the status of your applications in the SAP BTP cockpit. Copy the value of the extension application URL.
 
-        ![plot](./images/SAPBTPCockpit.png)
+    ![plot](./images/SAPBTPCockpit.png)
 
-    8. In the SAP BTP cockpit, navigate to your subaccount and choose **Services** > **Instances and Subscriptions**. Check if you have all of the instances created post deployment as shown below. Make sure the status of all of the instances are **Created**.
+8. In the SAP BTP cockpit, navigate to your subaccount and choose **Services** > **Instances and Subscriptions**. Check if you have all of the instances created post deployment as shown below. Make sure the status of all of the instances are **Created**.
 
-        ![plot](./images/postdeploy.png)
+    ![plot](./images/postdeploy.png)
 
-    9. Verify SAP Event Mesh Subscription and Instance creation.
-    
-        - In SAP BTP Enterprise account, you should be able to see the below details in Subcriptions and Instances.
+9. Verify SAP Event Mesh Subscription and Instance creation.
 
-            ![plot](./images/eventmesh-enterprise.png)
+    - In SAP BTP Enterprise account, you should be able to see the below details in Subcriptions and Instances.
 
-        - In SAP BTP trial account, you will see the below details in Subscription and Instances.
+        ![plot](./images/eventmesh-enterprise.png)
 
-            ![plot](./images/eventmesh-trial.png)
+10. Open the SAP Event Mesh application.
 
-    10. Open the SAP Event Mesh application.
+    - If you are using SAP BTP Enterprise account, go to the Subscriptions tab and choose Event Mesh to open the application.
 
-        - If you are using SAP BTP Enterprise account, go to the Subscriptions tab and choose Event Mesh to open the application.
+    - If you are using SAP BTP Trial account, go to Instances tab, select the instance for SAP Event Mesh and choose View Dashboard.
 
-        - If you are using SAP BTP Trial account, go to Instances tab, select the instance for SAP Event Mesh and choose View Dashboard.
+10. Choose **Message Clients** and then choose **Queues**. You will see the below message client and queue created in your SAP Event Mesh service instance.
 
-    10. Choose **Message Clients** and then choose **Queues**. You will see the below message client and queue created in your SAP Event Mesh service instance.
+    ![plot](./images/msgclient.png)
 
-        ![plot](./images/msgclient.png)
-
-        ![plot](./images/queue.png)
+    ![plot](./images/queue.png)
 
 
-    11. In subaccount, choose **Security** > **Role Collections**.
-      ![plot](./images/businessrules_rollcoll.png)
-    
+11. In subaccount, choose **Security** > **Role Collections**.
+
+    ![plot](./images/businessrules_rolecoll.png)
 
 
-### 4. Update destination configuration in Microsoft Azure.
+### 4. Create destination in Microsoft Azure IoT Central application
 
 1. In the SAP BTP cockpit, navigate to your subaccount and choose **Cloud Foundry** > **Spaces** and then choose your space.
 
@@ -90,7 +86,7 @@ Ensure you have added the required entitlements as described in section **Step1-
 
     ![plot](./images/deployedbtpapp.png)
 
-3. Choose **Environment Variables**. Search for your appname and copy the values of **clientid**, **clientsecret** and **tokenendpoint**.
+3. Choose **Environment Variables**. Search for your appname (action-management-srv) and copy the values of **clientid**, **clientsecret** and **tokenendpoint** of the **httprest** protocol.
 
     ![plot](./images/oauthdetails.png)
 
@@ -98,10 +94,62 @@ Ensure you have added the required entitlements as described in section **Step1-
 
     ![plot](./images/callback.png)
 
+4. Open the SAP Event Mesh application.
 
-6. Write instructions.Copy the value of <AJIT>**dfds**.
+    - If you are using SAP BTP Enterprise account, go to the Subscriptions tab and choose Event Mesh to open the application.
 
-    ![plot](./images/queuedetails.png)
+    ![plot](./images/event-mesh-subscription.png)
 
-7. Go to [Step 4 - Create Destinations in Configure Microsoft Azure IoT Central Application Destination](../Step2-Configure-Azure/README.md)
+5. Choose **Message Clients** and choose the respective message client
 
+    ![plot](./images/em-message-clients.png)
+
+6. Choose **Queues** and Select **Queue Subscriptions** in the Action button corresponding the queue name that is created by the "action-management" CAP application.
+
+    ![plot](./images/em-queue-subscription.png)
+
+7. Copy the value of **Subscribed Topic Name**
+
+    ![plot](./images/em-topic-name.png)
+
+8. Encode the **Subscribed Topic Name** value and notedown as **encoded subscribed topic name**.
+
+Note: For example, if the Subscribed Topic Name is "orgname/industry/event/raised", then the encoded subscribed topic name will be "orgname%2Findustry%2Fevent%2Fraised".
+
+9. Go to Microsoft Azure Portal and choose the IoT Central Application you created. Choose **Data Export** and then choose **Destinations** tab to create new destination.
+
+    ![plot](./images/create-destination.png)
+
+10. Enter **Send to SAP Event Mesh** as value for name of the destination.
+
+11. In the **Destination Type** dropdown menu, select **Webhook**.
+
+12. In the **Callback URL** field, enter the value of the url as below.
+    The callback URL is formed by concatinating the **uri** from Step 3, constant rest endpoint path (/messagingrest/v1/topics/) and **encoded subscribed topic name** from Step 8 
+    
+    Note: URL format -  **uri**/messagingrest/v1/topics/**encoded subscribed topic name**
+    For example,if uri is "https://enterprise-messaging-pubsub.cfapps.eu20.hana.ondemand.com/" and encoded subscribed topic name is "orgname%2Findustry%2Fevent%2Fraised", then the callback URL is "https://enterprise-messaging-pubsub.cfapps.eu20.hana.ondemand.com//messagingrest/v1/topics/orgname%2Findustry%2Fevent%2Fraised"
+
+13. From the **Authorization** dropdown menu, select **OAuth**.
+
+14. In the **Token URL**, **Client ID** and **Client secret** field, enter the value of the tokenendpoint, clientid, and clientsecret field you copied in Step 3.
+
+15. In the **Scope** field, enter **uaa.resource**.
+
+12. In the **Token request content type​** dropdown menu, choose **Auto**.
+
+13. In the **Headers** section, choose **+Header** and enter the below key-value pair.
+
+    ![plot](./images/update-dest.png)
+
+14. Choose **Save**.
+
+15. Navigate back to **Data Exports**, and choose **Exports** tab and choose the Export configuration that you had created (**Waste Container Export**).
+
+    ![plot](./images/iot-dataexport.png)
+
+16. In the **Destination** dropdown, choose the destination that you have created in Step 9.
+
+    ![plot](./images/iot-dataexport-destination.png)
+
+17. Choose **Save**.

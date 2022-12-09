@@ -140,33 +140,3 @@ In this section, you will create an Microsoft Azure IoT Central application and 
     ![plot](./images/enrichment-property.png)
 
 9. Choose **Save**.
-
-### 4. Create Destinations
-
-   **Note: To create a destination, you will need details from SAP BTP which you will get post deployment(Step5-Build-Deploy-ExtensionApplication). Complete the Step 3, 4 and 5 and then continue the next step here**.  
-
-
-7. Go to Microsoft Azure Portal and choose the IoT Central Application you created. Choose **Data Export** and then choose **Destinations** tab to create new destination.
-
-    ![plot](./images/create-destination.png)
-
-8. Enter **Send to SAP Event Mesh** as value for name of the destination.
-
-9. In the **Destination Type** dropdown menu, select **Webhook**.
-
-10. Write instruction to form the callback url.<AJIT> 
-In the **Callback URL** field, enter the value of the uri field you copied in Step 3.
-
-11. From the **Authorization** dropdown menu, select **OAuth**.
-
-12. In the **Token URL**, **Client ID** and **Client secret** field, enter the value of the tokenendpoint, clientid, and clientsecret field you copied in Step 3.
-
-13. In the **Scope** field, enter **uaa.resource**.
-
-14. In the **Token request content type​** dropdown menu, choose **Auto**.
-
-15. In the **Headers** section, choose **+Header** and enter the below key-value pair.
-
-    ![plot](./images/update-dest.png)
-
-16. Choose **Save**.

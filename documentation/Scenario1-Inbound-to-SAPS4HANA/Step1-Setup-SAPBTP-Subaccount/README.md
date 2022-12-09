@@ -60,10 +60,3 @@ To set up SAP Event Mesh for this scenario, follow these steps:
 ### 3. Set Up SAP HANA Cloud Instance
 
 Refer [Deploy SAP HANA Cloud](https://developers.sap.com/tutorials/hana-cloud-deploying.html) to create an instance of SAP HANA Cloud in SAP BTP. If you already have an existing HANA Instance, you can map it to this SAP BTP subaccount.
-
-
-
----------------------------------
-
-
----------------------------

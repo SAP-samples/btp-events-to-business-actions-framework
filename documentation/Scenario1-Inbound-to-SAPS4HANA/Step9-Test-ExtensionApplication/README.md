@@ -1,7 +1,7 @@
 ## Test the Extension Application and Execute the End to End Scenario
 
 Now that you have configured all required set up, follow these steps to test the application.
-1. Log in to Azure IOT Cetntral and Choose **Data Export**. Then enable data export and wait till status becomes healthy.
+1. Log in to Azure IOT Central and Choose **Data Export**. Then enable data export and wait till status becomes healthy.
     ![plot](./images/StartDataExport.png)
 
 2. Choose **Devices** and Find your device and Check the status.
