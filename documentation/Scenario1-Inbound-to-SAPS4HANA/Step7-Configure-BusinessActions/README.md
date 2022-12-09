@@ -1,6 +1,6 @@
 ## Configure SAP S/4HANA Business Actions in the extension application
 
-In this section, you will define business action in action-management extension application in SAP BTP. Ensure your application's **Requested State** is **Started**.
+In this section, you will define business action in the action-management extension application in SAP BTP. Ensure your application's **Requested State** is **Started**.
 
 ### 1. Create Destinations
 
@@ -42,6 +42,7 @@ In this section, you will define business action in action-management extension 
 
    - Copy the value of the IoT Central Application URL from IoT Central Application in Microsoft Azure Portal and append the url with /api/devices/. Update this value for URL parameter.
    - For **URL.headers.Authorization** parameter, refer [Authentication and authorization](https://learn.microsoft.com/en-us/rest/api/iotcentral/authentication) to generate API Token.
+   
 
     ```
     Name: azure-iot-device-api

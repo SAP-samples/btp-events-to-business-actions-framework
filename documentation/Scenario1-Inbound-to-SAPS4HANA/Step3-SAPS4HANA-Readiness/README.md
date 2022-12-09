@@ -1,5 +1,5 @@
 ## Check SAP S/4HANA Readiness
-In this section, you will activate the APIs related to purchase requisition scenario.
+In this section, you will activate the APIs related to purchase requisition for this scenario.
 
 ### Activate the API_PURCHASEREQ_PROCESS_SRV Service
 
@@ -9,4 +9,4 @@ In this section, you will activate the APIs related to purchase requisition scen
 
 ![Activate](./images/s4pr-service.png)
 
-Optionally expose the respective APIs related to your business scenarios (like Plant maintainence workorder, PO Creation, Sales Order) etc..
+Based on your business scenario, expose the respective APIs (For example, Plant maintainence W\workorder, PO Creation, Sales Order).

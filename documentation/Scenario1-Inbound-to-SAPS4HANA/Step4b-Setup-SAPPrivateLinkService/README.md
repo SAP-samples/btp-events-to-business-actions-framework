@@ -6,12 +6,12 @@ These are the prerequisities that you need to consider.
 - SAP S/4HANA system running on Microsoft Azure
 
 - SAP Private Link service
-    Required to connect SAP BTP and Microsoft Azure.
+    - Required to connect SAP BTP and Microsoft Azure.
 
-    >Note: The SAP BTP Private Link service is currently available only for enterprise accounts in SAP BTP.
+>Note: The SAP BTP Private Link service is currently available only for enterprise accounts in SAP BTP.
 
 - Microsoft Azure Private Link service
-    Required to connect Microsoft Azure and SAP S/4HANA.
+    - Required to connect Microsoft Azure and SAP S/4HANA.
 
 
 ### 1. Set Up the SAP Private Link Service and Microsoft Azure Private Link Service 

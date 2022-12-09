@@ -26,10 +26,10 @@ Service | Service Plan | Usage Scenario |
 [Event Mesh](https://discovery-center.cloud.sap/serviceCatalog/event-mesh?region=all) | dev <br> standard(Application) | Messaging bus for inter-app communication within the Cloud Foundry environment.|
 [SAP Private Link Service](https://discovery-center.cloud.sap/serviceCatalog/private-link-service?service_plan=standard&region=all&commercialModel=cloud) | standard | Available only in Enterprise account. 
 [SAP Business Application Studio](https://discovery-center.cloud.sap/serviceCatalog/business-application-studio?region=all) | trial or standard-edition(Application) |Available in Trial as well as Enterprise account.
-[SAP HANA Cloud](https://discovery-center.cloud.sap/serviceCatalog/sap-hana-cloud?tab=customerreference&region=all)  | hana |
-[SAP HANA Schemas & HDI Containers](https://help.sap.com/docs/SAP_HANA_PLATFORM/3823b0f33420468ba5f1cf7f59bd6bd9/e28abca91a004683845805efc2bf967c.html?version=2.0.04&locale=en-US) | hd-shared |
+[SAP HANA Cloud](https://discovery-center.cloud.sap/serviceCatalog/sap-hana-cloud?tab=customerreference&region=all)  | hana | Application database for CAP Application
+[SAP HANA Schemas & HDI Containers](https://help.sap.com/docs/SAP_HANA_PLATFORM/3823b0f33420468ba5f1cf7f59bd6bd9/e28abca91a004683845805efc2bf967c.html?version=2.0.04&locale=en-US) | hd-shared | Application database for CAP Application
 
-**Note:** Service instances for Connectivity service, Destination service and SAP Authorization and Trust Management Service will be created programmatically during deployment. 
+**Note:** Service instances for SAP Event Mesh, Business Rules, Connectivity service, Destination service and SAP Authorization and Trust Management Service will be created programmatically during deployment. 
 
 ### 2. Set Up SAP Event Mesh
 

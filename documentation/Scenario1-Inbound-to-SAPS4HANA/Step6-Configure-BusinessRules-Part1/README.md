@@ -1,12 +1,14 @@
 ## Create SAP Business Rules Project
-In this section, you will configure SAP Business Rule project which will be used to determine which business action should be executed for an event.
+In this section, you will configure SAP Business Rule project which will be used to determine which business action should be executed for an event. Additionally, based on your scenario you can create decision tables and business rules.
 
 ### 1. Configure Systems
 
 1. In the SAP BTP cockpit, navigate to your subaccount and choose **Cloud Foundry** > **Spaces**.  Choose your space and then choose **action-management** application. Choose the url provided under **Application Routes** section.
+
 ![plot](./images/ActionManagementApplication.png)
 
 2. Choose **Manage Business Rules** tile.
+
 ![plot](./images/ActionManagementHome.png)
 
 3. Choose **Configure Systems** and then choose **Add** to add a new system.
@@ -31,18 +33,20 @@ In this section, you will configure SAP Business Rule project which will be used
     ![plot](./images/ImportBusinessRulesProject.png)
 
 4. Browse for **EventsToActionsRulesProject.zip** file and choose **Import**.
+
     ![plot](./images/BrowseRulesProjectFile.png)
 
 5. You will see the imported project as shown in the screeshot, choose the  **EventsToActionRulesProject** to view the details of the project.
 
      ![plot](./images/prj-imported.png)   
 
-5. In the **Rule Services** tab, choose the **Settings** icon and then select **ID** from the **Define Column Properties** list.
+6. In the **Rule Services** tab, choose the **Settings** icon and then select **ID** from the **Define Column Properties** list.
 
     ![plot](./images/BusinessRulesServices.png)
 
     ![plot](./images/AddIDColumn.png)
 
-6. Copy the value of **ID** column from **DetermineAction** rule service.
+7. Copy the value of **ID** column from **DetermineAction** rule service.
+
     ![plot](./images/BusinessRulesServicesList.png)
 

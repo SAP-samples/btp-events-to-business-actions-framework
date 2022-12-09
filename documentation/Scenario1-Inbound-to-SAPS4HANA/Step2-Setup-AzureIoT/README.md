@@ -4,6 +4,9 @@ In this tutorial, you will configure Microsoft Azure IoT Central Application. Th
 
     - Valid Azure Subscription
     - Azure IoT Central
+    - Azure Event Grid
+    - Azure Function App
+    - Azure Communication Service
 
 If you don't have access to a Microsoft Azure account (including a paid or trial subscription), check out the [Unit 3: Microsoft Azure basics and setup](https://open.sap.com/courses/btpma1/items/1f82kP2dhVdZ6e9xia10A8) chapter in the latest openSAP course [Building Applications on SAP BTP with Microsoft Services](https://open.sap.com/courses/btpma1/). 
 
