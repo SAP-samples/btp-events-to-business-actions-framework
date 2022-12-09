@@ -1,0 +1,4 @@
+specVersion: "2.5"
+metadata:
+  name: sap.paa.action.mgmt.ui.logs
+type: application

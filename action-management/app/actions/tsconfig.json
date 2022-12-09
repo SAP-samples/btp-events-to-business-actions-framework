@@ -1,0 +1,104 @@
+{
+  "compilerOptions": {
+    "module": "none",
+    "noEmit": true,
+    "checkJs": true,
+    "allowJs": true,
+    "types": [
+      "@sapui5/ts-types"
+    ]
+  }
+}
+
+
+/*
+
+annotate AdminService.LogHeaders with @(
+    readonly                   : true,
+    Aggregation.ApplySupported : {
+        Transformations        : [
+            'aggregate',
+            'topcount',
+            'bottomcount',
+            'identity',
+            'concat',
+            'groupby',
+            'filter',
+            'expand',
+            'top',
+            'skip',
+            'orderby',
+            'search'
+        ],
+        Rollup                 : #None,
+        PropertyRestrictions   : true,
+        AggregatableProperties : [
+            {
+                $Type : 'Aggregation.AggregatablePropertyType',
+                Property                    : count,
+                SupportedAggregationMethods : ['sum']
+            },
+            {
+                $Type : 'Aggregation.AggregatablePropertyType',
+                Property                    : timefiff,
+                SupportedAggregationMethods : ['average']
+            }
+        ],
+        GroupableProperties    : [
+            status,
+            createdAt,
+            modifiedAt
+        ]
+    },
+    Analytics                  : {AnalyticalContext : [
+        {
+            $Type     : 'Analytics.AnalyticalContextType',
+            Property  : status,
+            Dimension : true
+        },
+        {
+            $Type     : 'Analytics.AnalyticalContextType',
+            Property  : createdAt,
+            Dimension : true
+        },
+        {
+            $Type     : 'Analytics.AnalyticalContextType',
+            Property  : modifiedAt,
+            Dimension : true
+        },
+        {
+            $Type     : 'Analytics.AnalyticalContextType',
+            Property  : action.name,
+            Dimension : true
+        },
+        {
+            $Type    : 'Analytics.AnalyticalContextType',
+            Property : count,
+            Measure  : true
+        },
+        {
+            $Type    : 'Analytics.AnalyticalContextType',
+            Property : timefiff,
+            Measure  : true
+        }
+    ]}
+);
+
+annotate AdminService.LogItems with @(
+    readonly                   : true,
+    Aggregation.ApplySupported : {
+        AggregatableProperties : [{
+            Property                    : count,
+            SupportedAggregationMethods : ['SUM']
+        }],
+        GroupableProperties    : [
+            level,
+            createdAt,
+            modifiedAt
+        ]
+    }
+);
+
+
+
+*/

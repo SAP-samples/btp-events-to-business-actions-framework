@@ -1,0 +1,922 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Aggregation.V1.xml">
+        <edmx:Include Alias="Aggregation" Namespace="Org.OData.Aggregation.V1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Analytics.xml">
+        <edmx:Include Alias="Analytics" Namespace="com.sap.vocabularies.Analytics.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Capabilities.V1.xml">
+        <edmx:Include Alias="Capabilities" Namespace="Org.OData.Capabilities.V1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml">
+        <edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="AdminService" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <EntityContainer Name="EntityContainer">
+                <EntitySet Name="Methods" EntityType="AdminService.Methods"/>
+                <EntitySet Name="ContentTypes" EntityType="AdminService.ContentTypes"/>
+                <EntitySet Name="Types" EntityType="AdminService.Types">
+                    <NavigationPropertyBinding Path="method" Target="Methods"/>
+                    <NavigationPropertyBinding Path="contentType" Target="ContentTypes"/>
+                    <NavigationPropertyBinding Path="SiblingEntity" Target="Types"/>
+                </EntitySet>
+                <EntitySet Name="flowTypes" EntityType="AdminService.flowTypes"/>
+                <EntitySet Name="ActionCategories" EntityType="AdminService.ActionCategories"/>
+                <EntitySet Name="Actions" EntityType="AdminService.Actions">
+                    <NavigationPropertyBinding Path="type" Target="Types"/>
+                    <NavigationPropertyBinding Path="destination" Target="Destinations"/>
+                    <NavigationPropertyBinding Path="method" Target="Methods"/>
+                    <NavigationPropertyBinding Path="contentType" Target="ContentTypes"/>
+                    <NavigationPropertyBinding Path="childActions" Target="prepostActions"/>
+                    <NavigationPropertyBinding Path="actionCategory" Target="ActionCategories"/>
+                    <NavigationPropertyBinding Path="SiblingEntity" Target="Actions"/>
+                </EntitySet>
+                <EntitySet Name="prepostActions" EntityType="AdminService.prepostActions">
+                    <NavigationPropertyBinding Path="flowType" Target="flowTypes"/>
+                    <NavigationPropertyBinding Path="rootAction" Target="Actions"/>
+                    <NavigationPropertyBinding Path="action" Target="Actions"/>
+                    <NavigationPropertyBinding Path="SiblingEntity" Target="prepostActions"/>
+                </EntitySet>
+                <EntitySet Name="NonQueueActions" EntityType="AdminService.NonQueueActions">
+                    <NavigationPropertyBinding Path="type" Target="Types"/>
+                    <NavigationPropertyBinding Path="destination" Target="Destinations"/>
+                    <NavigationPropertyBinding Path="method" Target="Methods"/>
+                    <NavigationPropertyBinding Path="contentType" Target="ContentTypes"/>
+                    <NavigationPropertyBinding Path="childActions" Target="prepostActions"/>
+                    <NavigationPropertyBinding Path="actionCategory" Target="ActionCategories"/>
+                </EntitySet>
+                <EntitySet Name="Destinations" EntityType="AdminService.Destinations"/>
+                <EntitySet Name="ActionDetails" EntityType="AdminService.ActionDetails">
+                    <NavigationPropertyBinding Path="SiblingEntity" Target="ActionDetails"/>
+                </EntitySet>
+                <EntitySet Name="PrePostActionDetails" EntityType="AdminService.PrePostActionDetails"/>
+                <EntitySet Name="LogHeaders" EntityType="AdminService.LogHeaders">
+                    <NavigationPropertyBinding Path="action" Target="Actions"/>
+                    <NavigationPropertyBinding Path="items" Target="LogItems"/>
+                </EntitySet>
+                <EntitySet Name="LogItems" EntityType="AdminService.LogItems">
+                    <NavigationPropertyBinding Path="header" Target="LogHeaders"/>
+                </EntitySet>
+                <FunctionImport Name="getActionsDefaults" Function="AdminService.getActionsDefaults" EntitySet="Actions"/>
+            </EntityContainer>
+            <EntityType Name="Methods">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="name" Type="Edm.String"/>
+            </EntityType>
+            <EntityType Name="ContentTypes">
+                <Key>
+                    <PropertyRef Name="id"/>
+                </Key>
+                <Property Name="id" Type="Edm.String" MaxLength="20" Nullable="false"/>
+                <Property Name="descr" Type="Edm.String" MaxLength="50"/>
+            </EntityType>
+            <EntityType Name="Types">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                    <PropertyRef Name="IsActiveEntity"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="name" Type="Edm.String"/>
+                <Property Name="descr" Type="Edm.String"/>
+                <Property Name="path" Type="Edm.String" MaxLength="200"/>
+                <NavigationProperty Name="method" Type="AdminService.Methods">
+                    <ReferentialConstraint Property="method_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="method_ID" Type="Edm.Guid"/>
+                <Property Name="payload" Type="Edm.String"/>
+                <NavigationProperty Name="contentType" Type="AdminService.ContentTypes">
+                    <ReferentialConstraint Property="contentType_id" ReferencedProperty="id"/>
+                </NavigationProperty>
+                <Property Name="contentType_id" Type="Edm.String" MaxLength="20"/>
+                <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="true"/>
+                <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <NavigationProperty Name="DraftAdministrativeData" Type="AdminService.DraftAdministrativeData" ContainsTarget="true"/>
+                <NavigationProperty Name="SiblingEntity" Type="AdminService.Types"/>
+            </EntityType>
+            <EntityType Name="flowTypes">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="flowId" Type="Edm.String" MaxLength="20"/>
+                <Property Name="flowName" Type="Edm.String" MaxLength="20"/>
+            </EntityType>
+            <EntityType Name="ActionCategories">
+                <Key>
+                    <PropertyRef Name="id"/>
+                </Key>
+                <Property Name="id" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="descr" Type="Edm.String" MaxLength="100"/>
+            </EntityType>
+            <EntityType Name="Actions">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                    <PropertyRef Name="IsActiveEntity"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="name" Type="Edm.String" MaxLength="100"/>
+                <Property Name="descr" Type="Edm.String"/>
+                <NavigationProperty Name="type" Type="AdminService.Types">
+                    <ReferentialConstraint Property="type_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="type_ID" Type="Edm.Guid"/>
+                <Property Name="dest" Type="Edm.String" MaxLength="100"/>
+                <NavigationProperty Name="destination" Type="AdminService.Destinations">
+                    <ReferentialConstraint Property="dest" ReferencedProperty="name"/>
+                </NavigationProperty>
+                <Property Name="url" Type="Edm.String" MaxLength="200"/>
+                <Property Name="path" Type="Edm.String" MaxLength="200"/>
+                <NavigationProperty Name="method" Type="AdminService.Methods">
+                    <ReferentialConstraint Property="method_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="method_ID" Type="Edm.Guid"/>
+                <Property Name="payload" Type="Edm.String"/>
+                <NavigationProperty Name="contentType" Type="AdminService.ContentTypes">
+                    <ReferentialConstraint Property="contentType_id" ReferencedProperty="id"/>
+                </NavigationProperty>
+                <Property Name="contentType_id" Type="Edm.String" MaxLength="20"/>
+                <NavigationProperty Name="childActions" Type="Collection(AdminService.prepostActions)" Partner="rootAction">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="actionCategory" Type="AdminService.ActionCategories">
+                    <ReferentialConstraint Property="actionCategory_id" ReferencedProperty="id"/>
+                </NavigationProperty>
+                <Property Name="actionCategory_id" Type="Edm.String" MaxLength="10"/>
+                <Property Name="hideChildActions" Type="Edm.Boolean"/>
+                <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="true"/>
+                <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <NavigationProperty Name="DraftAdministrativeData" Type="AdminService.DraftAdministrativeData" ContainsTarget="true"/>
+                <NavigationProperty Name="SiblingEntity" Type="AdminService.Actions"/>
+            </EntityType>
+            <EntityType Name="prepostActions">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                    <PropertyRef Name="IsActiveEntity"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <NavigationProperty Name="flowType" Type="AdminService.flowTypes">
+                    <ReferentialConstraint Property="flowType_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="flowType_ID" Type="Edm.Guid"/>
+                <NavigationProperty Name="rootAction" Type="AdminService.Actions">
+                    <ReferentialConstraint Property="rootAction_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="rootAction_ID" Type="Edm.Guid"/>
+                <NavigationProperty Name="action" Type="AdminService.Actions">
+                    <ReferentialConstraint Property="action_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="action_ID" Type="Edm.Guid"/>
+                <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="true"/>
+                <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <NavigationProperty Name="DraftAdministrativeData" Type="AdminService.DraftAdministrativeData" ContainsTarget="true"/>
+                <NavigationProperty Name="SiblingEntity" Type="AdminService.prepostActions"/>
+            </EntityType>
+            <EntityType Name="NonQueueActions">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="name" Type="Edm.String" MaxLength="100"/>
+                <Property Name="descr" Type="Edm.String"/>
+                <NavigationProperty Name="type" Type="AdminService.Types">
+                    <ReferentialConstraint Property="type_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="type_ID" Type="Edm.Guid"/>
+                <Property Name="dest" Type="Edm.String" MaxLength="100"/>
+                <NavigationProperty Name="destination" Type="AdminService.Destinations">
+                    <ReferentialConstraint Property="dest" ReferencedProperty="name"/>
+                </NavigationProperty>
+                <Property Name="url" Type="Edm.String" MaxLength="200"/>
+                <Property Name="path" Type="Edm.String" MaxLength="200"/>
+                <NavigationProperty Name="method" Type="AdminService.Methods">
+                    <ReferentialConstraint Property="method_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="method_ID" Type="Edm.Guid"/>
+                <Property Name="payload" Type="Edm.String"/>
+                <NavigationProperty Name="contentType" Type="AdminService.ContentTypes">
+                    <ReferentialConstraint Property="contentType_id" ReferencedProperty="id"/>
+                </NavigationProperty>
+                <Property Name="contentType_id" Type="Edm.String" MaxLength="20"/>
+                <NavigationProperty Name="childActions" Type="Collection(AdminService.prepostActions)">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="actionCategory" Type="AdminService.ActionCategories">
+                    <ReferentialConstraint Property="actionCategory_id" ReferencedProperty="id"/>
+                </NavigationProperty>
+                <Property Name="actionCategory_id" Type="Edm.String" MaxLength="10"/>
+                <Property Name="hideChildActions" Type="Edm.Boolean"/>
+            </EntityType>
+            <EntityType Name="Destinations">
+                <Key>
+                    <PropertyRef Name="name"/>
+                </Key>
+                <Property Name="name" Type="Edm.String" MaxLength="100" Nullable="false"/>
+                <Property Name="descr" Type="Edm.String" MaxLength="200"/>
+                <Property Name="type" Type="Edm.String" MaxLength="10"/>
+                <Property Name="url" Type="Edm.String" MaxLength="200"/>
+                <Property Name="auth" Type="Edm.String" MaxLength="50"/>
+                <Property Name="proxy" Type="Edm.String" MaxLength="30"/>
+            </EntityType>
+            <EntityType Name="ActionDetails">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                    <PropertyRef Name="IsActiveEntity"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="dest" Type="Edm.String" MaxLength="100"/>
+                <Property Name="path" Type="Edm.String" MaxLength="200"/>
+                <Property Name="payload" Type="Edm.String"/>
+                <Property Name="ma_contentType" Type="Edm.String" MaxLength="50"/>
+                <Property Name="ma_method" Type="Edm.String"/>
+                <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="true"/>
+                <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <NavigationProperty Name="DraftAdministrativeData" Type="AdminService.DraftAdministrativeData" ContainsTarget="true"/>
+                <NavigationProperty Name="SiblingEntity" Type="AdminService.ActionDetails"/>
+            </EntityType>
+            <EntityType Name="PrePostActionDetails">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="flowId" Type="Edm.String" MaxLength="20"/>
+                <Property Name="ma_ID" Type="Edm.Guid"/>
+                <Property Name="ca_dest" Type="Edm.String" MaxLength="100"/>
+                <Property Name="ca_ID" Type="Edm.Guid"/>
+                <Property Name="ca_path" Type="Edm.String" MaxLength="200"/>
+                <Property Name="ca_payload" Type="Edm.String"/>
+                <Property Name="ca_contentType" Type="Edm.String" MaxLength="50"/>
+                <Property Name="ca_method" Type="Edm.String"/>
+            </EntityType>
+            <EntityType Name="LogHeaders">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="status" Type="Edm.String" MaxLength="20"/>
+                <NavigationProperty Name="action" Type="AdminService.Actions">
+                    <ReferentialConstraint Property="action_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="action_ID" Type="Edm.Guid"/>
+                <NavigationProperty Name="items" Type="Collection(AdminService.LogItems)" Partner="header">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <Property Name="count" Type="Edm.Int32" DefaultValue="1"/>
+                <Property Name="timefiff" Type="Edm.Int32"/>
+            </EntityType>
+            <EntityType Name="LogItems">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="level" Type="Edm.String" MaxLength="10"/>
+                <Property Name="message" Type="Edm.String" MaxLength="200"/>
+                <Property Name="data" Type="Edm.String"/>
+                <NavigationProperty Name="header" Type="AdminService.LogHeaders" Partner="items">
+                    <ReferentialConstraint Property="header_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="header_ID" Type="Edm.Guid"/>
+                <Property Name="count" Type="Edm.Int32"/>
+            </EntityType>
+            <EntityType Name="DraftAdministrativeData">
+                <Key>
+                    <PropertyRef Name="DraftUUID"/>
+                </Key>
+                <Property Name="DraftUUID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="CreationDateTime" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="CreatedByUser" Type="Edm.String" MaxLength="256"/>
+                <Property Name="DraftIsCreatedByMe" Type="Edm.Boolean"/>
+                <Property Name="LastChangeDateTime" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="LastChangedByUser" Type="Edm.String" MaxLength="256"/>
+                <Property Name="InProcessByUser" Type="Edm.String" MaxLength="256"/>
+                <Property Name="DraftIsProcessedByMe" Type="Edm.Boolean"/>
+            </EntityType>
+            <Action Name="draftPrepare" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="AdminService.Types"/>
+                <Parameter Name="SideEffectsQualifier" Type="Edm.String"/>
+                <ReturnType Type="AdminService.Types"/>
+            </Action>
+            <Action Name="draftPrepare" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="AdminService.Actions"/>
+                <Parameter Name="SideEffectsQualifier" Type="Edm.String"/>
+                <ReturnType Type="AdminService.Actions"/>
+            </Action>
+            <Action Name="draftPrepare" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="AdminService.prepostActions"/>
+                <Parameter Name="SideEffectsQualifier" Type="Edm.String"/>
+                <ReturnType Type="AdminService.prepostActions"/>
+            </Action>
+            <Action Name="draftPrepare" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="AdminService.ActionDetails"/>
+                <Parameter Name="SideEffectsQualifier" Type="Edm.String"/>
+                <ReturnType Type="AdminService.ActionDetails"/>
+            </Action>
+            <Action Name="draftActivate" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="AdminService.Types"/>
+                <ReturnType Type="AdminService.Types"/>
+            </Action>
+            <Action Name="draftActivate" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="AdminService.Actions"/>
+                <ReturnType Type="AdminService.Actions"/>
+            </Action>
+            <Action Name="draftActivate" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="AdminService.ActionDetails"/>
+                <ReturnType Type="AdminService.ActionDetails"/>
+            </Action>
+            <Action Name="draftEdit" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="AdminService.Types"/>
+                <Parameter Name="PreserveChanges" Type="Edm.Boolean"/>
+                <ReturnType Type="AdminService.Types"/>
+            </Action>
+            <Action Name="draftEdit" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="AdminService.Actions"/>
+                <Parameter Name="PreserveChanges" Type="Edm.Boolean"/>
+                <ReturnType Type="AdminService.Actions"/>
+            </Action>
+            <Action Name="draftEdit" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="AdminService.ActionDetails"/>
+                <Parameter Name="PreserveChanges" Type="Edm.Boolean"/>
+                <ReturnType Type="AdminService.ActionDetails"/>
+            </Action>
+            <Action Name="getUrlByDestination" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="AdminService.Actions"/>
+                <ReturnType Type="AdminService.Actions"/>
+            </Action>
+            <Action Name="getRelatedActionsVisibility" IsBound="true">
+                <Parameter Name="in" Type="AdminService.Actions"/>
+                <ReturnType Type="Edm.Boolean"/>
+            </Action>
+            <Function Name="getActionsDefaults" IsBound="false" IsComposable="false">
+                <ReturnType Type="AdminService.Actions"/>
+            </Function>
+            <Annotations Target="AdminService.Methods/createdAt">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="{i18n>CreatedAt}"/>
+                </Annotations>
+                <Annotations Target="AdminService.Methods/createdBy">
+                    <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                    <Annotation Term="Core.Immutable" Bool="true"/>
+                    <Annotation Term="Core.Computed" Bool="true"/>
+                    <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+                        <Annotation Term="Common.Label" String="{i18n>CreatedBy}"/>
+                        </Annotations>
+                        <Annotations Target="AdminService.Methods/modifiedAt">
+                            <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                            <Annotation Term="Core.Computed" Bool="true"/>
+                            <Annotation Term="Common.Label" String="{i18n>ChangedAt}"/>
+                            </Annotations>
+                            <Annotations Target="AdminService.Methods/modifiedBy">
+                                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                <Annotation Term="Core.Computed" Bool="true"/>
+                                <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+                                    <Annotation Term="Common.Label" String="{i18n>ChangedBy}"/>
+                                    </Annotations>
+                                    <Annotations Target="AdminService.EntityContainer/Types">
+                                        <Annotation Term="Common.DraftRoot">
+                                            <Record Type="Common.DraftRootType">
+                                                <PropertyValue Property="ActivationAction" String="AdminService.draftActivate"/>
+                                                <PropertyValue Property="EditAction" String="AdminService.draftEdit"/>
+                                                <PropertyValue Property="PreparationAction" String="AdminService.draftPrepare"/>
+                                            </Record>
+                                        </Annotation>
+                                    </Annotations>
+                                    <Annotations Target="AdminService.Types/createdAt">
+                                        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                        <Annotation Term="Core.Immutable" Bool="true"/>
+                                        <Annotation Term="Core.Computed" Bool="true"/>
+                                        <Annotation Term="Common.Label" String="{i18n>CreatedAt}"/>
+                                        </Annotations>
+                                        <Annotations Target="AdminService.Types/createdBy">
+                                            <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                            <Annotation Term="Core.Immutable" Bool="true"/>
+                                            <Annotation Term="Core.Computed" Bool="true"/>
+                                            <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+                                                <Annotation Term="Common.Label" String="{i18n>CreatedBy}"/>
+                                                </Annotations>
+                                                <Annotations Target="AdminService.Types/modifiedAt">
+                                                    <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                    <Annotation Term="Core.Computed" Bool="true"/>
+                                                    <Annotation Term="Common.Label" String="{i18n>ChangedAt}"/>
+                                                    </Annotations>
+                                                    <Annotations Target="AdminService.Types/modifiedBy">
+                                                        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                        <Annotation Term="Core.Computed" Bool="true"/>
+                                                        <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+                                                            <Annotation Term="Common.Label" String="{i18n>ChangedBy}"/>
+                                                            </Annotations>
+                                                            <Annotations Target="AdminService.Types/IsActiveEntity">
+                                                                <Annotation Term="UI.Hidden" Bool="true"/>
+                                                            </Annotations>
+                                                            <Annotations Target="AdminService.Types/HasActiveEntity">
+                                                                <Annotation Term="UI.Hidden" Bool="true"/>
+                                                            </Annotations>
+                                                            <Annotations Target="AdminService.Types/HasDraftEntity">
+                                                                <Annotation Term="UI.Hidden" Bool="true"/>
+                                                            </Annotations>
+                                                            <Annotations Target="AdminService.Types/DraftAdministrativeData">
+                                                                <Annotation Term="UI.Hidden" Bool="true"/>
+                                                            </Annotations>
+                                                            <Annotations Target="AdminService.EntityContainer/Actions">
+                                                                <Annotation Term="Common.DraftRoot">
+                                                                    <Record Type="Common.DraftRootType">
+                                                                        <PropertyValue Property="ActivationAction" String="AdminService.draftActivate"/>
+                                                                        <PropertyValue Property="EditAction" String="AdminService.draftEdit"/>
+                                                                        <PropertyValue Property="PreparationAction" String="AdminService.draftPrepare"/>
+                                                                    </Record>
+                                                                </Annotation>
+                                                            </Annotations>
+                                                            <Annotations Target="AdminService.Actions/createdAt">
+                                                                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                <Annotation Term="Core.Immutable" Bool="true"/>
+                                                                <Annotation Term="Core.Computed" Bool="true"/>
+                                                                <Annotation Term="Common.Label" String="{i18n>CreatedAt}"/>
+                                                                </Annotations>
+                                                                <Annotations Target="AdminService.Actions/createdBy">
+                                                                    <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                    <Annotation Term="Core.Immutable" Bool="true"/>
+                                                                    <Annotation Term="Core.Computed" Bool="true"/>
+                                                                    <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+                                                                        <Annotation Term="Common.Label" String="{i18n>CreatedBy}"/>
+                                                                        </Annotations>
+                                                                        <Annotations Target="AdminService.Actions/modifiedAt">
+                                                                            <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                            <Annotation Term="Core.Computed" Bool="true"/>
+                                                                            <Annotation Term="Common.Label" String="{i18n>ChangedAt}"/>
+                                                                            </Annotations>
+                                                                            <Annotations Target="AdminService.Actions/modifiedBy">
+                                                                                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                                <Annotation Term="Core.Computed" Bool="true"/>
+                                                                                <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+                                                                                    <Annotation Term="Common.Label" String="{i18n>ChangedBy}"/>
+                                                                                    </Annotations>
+                                                                                    <Annotations Target="AdminService.Actions/hideChildActions">
+                                                                                        <Annotation Term="Core.Computed" Bool="true"/>
+                                                                                    </Annotations>
+                                                                                    <Annotations Target="AdminService.Actions/IsActiveEntity">
+                                                                                        <Annotation Term="UI.Hidden" Bool="true"/>
+                                                                                    </Annotations>
+                                                                                    <Annotations Target="AdminService.Actions/HasActiveEntity">
+                                                                                        <Annotation Term="UI.Hidden" Bool="true"/>
+                                                                                    </Annotations>
+                                                                                    <Annotations Target="AdminService.Actions/HasDraftEntity">
+                                                                                        <Annotation Term="UI.Hidden" Bool="true"/>
+                                                                                    </Annotations>
+                                                                                    <Annotations Target="AdminService.Actions/DraftAdministrativeData">
+                                                                                        <Annotation Term="UI.Hidden" Bool="true"/>
+                                                                                    </Annotations>
+                                                                                    <Annotations Target="AdminService.EntityContainer/prepostActions">
+                                                                                        <Annotation Term="Common.DraftNode">
+                                                                                            <Record Type="Common.DraftNodeType">
+                                                                                                <PropertyValue Property="PreparationAction" String="AdminService.draftPrepare"/>
+                                                                                            </Record>
+                                                                                        </Annotation>
+                                                                                    </Annotations>
+                                                                                    <Annotations Target="AdminService.prepostActions/IsActiveEntity">
+                                                                                        <Annotation Term="UI.Hidden" Bool="true"/>
+                                                                                    </Annotations>
+                                                                                    <Annotations Target="AdminService.prepostActions/HasActiveEntity">
+                                                                                        <Annotation Term="UI.Hidden" Bool="true"/>
+                                                                                    </Annotations>
+                                                                                    <Annotations Target="AdminService.prepostActions/HasDraftEntity">
+                                                                                        <Annotation Term="UI.Hidden" Bool="true"/>
+                                                                                    </Annotations>
+                                                                                    <Annotations Target="AdminService.prepostActions/DraftAdministrativeData">
+                                                                                        <Annotation Term="UI.Hidden" Bool="true"/>
+                                                                                    </Annotations>
+                                                                                    <Annotations Target="AdminService.NonQueueActions/createdAt">
+                                                                                        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                                        <Annotation Term="Core.Immutable" Bool="true"/>
+                                                                                        <Annotation Term="Core.Computed" Bool="true"/>
+                                                                                        <Annotation Term="Common.Label" String="{i18n>CreatedAt}"/>
+                                                                                        </Annotations>
+                                                                                        <Annotations Target="AdminService.NonQueueActions/createdBy">
+                                                                                            <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                                            <Annotation Term="Core.Immutable" Bool="true"/>
+                                                                                            <Annotation Term="Core.Computed" Bool="true"/>
+                                                                                            <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+                                                                                                <Annotation Term="Common.Label" String="{i18n>CreatedBy}"/>
+                                                                                                </Annotations>
+                                                                                                <Annotations Target="AdminService.NonQueueActions/modifiedAt">
+                                                                                                    <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                                                    <Annotation Term="Core.Computed" Bool="true"/>
+                                                                                                    <Annotation Term="Common.Label" String="{i18n>ChangedAt}"/>
+                                                                                                    </Annotations>
+                                                                                                    <Annotations Target="AdminService.NonQueueActions/modifiedBy">
+                                                                                                        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                                                        <Annotation Term="Core.Computed" Bool="true"/>
+                                                                                                        <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+                                                                                                            <Annotation Term="Common.Label" String="{i18n>ChangedBy}"/>
+                                                                                                            </Annotations>
+                                                                                                            <Annotations Target="AdminService.NonQueueActions/hideChildActions">
+                                                                                                                <Annotation Term="Core.Computed" Bool="true"/>
+                                                                                                            </Annotations>
+                                                                                                            <Annotations Target="AdminService.EntityContainer/Destinations">
+                                                                                                                <Annotation Term="Capabilities.DeleteRestrictions">
+                                                                                                                    <Record Type="Capabilities.DeleteRestrictionsType">
+                                                                                                                        <PropertyValue Property="Deletable" Bool="false"/>
+                                                                                                                    </Record>
+                                                                                                                </Annotation>
+                                                                                                                <Annotation Term="Capabilities.InsertRestrictions">
+                                                                                                                    <Record Type="Capabilities.InsertRestrictionsType">
+                                                                                                                        <PropertyValue Property="Insertable" Bool="false"/>
+                                                                                                                    </Record>
+                                                                                                                </Annotation>
+                                                                                                                <Annotation Term="Capabilities.UpdateRestrictions">
+                                                                                                                    <Record Type="Capabilities.UpdateRestrictionsType">
+                                                                                                                        <PropertyValue Property="Updatable" Bool="false"/>
+                                                                                                                    </Record>
+                                                                                                                </Annotation>
+                                                                                                            </Annotations>
+                                                                                                            <Annotations Target="AdminService.EntityContainer/ActionDetails">
+                                                                                                                <Annotation Term="Common.DraftRoot">
+                                                                                                                    <Record Type="Common.DraftRootType">
+                                                                                                                        <PropertyValue Property="ActivationAction" String="AdminService.draftActivate"/>
+                                                                                                                        <PropertyValue Property="EditAction" String="AdminService.draftEdit"/>
+                                                                                                                        <PropertyValue Property="PreparationAction" String="AdminService.draftPrepare"/>
+                                                                                                                    </Record>
+                                                                                                                </Annotation>
+                                                                                                                <Annotation Term="Capabilities.DeleteRestrictions">
+                                                                                                                    <Record Type="Capabilities.DeleteRestrictionsType">
+                                                                                                                        <PropertyValue Property="Deletable" Bool="false"/>
+                                                                                                                    </Record>
+                                                                                                                </Annotation>
+                                                                                                                <Annotation Term="Capabilities.InsertRestrictions">
+                                                                                                                    <Record Type="Capabilities.InsertRestrictionsType">
+                                                                                                                        <PropertyValue Property="Insertable" Bool="false"/>
+                                                                                                                    </Record>
+                                                                                                                </Annotation>
+                                                                                                                <Annotation Term="Capabilities.UpdateRestrictions">
+                                                                                                                    <Record Type="Capabilities.UpdateRestrictionsType">
+                                                                                                                        <PropertyValue Property="Updatable" Bool="false"/>
+                                                                                                                    </Record>
+                                                                                                                </Annotation>
+                                                                                                            </Annotations>
+                                                                                                            <Annotations Target="AdminService.ActionDetails/IsActiveEntity">
+                                                                                                                <Annotation Term="UI.Hidden" Bool="true"/>
+                                                                                                            </Annotations>
+                                                                                                            <Annotations Target="AdminService.ActionDetails/HasActiveEntity">
+                                                                                                                <Annotation Term="UI.Hidden" Bool="true"/>
+                                                                                                            </Annotations>
+                                                                                                            <Annotations Target="AdminService.ActionDetails/HasDraftEntity">
+                                                                                                                <Annotation Term="UI.Hidden" Bool="true"/>
+                                                                                                            </Annotations>
+                                                                                                            <Annotations Target="AdminService.ActionDetails/DraftAdministrativeData">
+                                                                                                                <Annotation Term="UI.Hidden" Bool="true"/>
+                                                                                                            </Annotations>
+                                                                                                            <Annotations Target="AdminService.EntityContainer/PrePostActionDetails">
+                                                                                                                <Annotation Term="Capabilities.DeleteRestrictions">
+                                                                                                                    <Record Type="Capabilities.DeleteRestrictionsType">
+                                                                                                                        <PropertyValue Property="Deletable" Bool="false"/>
+                                                                                                                    </Record>
+                                                                                                                </Annotation>
+                                                                                                                <Annotation Term="Capabilities.InsertRestrictions">
+                                                                                                                    <Record Type="Capabilities.InsertRestrictionsType">
+                                                                                                                        <PropertyValue Property="Insertable" Bool="false"/>
+                                                                                                                    </Record>
+                                                                                                                </Annotation>
+                                                                                                                <Annotation Term="Capabilities.UpdateRestrictions">
+                                                                                                                    <Record Type="Capabilities.UpdateRestrictionsType">
+                                                                                                                        <PropertyValue Property="Updatable" Bool="false"/>
+                                                                                                                    </Record>
+                                                                                                                </Annotation>
+                                                                                                            </Annotations>
+                                                                                                            <Annotations Target="AdminService.LogHeaders">
+                                                                                                                <Annotation Term="Aggregation.ApplySupported">
+                                                                                                                    <Record Type="Aggregation.ApplySupportedType">
+                                                                                                                        <PropertyValue Property="Transformations">
+                                                                                                                            <Collection>
+                                                                                                                                <String>aggregate</String>
+                                                                                                                                <String>topcount</String>
+                                                                                                                                <String>bottomcount</String>
+                                                                                                                                <String>identity</String>
+                                                                                                                                <String>concat</String>
+                                                                                                                                <String>groupby</String>
+                                                                                                                                <String>filter</String>
+                                                                                                                                <String>expand</String>
+                                                                                                                                <String>top</String>
+                                                                                                                                <String>skip</String>
+                                                                                                                                <String>orderby</String>
+                                                                                                                                <String>search</String>
+                                                                                                                            </Collection>
+                                                                                                                        </PropertyValue>
+                                                                                                                        <PropertyValue Property="Rollup" EnumMember="Aggregation.RollupType/None"/>
+                                                                                                                        <PropertyValue Property="PropertyRestrictions" Bool="true"/>
+                                                                                                                        <PropertyValue Property="AggregatableProperties">
+                                                                                                                            <Collection>
+                                                                                                                                <Record Type="Aggregation.AggregatablePropertyType">
+                                                                                                                                    <PropertyValue Property="Property" PropertyPath="count"/>
+                                                                                                                                    <PropertyValue Property="SupportedAggregationMethods">
+                                                                                                                                        <Collection>
+                                                                                                                                            <String>sum</String>
+                                                                                                                                        </Collection>
+                                                                                                                                    </PropertyValue>
+                                                                                                                                </Record>
+                                                                                                                                <Record Type="Aggregation.AggregatablePropertyType">
+                                                                                                                                    <PropertyValue Property="Property" PropertyPath="timefiff"/>
+                                                                                                                                    <PropertyValue Property="SupportedAggregationMethods">
+                                                                                                                                        <Collection>
+                                                                                                                                            <String>average</String>
+                                                                                                                                        </Collection>
+                                                                                                                                    </PropertyValue>
+                                                                                                                                </Record>
+                                                                                                                            </Collection>
+                                                                                                                        </PropertyValue>
+                                                                                                                        <PropertyValue Property="GroupableProperties">
+                                                                                                                            <Collection>
+                                                                                                                                <PropertyPath>status</PropertyPath>
+                                                                                                                                <PropertyPath>createdAt</PropertyPath>
+                                                                                                                                <PropertyPath>modifiedAt</PropertyPath>
+                                                                                                                            </Collection>
+                                                                                                                        </PropertyValue>
+                                                                                                                    </Record>
+                                                                                                                </Annotation>
+                                                                                                            </Annotations>
+                                                                                                            <Annotations Target="AdminService.EntityContainer/LogHeaders">
+                                                                                                                <Annotation Term="Aggregation.ApplySupported">
+                                                                                                                    <Record Type="Aggregation.ApplySupportedType">
+                                                                                                                        <PropertyValue Property="Transformations">
+                                                                                                                            <Collection>
+                                                                                                                                <String>aggregate</String>
+                                                                                                                                <String>topcount</String>
+                                                                                                                                <String>bottomcount</String>
+                                                                                                                                <String>identity</String>
+                                                                                                                                <String>concat</String>
+                                                                                                                                <String>groupby</String>
+                                                                                                                                <String>filter</String>
+                                                                                                                                <String>expand</String>
+                                                                                                                                <String>top</String>
+                                                                                                                                <String>skip</String>
+                                                                                                                                <String>orderby</String>
+                                                                                                                                <String>search</String>
+                                                                                                                            </Collection>
+                                                                                                                        </PropertyValue>
+                                                                                                                        <PropertyValue Property="Rollup" EnumMember="Aggregation.RollupType/None"/>
+                                                                                                                        <PropertyValue Property="PropertyRestrictions" Bool="true"/>
+                                                                                                                        <PropertyValue Property="AggregatableProperties">
+                                                                                                                            <Collection>
+                                                                                                                                <Record Type="Aggregation.AggregatablePropertyType">
+                                                                                                                                    <PropertyValue Property="Property" PropertyPath="count"/>
+                                                                                                                                    <PropertyValue Property="SupportedAggregationMethods">
+                                                                                                                                        <Collection>
+                                                                                                                                            <String>sum</String>
+                                                                                                                                        </Collection>
+                                                                                                                                    </PropertyValue>
+                                                                                                                                </Record>
+                                                                                                                                <Record Type="Aggregation.AggregatablePropertyType">
+                                                                                                                                    <PropertyValue Property="Property" PropertyPath="timefiff"/>
+                                                                                                                                    <PropertyValue Property="SupportedAggregationMethods">
+                                                                                                                                        <Collection>
+                                                                                                                                            <String>average</String>
+                                                                                                                                        </Collection>
+                                                                                                                                    </PropertyValue>
+                                                                                                                                </Record>
+                                                                                                                            </Collection>
+                                                                                                                        </PropertyValue>
+                                                                                                                        <PropertyValue Property="GroupableProperties">
+                                                                                                                            <Collection>
+                                                                                                                                <PropertyPath>status</PropertyPath>
+                                                                                                                                <PropertyPath>createdAt</PropertyPath>
+                                                                                                                                <PropertyPath>modifiedAt</PropertyPath>
+                                                                                                                            </Collection>
+                                                                                                                        </PropertyValue>
+                                                                                                                    </Record>
+                                                                                                                </Annotation>
+                                                                                                                <Annotation Term="Analytics.AnalyticalContext">
+                                                                                                                    <Collection>
+                                                                                                                        <Record Type="Analytics.AnalyticalContextType">
+                                                                                                                            <PropertyValue Property="Property" PropertyPath="status"/>
+                                                                                                                            <PropertyValue Property="Dimension" Bool="true"/>
+                                                                                                                        </Record>
+                                                                                                                        <Record Type="Analytics.AnalyticalContextType">
+                                                                                                                            <PropertyValue Property="Property" PropertyPath="createdAt"/>
+                                                                                                                            <PropertyValue Property="Dimension" Bool="true"/>
+                                                                                                                        </Record>
+                                                                                                                        <Record Type="Analytics.AnalyticalContextType">
+                                                                                                                            <PropertyValue Property="Property" PropertyPath="modifiedAt"/>
+                                                                                                                            <PropertyValue Property="Dimension" Bool="true"/>
+                                                                                                                        </Record>
+                                                                                                                        <Record Type="Analytics.AnalyticalContextType">
+                                                                                                                            <PropertyValue Property="Property" PropertyPath="action/name"/>
+                                                                                                                            <PropertyValue Property="Dimension" Bool="true"/>
+                                                                                                                        </Record>
+                                                                                                                        <Record Type="Analytics.AnalyticalContextType">
+                                                                                                                            <PropertyValue Property="Property" PropertyPath="count"/>
+                                                                                                                            <PropertyValue Property="Measure" Bool="true"/>
+                                                                                                                        </Record>
+                                                                                                                        <Record Type="Analytics.AnalyticalContextType">
+                                                                                                                            <PropertyValue Property="Property" PropertyPath="timefiff"/>
+                                                                                                                            <PropertyValue Property="Measure" Bool="true"/>
+                                                                                                                        </Record>
+                                                                                                                    </Collection>
+                                                                                                                </Annotation>
+                                                                                                                <Annotation Term="Capabilities.DeleteRestrictions">
+                                                                                                                    <Record Type="Capabilities.DeleteRestrictionsType">
+                                                                                                                        <PropertyValue Property="Deletable" Bool="false"/>
+                                                                                                                    </Record>
+                                                                                                                </Annotation>
+                                                                                                                <Annotation Term="Capabilities.InsertRestrictions">
+                                                                                                                    <Record Type="Capabilities.InsertRestrictionsType">
+                                                                                                                        <PropertyValue Property="Insertable" Bool="false"/>
+                                                                                                                    </Record>
+                                                                                                                </Annotation>
+                                                                                                                <Annotation Term="Capabilities.UpdateRestrictions">
+                                                                                                                    <Record Type="Capabilities.UpdateRestrictionsType">
+                                                                                                                        <PropertyValue Property="Updatable" Bool="false"/>
+                                                                                                                    </Record>
+                                                                                                                </Annotation>
+                                                                                                            </Annotations>
+                                                                                                            <Annotations Target="AdminService.LogHeaders/createdAt">
+                                                                                                                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                                                                <Annotation Term="Core.Immutable" Bool="true"/>
+                                                                                                                <Annotation Term="Core.Computed" Bool="true"/>
+                                                                                                                <Annotation Term="Common.Label" String="{i18n>CreatedAt}"/>
+                                                                                                                </Annotations>
+                                                                                                                <Annotations Target="AdminService.LogHeaders/createdBy">
+                                                                                                                    <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                                                                    <Annotation Term="Core.Immutable" Bool="true"/>
+                                                                                                                    <Annotation Term="Core.Computed" Bool="true"/>
+                                                                                                                    <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+                                                                                                                        <Annotation Term="Common.Label" String="{i18n>CreatedBy}"/>
+                                                                                                                        </Annotations>
+                                                                                                                        <Annotations Target="AdminService.LogHeaders/modifiedAt">
+                                                                                                                            <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                                                                            <Annotation Term="Core.Computed" Bool="true"/>
+                                                                                                                            <Annotation Term="Common.Label" String="{i18n>ChangedAt}"/>
+                                                                                                                            </Annotations>
+                                                                                                                            <Annotations Target="AdminService.LogHeaders/modifiedBy">
+                                                                                                                                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                                                                                <Annotation Term="Core.Computed" Bool="true"/>
+                                                                                                                                <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+                                                                                                                                    <Annotation Term="Common.Label" String="{i18n>ChangedBy}"/>
+                                                                                                                                    </Annotations>
+                                                                                                                                    <Annotations Target="AdminService.LogHeaders/count">
+                                                                                                                                        <Annotation Term="Core.Computed" Bool="true"/>
+                                                                                                                                    </Annotations>
+                                                                                                                                    <Annotations Target="AdminService.LogHeaders/timefiff">
+                                                                                                                                        <Annotation Term="Core.Computed" Bool="true"/>
+                                                                                                                                    </Annotations>
+                                                                                                                                    <Annotations Target="AdminService.LogItems">
+                                                                                                                                        <Annotation Term="Aggregation.ApplySupported">
+                                                                                                                                            <Record Type="Aggregation.ApplySupportedType">
+                                                                                                                                                <PropertyValue Property="AggregatableProperties">
+                                                                                                                                                    <Collection>
+                                                                                                                                                        <Record Type="Aggregation.AggregatablePropertyType">
+                                                                                                                                                            <PropertyValue Property="Property" PropertyPath="count"/>
+                                                                                                                                                            <PropertyValue Property="SupportedAggregationMethods">
+                                                                                                                                                                <Collection>
+                                                                                                                                                                    <String>SUM</String>
+                                                                                                                                                                </Collection>
+                                                                                                                                                            </PropertyValue>
+                                                                                                                                                        </Record>
+                                                                                                                                                    </Collection>
+                                                                                                                                                </PropertyValue>
+                                                                                                                                                <PropertyValue Property="GroupableProperties">
+                                                                                                                                                    <Collection>
+                                                                                                                                                        <PropertyPath>level</PropertyPath>
+                                                                                                                                                        <PropertyPath>createdAt</PropertyPath>
+                                                                                                                                                        <PropertyPath>modifiedAt</PropertyPath>
+                                                                                                                                                    </Collection>
+                                                                                                                                                </PropertyValue>
+                                                                                                                                            </Record>
+                                                                                                                                        </Annotation>
+                                                                                                                                    </Annotations>
+                                                                                                                                    <Annotations Target="AdminService.EntityContainer/LogItems">
+                                                                                                                                        <Annotation Term="Aggregation.ApplySupported">
+                                                                                                                                            <Record Type="Aggregation.ApplySupportedType">
+                                                                                                                                                <PropertyValue Property="AggregatableProperties">
+                                                                                                                                                    <Collection>
+                                                                                                                                                        <Record Type="Aggregation.AggregatablePropertyType">
+                                                                                                                                                            <PropertyValue Property="Property" PropertyPath="count"/>
+                                                                                                                                                            <PropertyValue Property="SupportedAggregationMethods">
+                                                                                                                                                                <Collection>
+                                                                                                                                                                    <String>SUM</String>
+                                                                                                                                                                </Collection>
+                                                                                                                                                            </PropertyValue>
+                                                                                                                                                        </Record>
+                                                                                                                                                    </Collection>
+                                                                                                                                                </PropertyValue>
+                                                                                                                                                <PropertyValue Property="GroupableProperties">
+                                                                                                                                                    <Collection>
+                                                                                                                                                        <PropertyPath>level</PropertyPath>
+                                                                                                                                                        <PropertyPath>createdAt</PropertyPath>
+                                                                                                                                                        <PropertyPath>modifiedAt</PropertyPath>
+                                                                                                                                                    </Collection>
+                                                                                                                                                </PropertyValue>
+                                                                                                                                            </Record>
+                                                                                                                                        </Annotation>
+                                                                                                                                        <Annotation Term="Capabilities.DeleteRestrictions">
+                                                                                                                                            <Record Type="Capabilities.DeleteRestrictionsType">
+                                                                                                                                                <PropertyValue Property="Deletable" Bool="false"/>
+                                                                                                                                            </Record>
+                                                                                                                                        </Annotation>
+                                                                                                                                        <Annotation Term="Capabilities.InsertRestrictions">
+                                                                                                                                            <Record Type="Capabilities.InsertRestrictionsType">
+                                                                                                                                                <PropertyValue Property="Insertable" Bool="false"/>
+                                                                                                                                            </Record>
+                                                                                                                                        </Annotation>
+                                                                                                                                        <Annotation Term="Capabilities.UpdateRestrictions">
+                                                                                                                                            <Record Type="Capabilities.UpdateRestrictionsType">
+                                                                                                                                                <PropertyValue Property="Updatable" Bool="false"/>
+                                                                                                                                            </Record>
+                                                                                                                                        </Annotation>
+                                                                                                                                    </Annotations>
+                                                                                                                                    <Annotations Target="AdminService.LogItems/createdAt">
+                                                                                                                                        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                                                                                        <Annotation Term="Core.Immutable" Bool="true"/>
+                                                                                                                                        <Annotation Term="Core.Computed" Bool="true"/>
+                                                                                                                                        <Annotation Term="Common.Label" String="{i18n>CreatedAt}"/>
+                                                                                                                                        </Annotations>
+                                                                                                                                        <Annotations Target="AdminService.LogItems/createdBy">
+                                                                                                                                            <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                                                                                            <Annotation Term="Core.Immutable" Bool="true"/>
+                                                                                                                                            <Annotation Term="Core.Computed" Bool="true"/>
+                                                                                                                                            <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+                                                                                                                                                <Annotation Term="Common.Label" String="{i18n>CreatedBy}"/>
+                                                                                                                                                </Annotations>
+                                                                                                                                                <Annotations Target="AdminService.LogItems/modifiedAt">
+                                                                                                                                                    <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                                                                                                    <Annotation Term="Core.Computed" Bool="true"/>
+                                                                                                                                                    <Annotation Term="Common.Label" String="{i18n>ChangedAt}"/>
+                                                                                                                                                    </Annotations>
+                                                                                                                                                    <Annotations Target="AdminService.LogItems/modifiedBy">
+                                                                                                                                                        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                                                                                                        <Annotation Term="Core.Computed" Bool="true"/>
+                                                                                                                                                        <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+                                                                                                                                                            <Annotation Term="Common.Label" String="{i18n>ChangedBy}"/>
+                                                                                                                                                            </Annotations>
+                                                                                                                                                            <Annotations Target="AdminService.LogItems/count">
+                                                                                                                                                                <Annotation Term="Core.Computed" Bool="true"/>
+                                                                                                                                                            </Annotations>
+                                                                                                                                                            <Annotations Target="AdminService.DraftAdministrativeData">
+                                                                                                                                                                <Annotation Term="Common.Label" String="{i18n>Draft_DraftAdministrativeData}"/>
+                                                                                                                                                                </Annotations>
+                                                                                                                                                                <Annotations Target="AdminService.DraftAdministrativeData/DraftUUID">
+                                                                                                                                                                    <Annotation Term="UI.Hidden" Bool="true"/>
+                                                                                                                                                                    <Annotation Term="Common.Label" String="{i18n>Draft_DraftUUID}"/>
+                                                                                                                                                                    </Annotations>
+                                                                                                                                                                    <Annotations Target="AdminService.DraftAdministrativeData/CreationDateTime">
+                                                                                                                                                                        <Annotation Term="Common.Label" String="{i18n>Draft_CreationDateTime}"/>
+                                                                                                                                                                        </Annotations>
+                                                                                                                                                                        <Annotations Target="AdminService.DraftAdministrativeData/CreatedByUser">
+                                                                                                                                                                            <Annotation Term="Common.Label" String="{i18n>Draft_CreatedByUser}"/>
+                                                                                                                                                                            </Annotations>
+                                                                                                                                                                            <Annotations Target="AdminService.DraftAdministrativeData/DraftIsCreatedByMe">
+                                                                                                                                                                                <Annotation Term="UI.Hidden" Bool="true"/>
+                                                                                                                                                                                <Annotation Term="Common.Label" String="{i18n>Draft_DraftIsCreatedByMe}"/>
+                                                                                                                                                                                </Annotations>
+                                                                                                                                                                                <Annotations Target="AdminService.DraftAdministrativeData/LastChangeDateTime">
+                                                                                                                                                                                    <Annotation Term="Common.Label" String="{i18n>Draft_LastChangeDateTime}"/>
+                                                                                                                                                                                    </Annotations>
+                                                                                                                                                                                    <Annotations Target="AdminService.DraftAdministrativeData/LastChangedByUser">
+                                                                                                                                                                                        <Annotation Term="Common.Label" String="{i18n>Draft_LastChangedByUser}"/>
+                                                                                                                                                                                        </Annotations>
+                                                                                                                                                                                        <Annotations Target="AdminService.DraftAdministrativeData/InProcessByUser">
+                                                                                                                                                                                            <Annotation Term="Common.Label" String="{i18n>Draft_InProcessByUser}"/>
+                                                                                                                                                                                            </Annotations>
+                                                                                                                                                                                            <Annotations Target="AdminService.DraftAdministrativeData/DraftIsProcessedByMe">
+                                                                                                                                                                                                <Annotation Term="UI.Hidden" Bool="true"/>
+                                                                                                                                                                                                <Annotation Term="Common.Label" String="{i18n>Draft_DraftIsProcessedByMe}"/>
+                                                                                                                                                                                                </Annotations>
+                                                                                                                                                                                            </Schema>
+                                                                                                                                                                                        </edmx:DataServices>
+                                                                                                                                                                                    </edmx:Edmx>

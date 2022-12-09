@@ -1,0 +1,49 @@
+{
+  "welcomeFile": "/resources/index.html",
+  "authenticationMethod": "route",
+  "routes": [
+    {
+      "source": "^/resources/(.*)$",
+      "target": "/$1",
+      "localDir": "resources",
+      "authenticationType": "xsuaa"
+    },
+    {
+      "source": "^/appconfig/(.*)$",
+      "target": "/appconfig/$1",
+      "localDir": "resources",
+      "authenticationType": "xsuaa"
+    },
+    {
+      "source": "^/sappaaactionmgmtuiactions/(.*)$",
+      "target": "/sappaaactionmgmtuiactions/$1",
+      "service": "html5-apps-repo-rt",
+      "authenticationType": "xsuaa"
+    },
+    {
+      "source": "^/sappaaactionmgmtuitypes/(.*)$",
+      "target": "/sappaaactionmgmtuitypes/$1",
+      "service": "html5-apps-repo-rt",
+      "authenticationType": "xsuaa"
+    },
+    {
+      "source": "^/sappaaactionmgmtuilogs/(.*)$",
+      "target": "/sappaaactionmgmtuilogs/$1",
+      "service": "html5-apps-repo-rt",
+      "authenticationType": "xsuaa"
+    },
+    {
+      "source": "^/comsapbpmrule.ruleeditor/(.*)$",
+      "target": "/comsapbpmrule.ruleeditor/$1",
+      "service": "com.sap.bpm.rule",
+      "endpoint": "rule_runtime_url"
+    },   
+    {
+      "source": "^/(.*)$",
+      "target": "$1",
+      "destination": "srv-api",
+      "authenticationType": "xsuaa",
+      "csrfProtection": true
+    }
+  ]
+}

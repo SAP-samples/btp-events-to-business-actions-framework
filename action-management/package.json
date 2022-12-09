@@ -1,0 +1,91 @@
+{
+  "name": "action-management",
+  "version": "1.0.0",
+  "description": "Action Management Application",
+  "repository": "<Add your repository here>",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@sap-cloud-sdk/connectivity": "^2.10.0",
+    "@sap-cloud-sdk/http-client": "^2.11.0",
+    "@sap/cds": "^6.2.2",
+    "@sap/cds-odata-v2-adapter-proxy": "^1.9.15",
+    "@sap/xb-msg-amqp-v100": "^0.9.58",
+    "@sap/xsenv": "^3.4.0",
+    "@sap/xssec": "^3",
+    "axios": "^1.1.3",
+    "express": "^4",
+    "hdb": "^0.19.0",
+    "passport": "^0"
+  },
+  "devDependencies": {
+    "@sap/eslint-plugin-ui5-jsdocs": "^2.0.5",
+    "@sap/ux-specification": "^1.102.12",
+    "@sapui5/ts-types": "^1.92.2",
+    "cds-launchpad-plugin": "^1.0.8",
+    "eslint": "^7.32.0",
+    "rimraf": "^3.0.2",
+    "sqlite3": "^5.1.2"
+  },
+  "scripts": {
+    "start": "cds run",
+    "watch-actions": "cds watch --open actions/webapp/index.html?sap-ui-xx-viewCache=false",
+    "undeploy": "cf undeploy action-management --delete-services --delete-service-keys --delete-service-brokers",
+    "build": "rimraf resources mta_archives && mbt build --mtar archive",
+    "clear": "rimraf app-build dbsrv-build mta_archives app/actions/dist app/types/dist app/logs/dist",
+    "deploy": "cf deploy mta_archives/archive.mtar --retries 1"
+  },
+  "engines": {
+    "node": "^14.18.0"
+  },
+  "eslintConfig": {
+    "extends": "eslint:recommended",
+    "env": {
+      "es2020": true,
+      "node": true,
+      "jest": true,
+      "mocha": true
+    },
+    "globals": {
+      "SELECT": true,
+      "INSERT": true,
+      "UPDATE": true,
+      "DELETE": true,
+      "CREATE": true,
+      "DROP": true,
+      "CDL": true,
+      "CQL": true,
+      "CXL": true,
+      "cds": true
+    },
+    "rules": {
+      "no-console": "off",
+      "require-atomic-updates": "off"
+    }
+  },
+  "cds": {
+    "requires": {
+      "approuter": {
+        "kind": "cloudfoundry"
+      },
+      "auth": {
+        "kind": "xsuaa"
+      },
+      "db": {
+        "kind": "hana-cloud"
+      },
+      "messaging": {
+          "kind": "enterprise-messaging-shared"
+      }
+    },
+    "features": {
+      "preserve_computed": true,
+      "odata_new_parser": true
+    }
+  },
+  "sapux": [
+    "app/actions",
+    "app/types",
+    "app/logs"
+  ]
+}
