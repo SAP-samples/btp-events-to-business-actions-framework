@@ -32,7 +32,7 @@ There are two scenarios described in this repository. In this tutorial, the even
 [Implementation: Configuration and Development](#configuration-and-development)\
 [Additional Resources](#additional-resources)\
 [Known Issues](#known-issues)\
-[Reference](#useful-links)\
+[Reference](#reference)\
 [Disclaimer](#disclaimer)\
 [How to Obtain Support](#how-to-obtain-support)\
 [Code of Conduct](#codeofconduct)\
@@ -135,7 +135,13 @@ Step 4: Connect SAP BTP and SAP S/4HANA
 [Step 9: Test the Extension Application](./documentation/Scenario1-Inbound-to-SAPS4HANA/Step9-Test-ExtensionApplication/README.md)
 
 For **Scenario 2 - Outbound from SAP S/4HANA to Azure Event Grid**, please refer to 
-[Outbound from SAP S/4HANA to Azure Event Grid](./documentation/Scenario2-Outbound-from-SAP-S4HANA/README.md) link.
+[Outbound from SAP S/4HANA to Azure Event Grid](./documentation/Scenario2-Outbound-from-SAPS4HANA/README.md) link.
+
+## Additional Resources
+
+This project has been implemented based on the following SAP CAP sample repository.
+
+- [Cloud-cap-samples](https://github.com/SAP-samples/cloud-cap-samples/)
 
 ## Known Issues
 
