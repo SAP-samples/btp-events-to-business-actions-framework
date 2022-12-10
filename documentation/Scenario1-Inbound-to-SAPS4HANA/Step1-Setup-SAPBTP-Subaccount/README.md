@@ -18,18 +18,18 @@ If you are new to SAP BTP, follow the [Get Ready to Develop on SAP BTP](https://
 
 Service | Service Plan | Usage Scenario |
 --- | --- | --- |
-|[SAP Authorization and Trust Management Service](https://discovery-center.cloud.sap/serviceCatalog/authorization-and-trust-management-service?region=all&tab=feature) | Application | Required to authenticate access to the extension app's notification endpoint.|
-|[Business Rule](https://help.sap.com/docs/BUSINESS_RULES) | Application | Required to authenticate access to the extension app's notification endpoint.|
-[Cloud Foundry Runtime](https://discovery-center.cloud.sap/serviceCatalog/cloud-foundry-runtime?region=all) | MEMORY | Needed to run the application on SAP BTP, Cloud Foundry environment. The chosen quota defines the available amount of memory in GB. |
-[Connectivity Service](https://discovery-center.cloud.sap/serviceCatalog/connectivity-service?service_plan=lite&region=all&commercialModel=cloud) | lite | Connectivity service allows you to connect extension application to an on-premise system through the Cloud Connector.|
+|[SAP Authorization and Trust Management Service](https://discovery-center.cloud.sap/serviceCatalog/authorization-and-trust-management-service?region=all&tab=feature) | application | Manage application authorizations and connections to identity providers.|
+|[Business Rule](https://help.sap.com/docs/BUSINESS_RULES) | application | Digitize and automate decision making with business rules to increase flexibility and compliance.|
+[Cloud Foundry Runtime](https://discovery-center.cloud.sap/serviceCatalog/cloud-foundry-runtime?region=all) | MEMORY | Create polyglot applications.The chosen quota defines the available amount of memory in GB.|
+[SAP Connectivity Service](https://discovery-center.cloud.sap/serviceCatalog/connectivity-service?service_plan=lite&region=all&commercialModel=cloud) | lite | Establish connections between cloud applications and on-premise systems.|
 [Destination Service](https://discovery-center.cloud.sap/serviceCatalog/destination?service_plan=lite&region=all&commercialModel=cloud) | lite | Destination service lets you find the destination information required to access a remote service or system from your extension application.|
-[Event Mesh](https://discovery-center.cloud.sap/serviceCatalog/event-mesh?region=all) | dev <br> standard(Application) | Messaging bus for inter-app communication within the Cloud Foundry environment.|
-[SAP Private Link Service](https://discovery-center.cloud.sap/serviceCatalog/private-link-service?service_plan=standard&region=all&commercialModel=cloud) | standard | Available only in Enterprise account. 
-[SAP Business Application Studio](https://discovery-center.cloud.sap/serviceCatalog/business-application-studio?region=all) | trial or standard-edition(Application) |Available in Trial as well as Enterprise account.
+[Event Mesh](https://discovery-center.cloud.sap/serviceCatalog/event-mesh?region=all) | dev <br> default <br> standard(Application) | fully managed cloud service that allows applications to communicate through asynchronous events.|
+[SAP Private Link Service](https://discovery-center.cloud.sap/serviceCatalog/private-link-service?service_plan=standard&region=all&commercialModel=cloud) | standard | Available only in Enterprise account. Establishes a private connection between selected SAP BTP services and selected services in your own IaaS provider accounts.|
+[SAP Business Application Studio](https://discovery-center.cloud.sap/serviceCatalog/business-application-studio?region=all) | trial <br> standard-edition(Application) | Available in Trial as well as Enterprise account.
 [SAP HANA Cloud](https://discovery-center.cloud.sap/serviceCatalog/sap-hana-cloud?tab=customerreference&region=all)  | hana | Application database for CAP Application
 [SAP HANA Schemas & HDI Containers](https://help.sap.com/docs/SAP_HANA_PLATFORM/3823b0f33420468ba5f1cf7f59bd6bd9/e28abca91a004683845805efc2bf967c.html?version=2.0.04&locale=en-US) | hd-shared | Application database for CAP Application
 
-**Note:** Service instances for SAP Event Mesh, Business Rules, Connectivity service, Destination service and SAP Authorization and Trust Management Service will be created programmatically during deployment. 
+**Note:** Service instances for SAP Event Mesh, Business Rules, SAP HANA Schemas & HDI Containers, Connectivity service, Destination service and SAP Authorization and Trust Management Service will be created programmatically during deployment. 
 
 ### 2. Set Up SAP Event Mesh
 
@@ -43,7 +43,7 @@ To set up SAP Event Mesh for this scenario, follow these steps:
 
     ![plot](./images/sub-eventmesh1.png)
 
-2. Open the SAP Event Mesh application:
+3. Open the SAP Event Mesh application:
 
     - If you are using SAP BTP Enterprise account, go to the **Subscriptions** tab and choose **Event Mesh** to open the application.
 
@@ -53,10 +53,24 @@ To set up SAP Event Mesh for this scenario, follow these steps:
 
         ![plot](./images/viewdashboard.png)
 
-3. Ensure the below roles are added.
+4. Select **Click to Select** icon to view the details of roles. 
+
+    ![plot](./images/eventmesh-btp-roles.png)
+
+    Ensure the below roles are available.
 
     ![plot](./images/eventmesh-roles.png)
 
+5. Choose **Security** > **Role Collections**. Choose **Enterprise Messaging Administrator** and choose **Edit** and then choose **Users** tab to add users.
+
+    ![plot](./images/rolecollection.png)
+
 ### 3. Set Up SAP HANA Cloud Instance
 
-Refer [Deploy SAP HANA Cloud](https://developers.sap.com/tutorials/hana-cloud-deploying.html) to create an instance of SAP HANA Cloud in SAP BTP. If you already have an existing HANA Instance, you can map it to this SAP BTP subaccount.
+Refer [Deploy SAP HANA Cloud](https://developers.sap.com/tutorials/hana-cloud-deploying.html) to create an instance of SAP HANA Cloud in SAP BTP. 
+
+If you already have an existing HANA Instance, you can map it to this SAP BTP subaccount.
+
+### 4. Set Up SAP Business Application Studio
+
+Refer [Manage Authorizations and Roles](https://help.sap.com/docs/SAP%20Business%20Application%20Studio/9d1db9835307451daa8c930fbd9ab264/01e69c53003c4b0a8a64310a3f08867d.html) to assign permissions to users.

@@ -4,6 +4,7 @@ In this section, you will clone the codebase and deploy the extension applicatio
 
 ### 1. Clone the GitHub Repository
     
+
 Access the [Event To Action Framework](https://github.com/SAP-samples/btp-events-to-business-actions-framework) GitHub repository to download the project.
 
 ### 2. Check the Prerequisites for Deployment
