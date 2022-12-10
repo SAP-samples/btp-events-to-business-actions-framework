@@ -1,4 +1,4 @@
-# Build Events-to-Business Actions scenarios with SAP BTP and Microsoft Azure
+# Build Events-to-Business Actions Scenarios with SAP BTP and Microsoft Azure
 
 [![REUSE status](https://api.reuse.software/badge/github.com/SAP-samples/btp-events-to-business-actions-framework)](https://api.reuse.software/info/github.com/SAP-samples/btp-events-to-business-actions-framework)
 
@@ -140,6 +140,7 @@ This project has been implemented based on the following SAP CAP sample reposito
 - [Cloud-cap-samples](https://github.com/SAP-samples/cloud-cap-samples/)
 
 ## Known Issues
+No known issues.
 
 ## Reference
 
