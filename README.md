@@ -2,7 +2,7 @@
 
 [![REUSE status](https://api.reuse.software/badge/github.com/SAP-samples/btp-events-to-business-actions-framework)](https://api.reuse.software/info/github.com/SAP-samples/btp-events-to-business-actions-framework)
 
-This repository contains code samples and instructions for developing an extension application  in SAP BTP. The sample application has been developed in a partner collaboration to help customers integrate any type of events from systems into SAP ecosystem via SAP BTP. This application helps to configure  actions that needs to be taken in SAP LoB systems based on the events that is received in SAP Event Mesh.
+This repository contains code samples and instructions for developing an extension application in SAP BTP. The sample application has been developed in a partner collaboration to help customers integrate any type of events from systems into SAP ecosystem via SAP BTP. This application helps to configure  actions that needs to be taken in SAP LoB systems based on the events that is received in SAP Event Mesh. The application scenario you will develop leverages Event-To-Business actions framework (extension application). 
 
 There are two scenarios described in this repository. In this tutorial, the events are received from Azure IoT Platform and the actions for these events are taken in SAP S/4HANA. You can use this application to further customize it for other systems as well.
 
@@ -34,17 +34,27 @@ There are two scenarios described in this repository. In this tutorial, the even
 [License](#license)
 
 ## Scenario:
-The business scenario you will be implementing here is to integrate real time events generated from industrial production processes in factories, plants, and warehouses into SAP business processes to enrich the outcome of enterprise operations and facilitate rapid decision making. In this use-case you will see how an IoT Event from Azure IoT Central is handled for performing business operations in SAP S/4HANA. The framework can be extended to any platform and to any kind of event.
-
-## Business Process Flow 
-The **Event to Business** Application has been developed in SAP BTP to help customers and partners to help create event-driven application using CAP and deploying them in SAP BTP. For this use-case, the Cloud Foundry Runtime was chosen. 
+The business scenario you will be implementing here is to integrate real time events generated from Microsoft Azure IoT Platform into SAP business processes to enrich the outcome of enterprise operations and facilitate rapid decision making. In this use-case you will see how an IoT Event from Azure IoT Central is handled for performing business operations in SAP S/4HANA. The framework can be extended to any platform and to any kind of event.
 
 The example configured here focuses on using Azure IoT Central, SAP Event Mesh, SAP CAP, SAP Workflow Management integrating with SAP S/4HANA. You can choose to configure and integrate with any SAP LoB solutions which exposes business services as OData APIs.
 
+## Business Process Flow 
+
+In this event-driven scenario, based on the real-time status of the IoT Devices from Azure IoT Central, actionable events are sent to SAP BTP to decide on the critical business actions to be taken in the SAP Enteprise Business systems based on business rules defined in the system.
+
 ![plot](./images/businessprocess.png)
 
-This sample application which is part of this repository is configured for Azure IoT Central to send critical and actionable events to SAP BTP. These events are received by SAP Event Mesh and the extension application in SAP BTP initiates process business actions in SAP S/4HANA based on the configurations.
+1. Data from IoT Devices are sent to Azure IoT Central.
 
+2. Rules in Azure IoT triggers an call to SAP Event Mesh in case of any actions which needs attention.
+
+3. SAP Event Mesh receives the events.
+
+4. Extension application is configured with all necessary actions (call SAP Business Rules to read the decision tables to decide on action to be taken, configure the OData API call to be executed , service call back to the device etc) to be taken.
+
+5. Extension application executes the business actions.
+
+6. For this sample application, Purchase Requisition is created in SAP S/4HANA. 
 
 ## Solution Architecture
 
