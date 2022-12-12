@@ -65,17 +65,39 @@ Build and deploy the application. Run the following commands:
 
     - If you are using SAP BTP Trial account, go to Instances tab, select the instance for SAP Event Mesh and choose View Dashboard.
 
-10. Choose **Message Clients** and then choose **Queues**. You will see the below message client and queue created in your SAP Event Mesh service instance.
+11. Choose **Message Clients** and then choose **Queues**. You will see the below message client and queue created in your SAP Event Mesh service instance.
 
     ![plot](./images/msgclient.png)
 
     ![plot](./images/queue.png)
 
 
-11. In subaccount, choose **Security** > **Role Collections**.
+12. In subaccount, choose **Security** > **Role Collections** and then choose **Create New Role Collection** icon.
 
-    ![plot](./images/businessrules_rolecoll.png)
+    ![plot](./images/RoleCollectionListCreate.png)
 
+13. Enter a value of your choice for the **Name** and **Description** field and choose **Create**.
+
+    ![plot](./images/CreateNewRoleCollection.png)
+
+14. Choose **Edit** to add roles and user to the created role collection.
+
+    ![plot](./images/EditRoleCollection.png)
+
+
+15. Select **RoleName** value help and then select the **RuleRepositorySuperUser** and **RuleRuntimeSuperUser** roles from the list.
+
+    ![plot](./images/RoleNameValueHelp.png)
+
+16. Choose **Add**.
+
+    ![plot](./images/SelectRoles.png)
+
+17. In the **Users** tab, enter your email id in **ID** and **E-Mail** input field and choose **Save**.
+
+18. Your configuration should look like below:
+
+    ![plot](./images/AddUserToRoleCollection.png)
 
 ### 4. Create destination in Microsoft Azure IoT Central application
 
