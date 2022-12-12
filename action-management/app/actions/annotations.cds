@@ -317,7 +317,10 @@ annotate service.prepostActions with {
                 $Type             : 'Common.ValueListParameterInOut',
                 LocalDataProperty : action_ID,
                 ValueListProperty : 'ID',
-            }, ],
+            }, {
+                    $Type             : 'Common.ValueListParameterDisplayOnly',
+                    ValueListProperty : 'name',
+                } ],
         },
         Common.ValueListWithFixedValues : false
     )
