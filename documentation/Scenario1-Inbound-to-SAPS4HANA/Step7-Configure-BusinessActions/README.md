@@ -124,6 +124,8 @@ In this section, you will configure the different business actions that needs to
 
     ![plot](./images/NewBusinessRulesAction.png)
 
+6. Choose **Save**.
+
 7. Choose **Create**.
 
 8. Create another business action with name **Update Device Cloud Property** and enter the following configuration values.
