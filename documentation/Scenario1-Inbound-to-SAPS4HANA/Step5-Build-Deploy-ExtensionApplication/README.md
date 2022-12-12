@@ -129,7 +129,7 @@ Note: For example, if the Subscribed Topic Name is "orgname/industry/event/raise
     The callback URL is formed by concatinating the **uri** from Step 3, constant rest endpoint path (/messagingrest/v1/topics/) and **encoded subscribed topic name** from Step 8 
     
     Note: URL format -  **uri**/messagingrest/v1/topics/**encoded subscribed topic name**
-    For example,if uri is "https://enterprise-messaging-pubsub.cfapps.eu20.hana.ondemand.com/" and encoded subscribed topic name is "orgname%2Findustry%2Fevent%2Fraised", then the callback URL is "https://enterprise-messaging-pubsub.cfapps.eu20.hana.ondemand.com//messagingrest/v1/topics/orgname%2Findustry%2Fevent%2Fraised"
+    For example,if uri is "https://enterprise-messaging-pubsub.cfapps.eu20.hana.ondemand.com" and encoded subscribed topic name is "orgname%2Findustry%2Fevent%2Fraised", then the callback URL is "https://enterprise-messaging-pubsub.cfapps.eu20.hana.ondemand.com/messagingrest/v1/topics/orgname%2Findustry%2Fevent%2Fraised"
 
 13. From the **Authorization** dropdown menu, select **OAuth**.
 
