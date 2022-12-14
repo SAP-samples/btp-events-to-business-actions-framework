@@ -62,7 +62,8 @@ The key services used from Microsoft Azure are the Azure IoT Central, Azure Blob
 
 The services used from SAP BTP are the Cloud Foundry Runtime, SAP Event Mesh, SAP Connectivity service, SAP Private Link service, SAP Workflow Management, SAP Event Mesh Connectivity Plan(Beta) and SAP Destination service. 
 
-SAP Private Link service is used in thie scenario as SAP BTP and SAP S/4HANA are running on Azure Infrastructure, however you can use the SAP Connectivity service and Cloud Connector for integration of SAP BTP and SAP S/4HANA as well. 
+SAP Private Link service is used for connectivity between SAP BTP and SAP S/4HANA when both the systems are running on Microsoft Azure Infrastructure, you can use Private Link service in the case of AWS as well, in this tutorial you will find implementation steps for SAP BTP Private Link service and Microsoft Azure Private Link service. Alternatively you can use SAP Connectivity service and Cloud Connector for integration of SAP BTP and SAP S/4HANA as well. 
+
 
 ![plot](./images/eventprocessingarch.png)
 

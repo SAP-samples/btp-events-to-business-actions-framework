@@ -105,11 +105,11 @@ Build and deploy the application. Run the following commands:
 
     ![plot](./images/cfspace.png)
 
-2. Select the extension application which is deployed in SAP BTP. Ensure it is in **Started** in **Requested State**.
+2. Select the extension application (action-management-srv) which is deployed in SAP BTP. Ensure the status is **Started** in **Requested State**.
 
     ![plot](./images/deployedbtpapp.png)
 
-3. Choose **Environment Variables**. Search for your appname (action-management-srv) and copy the values of **clientid**, **clientsecret** and **tokenendpoint** of the **httprest** protocol.
+3. Choose **Environment Variables**. Search for **httprest** protocol and copy the values of **clientid**, **clientsecret** and **tokenendpoint**.
 
     ![plot](./images/oauthdetails.png)
 
@@ -123,7 +123,7 @@ Build and deploy the application. Run the following commands:
 
     ![plot](./images/event-mesh-subscription.png)
 
-5. Choose **Message Clients** and choose the respective message client
+5. Choose **Message Clients** and choose message client which is created post deployment.
 
     ![plot](./images/em-message-clients.png)
 
@@ -139,7 +139,9 @@ Build and deploy the application. Run the following commands:
 
 Note: For example, if the Subscribed Topic Name is "orgname/industry/event/raised", then the encoded subscribed topic name will be "orgname%2Findustry%2Fevent%2Fraised".
 
-9. Go to Microsoft Azure Portal and choose the IoT Central Application you created. Choose **Data Export** and then choose **Destinations** tab to create new destination.
+9. Go to Microsoft Azure Portal and choose **Resource Groups**. Select the resource group and then  choose the IoT Central Application you created. 
+
+    Select the **IoT Central Application URL** to open the application. Choose **Data Export** and then choose **Destinations** tab to create new destination. Choose **Add a destination**.
 
     ![plot](./images/create-destination.png)
 
@@ -148,7 +150,7 @@ Note: For example, if the Subscribed Topic Name is "orgname/industry/event/raise
 11. In the **Destination Type** dropdown menu, select **Webhook**.
 
 12. In the **Callback URL** field, enter the value of the url as below.
-    The callback URL is formed by concatinating the **uri** from Step 3, constant rest endpoint path (/messagingrest/v1/topics/) and **encoded subscribed topic name** from Step 8 
+    The callback URL is formed by concatenating the **uri** from Step 3, constant rest endpoint path (/messagingrest/v1/topics/) and **encoded subscribed topic name** from Step 8 
     
     Note: URL format -  **uri**/messagingrest/v1/topics/**encoded subscribed topic name**
     For example,if uri is "https://enterprise-messaging-pubsub.cfapps.eu20.hana.ondemand.com" and encoded subscribed topic name is "orgname%2Findustry%2Fevent%2Fraised", then the callback URL is "https://enterprise-messaging-pubsub.cfapps.eu20.hana.ondemand.com/messagingrest/v1/topics/orgname%2Findustry%2Fevent%2Fraised"
@@ -159,20 +161,19 @@ Note: For example, if the Subscribed Topic Name is "orgname/industry/event/raise
 
 15. In the **Scope** field, enter **uaa.resource**.
 
-12. In the **Token request content type​** dropdown menu, choose **Auto**.
+16. In the **Token request content type​** dropdown menu, choose **Auto**.
 
-13. In the **Headers** section, choose **+Header** and enter the below key-value pair.
+17. In the **Headers** section, choose **+Header** and enter the below key-value pair.
 
     ![plot](./images/update-dest.png)
 
-14. Choose **Save**.
+18. Choose **Save**.
 
-15. Navigate back to **Data Exports**, and choose **Exports** tab and choose the Export configuration that you had created (**Waste Container Export**).
+19. Navigate back to **Data Exports**, and choose **Exports** tab and choose the Export configuration that you had created (**Waste Container Export**).
 
     ![plot](./images/iot-dataexport.png)
 
-16. In the **Destination** dropdown, choose the destination that you have created in Step 9.
+20. In the **Destination** dropdown, choose the destination that you have created in Step 9 and then choose **Save**.
 
     ![plot](./images/iot-dataexport-destination.png)
 
-17. Choose **Save**.

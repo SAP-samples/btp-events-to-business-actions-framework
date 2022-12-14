@@ -102,9 +102,26 @@ In this section, you will create an Microsoft Azure IoT Central application and 
 
     ![plot](./images/model-imported.png)
 
-8. Choose **Publish**.
+8. Choose **Views** and the choose **Editing device and cloud data** to add a test view.
+
+    ![plot](./images/addview.png)
+
+9. Select the fields as per your requirement. For a sample view, you can choose **Container ID**, **Container Type**, **Location ID** and **Status** fields and choose **Save**.
+
+    ![plot](./images/addview1.png)
+
+10. Choose **Publish**.
 
     ![plot](./images/publish.png)
+
+11. Choose **Devices** and then choose **+ New** to create a new device. 
+
+    ![plot](./images/newdevice.png)
+
+12. In the **Device Template** dropdown menu, choose the device template you created and then choose **Create**.
+
+    ![plot](./images/newdevice1.png)
+
 
 ### 4. Configure Data Export
 
@@ -134,6 +151,7 @@ In this section, you will create an Microsoft Azure IoT Central application and 
 
     ![plot](./images/dataexport-new3.png)
 
+    
 7. In the **Enrichments** section, choose **+Custom String** and enter the below key value pairs as shown below.
 
     ![plot](./images/enrichment-custom.png)

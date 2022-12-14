@@ -95,6 +95,9 @@ In this section, you will configure the different business actions that needs to
     ![plot](./images/createaction.png)
 
 
+    ![plot](./images/createaction1.png)
+
+
 4. In the **Basic Information** section, enter the following configuration values. 
 
     ```
@@ -190,13 +193,16 @@ In this section, you will configure the different business actions that needs to
                 }
              }
     Is Csrf Token Needed?: true
+
     Related Actions: 
-        Flow Type: Post Action
-        Action: Update Device Cloud Property
+    Flow Type: Post Action
+    Action: Update Device Cloud Property
     ```
 
     Your configuration should look like this:
 
     ![plot](./images/CreatePurchaseRequisitionAction.png)
+
+    You will see a message **Your rule service is deployed successfully.**
 
 
