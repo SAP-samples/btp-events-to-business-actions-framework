@@ -142,17 +142,4 @@ module.exports = cds.service.impl(async function (srv) {
         return { actionCategory_id: 'ROOT', contentType_id: 'JSON', isCsrfTokenNeeded: false };
     })
 
-    srv.on('test', async () => {
-        let actionObject = {
-            url: '1jk6ufxxthr/properties?api-version=2022-07-31',
-            destination: 'azure-iot-device-api',
-            method: 'PATCH',
-            data: '{"Status":"Under Maintainence"}',
-            contentType: 'application/json'
-        };
-        let x = actionUtil.executeAction(actionObject, httpsAgent, false, undefined)
-        console.log(x);
-        return 'Worked';
-    })
-
 })
