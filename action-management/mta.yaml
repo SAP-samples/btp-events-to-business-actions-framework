@@ -11,6 +11,7 @@ modules:
   - name: action-management-auth
   - name: action-management-dest-srv
   - name: action-management-eventmesh
+  - name: action-management-connectivity-srv
   provides:
   - name: srv-api
     properties:
@@ -180,6 +181,11 @@ resources:
     service: enterprise-messaging    
     service-plan: default
     path: config/em-config.json
+- name: action-management-connectivity-srv
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: connectivity    
+    service-plan: lite
 parameters:
   deploy_mode: html5-repo
   enable-parallel-deployments: true
