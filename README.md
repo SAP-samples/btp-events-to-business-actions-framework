@@ -36,17 +36,17 @@ There are two scenarios described in this repository. In this tutorial, the even
 ## Scenario:
 The business scenario you will be implementing here is to integrate real time events generated from Microsoft Azure IoT Platform into SAP business processes to enrich the outcome of enterprise operations and facilitate rapid decision making. In this use-case you will see how an IoT Event from Azure IoT Central is handled for performing business operations in SAP S/4HANA. The framework can be extended to any platform and to any kind of event.
 
-The example configured here focuses on using Azure IoT Central, SAP Event Mesh, SAP CAP, SAP Workflow Management integrating with SAP S/4HANA. You can choose to configure and integrate with any SAP LoB solutions which exposes business services as OData APIs.
+The example configured here focuses on using Microsoft Azure IoT Central, SAP Event Mesh, SAP CAP, SAP Workflow Management integrating with SAP S/4HANA. You can choose to configure and integrate with any SAP LoB solutions which exposes business services as OData APIs.
 
 ## Business Process Flow 
 
-In this event-driven scenario, based on the real-time status of the IoT Devices from Azure IoT Central, actionable events are sent to SAP BTP to decide on the critical business actions to be taken in the SAP Enteprise Business systems based on business rules defined in the system.
+In this event-driven scenario, based on the real-time status of the IoT Devices from Microsoft Azure IoT Central, actionable events are sent to SAP BTP to decide on the critical business actions to be taken in the SAP Enteprise Business systems based on business rules defined in the system.
 
 ![plot](./images/businessprocess.png)
 
-1. Data from IoT Devices are sent to Azure IoT Central.
+1. Data from IoT Devices are sent to Microsoft Azure IoT Central.
 
-2. Rules in Azure IoT triggers an call to SAP Event Mesh in case of any actions which needs attention.
+2. Rules in Microsoft Azure IoT triggers an call to SAP Event Mesh in case of any actions which needs attention.
 
 3. SAP Event Mesh receives the events.
 
@@ -64,10 +64,23 @@ The services used from SAP BTP are the Cloud Foundry Runtime, SAP Event Mesh, SA
 
 SAP Private Link service is used for connectivity between SAP BTP and SAP S/4HANA when both the systems are running on Microsoft Azure Infrastructure, you can use Private Link service in the case of AWS as well, in this tutorial you will find implementation steps for SAP BTP Private Link service and Microsoft Azure Private Link service. Alternatively you can use SAP Connectivity service and Cloud Connector for integration of SAP BTP and SAP S/4HANA as well. 
 
-
 ![plot](./images/eventprocessingarch.png)
 
+The following steps depicts the information flow across systems (in both the scenarios) 
+
+(1) Event is triggered from Microsoft Azure and sent to SAP Event Mesh.
+
+(2) Event-to-Business-Action framework(extension app) processor module's endpoint is subscribed to SAP Event Mesh, hence receives this event. 
+
+(3) Event-to-Business-Action framework (extension app) processor module leverages the Business Rules capability of SAP Build Process Automation to derive business action (for example, Purchase Order Requisition creation in SAP S/4HANA system) based on certain characteristics of incoming event.
+
+(4), (5), (6) (7) and (8) Event-to-Business-Action framework (extension app) processor module triggers the defined action in the SAP S/4HANA system by using the SAP Destination Service and SAP Private Link Service.  
+
 For more information, see [Set Up Connectivity Between SAP BTP and SAP S/4HANA Using SAP Private Link Service](./documentation/Scenario1-Inbound-to-SAPS4HANA/Step4b-Setup-SAPPrivateLinkService/README.md) page.
+
+In case SAP S/4HANA is on-premise and private cloud (refer to Figure-2)– communication with SAP S/4 HANA integrates via SAP Connectivity Service and Cloud Connector.
+
+(9) and (10) SAP S/4HANA publishes event for Purchase Requisition creation is sent to Microsoft Azure Event Grid via SAP Event Mesh Connectivity Bridge for further processing by Microfost Azure applications.
 
 For outbound from SAP S/4HANA scenario using SAP Event Mesh Connectivity Plan(Beta), see [Integrate Events Between SAP and Microsoft using SAP Event Mesh - Connectivity Bridge Service](https://github.com/SAP-samples/btp-event-mesh-connectivity-bridge) page. You will find the detailed architecture and business scenario for SAP Event Mesh and Azure Event Grid direct connectivity.
 

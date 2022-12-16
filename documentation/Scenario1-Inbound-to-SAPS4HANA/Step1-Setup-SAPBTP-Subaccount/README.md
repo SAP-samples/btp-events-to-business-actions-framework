@@ -31,6 +31,7 @@ Service | Service Plan | Usage Scenario |
 
 **Note:** Service instances for SAP Event Mesh, Business Rules, SAP HANA Schemas & HDI Containers, Connectivity service, Destination service and SAP Authorization and Trust Management Service will be created programmatically during deployment. 
 
+
 ### 2. Set Up SAP Event Mesh
 
 To set up SAP Event Mesh for this scenario, follow these steps:
