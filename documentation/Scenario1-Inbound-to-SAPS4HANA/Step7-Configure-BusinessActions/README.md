@@ -61,22 +61,34 @@ In this section, you will define business action in the action-management extens
 
     ![plot](./images/AzureDeviceAPIDestination.png)
 
-6. Create another destination with the name **ACTION_MODELER_S4** and enter the following configuration values. 
+6. Create destination with the name **ACTION_MODELER_S4** and enter the following configuration values. 
 
-    - Change host name in URL, User, Password as per your SAP S/4HANA system details. In case of on-premise instance, choose Proxy as **OnPremise**.
+    - Change host name in URL, User, Password as per your SAP S/4HANA system details. In case of on-premise instance, choose Proxy Type as **OnPremise**,
+    and in case of SAP S/4HANA system on Azure Private Cloud, then choose the Proxy Type as **PrivateLink**.
 
     ```
     Name: ACTION_MODELER_S4
     Type: HTTP
     URL: https://<<hostname>/sap/opu/odata/sap
-    Proxy: Internet
+    Proxy Type: Internet
     Authentication: BasicAuthentication
     User: <SAP S4HANA User>
     Password: <SAP S4HANA Password>
     ```
+        
+    - Add the additional properties:
+
+    ```
+    TrustAll: true (if using self signed certificate for development scenarios)
+    HTML5.DynamicDestination: true
+    WebIDEEnabled: true
+    WebIDEUsage: odata_abap
+    ```
+
     Your destination configuration should look like this:
 
-    ![plot](./images/S4HANACloudDestination.png)
+    ![plot](./images/S4HANAPLDestination.png)
+
 
 ### 2. Configure Business Actions in  Manage Actions application
 
