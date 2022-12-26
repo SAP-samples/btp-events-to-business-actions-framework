@@ -9,4 +9,4 @@ In this section, you will activate the APIs related to purchase requisition for 
 
 ![Activate](./images/s4pr-service.png)
 
-Based on your business scenario, expose the respective APIs (For example, Plant maintainence W\workorder, PO Creation, Sales Order).
+Based on your business scenario, expose the respective APIs (For example, Plant maintainence Workorder, Purchase Order, Sales Order etc.).

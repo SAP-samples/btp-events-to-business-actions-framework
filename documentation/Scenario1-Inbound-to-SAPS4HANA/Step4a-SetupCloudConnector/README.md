@@ -72,46 +72,18 @@ To make the SAP S/4HANA system available to the services and application in SAP 
 3. Select the virtual host created in the previous step and in the **Resources** section, choose the **Add** icon.
 
     1. In the **URL Path** field, enter **/**.
+
     2. Select the **Active** field.
+
     3. In the **Access Policy** field, select the **Path and All Sub-Paths** radio button.
+
     4. Choose **Save**. 
-  
-4.  Your configuration should look like this:
-   ![plot](./images/cloudconnector.png)
+
+4. Your configuration should look like this:
+
+    ![plot](./images/cloudconnector.png)
 
 
 5. In SAP BTP cockpit, navigate to your subaccount. Choose **Connectivity** > **Cloud Connectors**. The state of the Cloud Connector configurations should be **Connected**.
 
     ![plot](./images/btp-cc.png)
-
-
-### 4. Create Destination in SAP BTP subaccount
-
-Follow these steps to create the destinations in BTP for the SAP S/4HANA system.
-
-1. Log in to the SAP BTP cockpit with admin user credentials. 
-
-2. Navigate to you subaccount and choose **Connectivity** > **Destinations**. 
-
-3. Create another destination with the name **S4HANA_NP**.This is used for basic authentication.
-
-    1. Choose **New Destination** and enter the following configuration values.
-
-        | key | value |
-        | --- | --- |
-        | Name | S4HANA_NP |
-        | Type | HTTP |
-        | URL | The virtual host and port, e.g. http://virtualhostname:44300 |
-        | Proxy Type | OnPremise |
-        | Authentication | BasicAuthentication |
-        | User| Technical User |
-        | Password| Technical User Password | 
-
-    2. Add the additional properties:
-
-        | key | value |
-        | --- | --- |
-        | sap-client | your SAP Client no |
-        | HTML5.DynamicDestination | true |
-        | WebIDEEnabled | true |
-        | WebIDEUsage | odata_abap |

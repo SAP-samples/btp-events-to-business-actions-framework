@@ -47,14 +47,14 @@ In this section, you will define business action in the action-management extens
     ```
     Name: azure-iot-device-api
     Type: HTTP
-    URL: https://btp-events-s4-poc.azureiotcentral.com/api/devices/
+    URL: <IoT Central Application URL>/api/devices/
     Proxy: Internet
     Authentication: NoAuthentication
 
     Additional Properties:
-        HTML5.DynamicDestination: true
-        HTML5.PreserveHostHeader: true
-        URL.headers.Authorization: <API Token>
+    HTML5.DynamicDestination: true
+    HTML5.PreserveHostHeader: true
+    URL.headers.Authorization: <API Token>
     ```
 
     Your destination configuration should look like this:
@@ -63,32 +63,30 @@ In this section, you will define business action in the action-management extens
 
 6. Create destination with the name **ACTION_MODELER_S4** and enter the following configuration values. 
 
-    - Change host name in URL, User, Password as per your SAP S/4HANA system details. In case of on-premise instance, choose Proxy Type as **OnPremise**,
-    and in case of SAP S/4HANA system on Azure Private Cloud, then choose the Proxy Type as **PrivateLink**.
+    Change host name in URL, User, Password as per your SAP S/4HANA system details.
+    
+    - In case of SAP S/4HANA system on Azure Private Cloud, choose **Proxy Type** as **PrivateLink** and the private link **hostname** copied from [Step4b-Setup-SAPPrivateLinkService](../Step4b-Setup-SAPPrivateLinkService/README.md) in the **hostname** field.
+    - In case of SAP S/4HANA On-Premise system, choose **Proxy Type** as **OnPremise** and use the **Virtual Host**:**Virtual Port** in the **hostname** placeholder below created at [Step4a-SetupCloudConnector](../Step4a-SetupCloudConnector/README.md) to connect using Cloud Connector.
 
     ```
     Name: ACTION_MODELER_S4
     Type: HTTP
-    URL: https://<<hostname>/sap/opu/odata/sap
-    Proxy Type: Internet
+    URL: https://<hostname>/sap/opu/odata/sap
+    Proxy Type: PrivateLink
     Authentication: BasicAuthentication
     User: <SAP S4HANA User>
     Password: <SAP S4HANA Password>
-    ```
-        
-    - Add the additional properties:
 
-    ```
-    TrustAll: true (if using self signed certificate for development scenarios)
+    Additional Properties:
     HTML5.DynamicDestination: true
     WebIDEEnabled: true
     WebIDEUsage: odata_abap
+    TrustAll: true (Only for connecting using PrivateLink)
     ```
 
     Your destination configuration should look like this:
 
     ![plot](./images/S4HANAPLDestination.png)
-
 
 ### 2. Configure Business Actions in  Manage Actions application
 
@@ -117,8 +115,8 @@ In this section, you will configure the different business actions that needs to
     Description: Determine Action from Event Information
     Category: Default Action
     Action Type: Service Integration
-
     ```
+
 5. In the **HTTP Information** section, enter the following configuration values. 
 
     **Note**: Replace **Rule Service ID** with the value copied from Create Business Rules Project section of the **Step6-Configure-BusinessRules-Part1** page.
