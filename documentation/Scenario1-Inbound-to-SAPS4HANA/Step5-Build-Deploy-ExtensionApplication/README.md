@@ -101,15 +101,15 @@ Build and deploy the application. Run the following commands:
 
 ### 4. Create destination in Microsoft Azure IoT Central application
 
-1. In the SAP BTP cockpit, navigate to your subaccount and choose **Cloud Foundry** > **Spaces** and then choose your space.
+1. In the SAP BTP cockpit, navigate to your subaccount and choose **Instances and Subscriptions** and then choose **Instances**.
 
-    ![plot](./images/cfspace.png)
+    ![plot](./images/btp-instances.png)
 
-2. Select the extension application (action-management-srv) which is deployed in SAP BTP. Ensure the status is **Started** in **Requested State**.
+2. Choose **action-management-eventmesh** and then choose the three dots next to **action-management-eventmesh-key** and then choose **View** to open the service key. 
 
-    ![plot](./images/deployedbtpapp.png)
+    ![plot](./images/em-servicekey.png)
 
-3. Choose **Environment Variables**. Search for **httprest** protocol and copy the values of **clientid**, **clientsecret** and **tokenendpoint**.
+3. Copy the values of **clientid**, **clientsecret** and **tokenendpoint** corresponding to **httprest** protocol.
 
     ![plot](./images/oauthdetails.png)
 
