@@ -29,6 +29,10 @@ function replaceTemplateData(eventData, actionResponses, actionTemplateData) {
                         jsonData = eventData;
                         subpathList.splice(0, 1);
                         break;
+                    case 'DEFAULT':
+                        jsonData = actionResponses.defaultActionResponses[subpathList[1]];
+                        subpathList.splice(0, 2);
+                        break;
                     case 'MAIN':
                         jsonData = actionResponses.mainActionResponses[subpathList[1]];
                         subpathList.splice(0, 2);

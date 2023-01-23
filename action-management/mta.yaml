@@ -65,6 +65,10 @@ modules:
       parameters:
         service-key:
           name: action-management-eventmesh-key
+    - name: action-management-rules
+      parameters:
+        service-key:
+          name: action-management-rules-key
   parameters:
     content:
       subaccount:

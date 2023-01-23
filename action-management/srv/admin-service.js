@@ -12,7 +12,7 @@ module.exports = cds.service.impl(async function (srv) {
     const httpsAgent = new https.Agent({ rejectUnauthorized: false });
 
     emMessaging.on('com/sap/paa/industry/event/raised', async (eventMessage) => {
-        let actionResponses = { preActionResponses: {}, mainActionResponses: {}, postActionResponses: {} };
+        let actionResponses = { defaultActionResponses: {}, preActionResponses: {}, mainActionResponses: {}, postActionResponses: {} };
         const logHeadId = await logUtil.createLogHeader('INPROCESS');
         await logUtil.createLogItem(logHeadId, 'INFO', 'Event Received', JSON.stringify(eventMessage));
 
@@ -26,7 +26,7 @@ module.exports = cds.service.impl(async function (srv) {
             const actionId = actionUtil.getValueByJSONPath(defaultActionResponse.data, defaultActionDetails.defaultActionIdPath);
             await logUtil.createLogItem(logHeadId, 'INFO', 'Action Determined Successfully', actionId);
             await logUtil.updateLogHeader(logHeadId, { action_ID: actionId });
-
+            actionResponses.defaultActionResponses[defaultActionDetails.ID] = defaultActionResponse.data;
 
 
             //Get Action and Pre/Post Action Details
@@ -136,6 +136,12 @@ module.exports = cds.service.impl(async function (srv) {
         } else {
             return false;
         }
+    })
+
+    srv.on('postEvent', async (req) => {
+        console.log('event re4ceived from advanced event mesh');
+        console.log(req);
+        console.log(req.data);
     })
 
     srv.on('getActionsDefaults', async () => {
