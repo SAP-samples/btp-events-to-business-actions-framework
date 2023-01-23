@@ -4,19 +4,23 @@ In this section, you will define business action in the action-management extens
 
 ### 1. Create Destinations
 
-1. Choose **action-management** application in your Cloud Foundry space and then choose **Service Bindings**. Select **action-management-rules** service bing and choose **Show sensitive data**.
+1. In the SAP BTP cockpit, navigate to your subaccount and choose **Instances and Subscriptions** and then choose **Instances**.
 
-    ![plot](./images/ActionManagementServiceBinding.png)
+    ![plot](./images/btp-instances.png)
 
-2. Copy the values of clientid, clientsecret, url and rule_runtime_url.
+2. Choose **action-management-rules** and then choose the three dots next to **action-management-rules-key** and then choose **View** to open the service key. 
 
-    ![plot](./images/BusinessRulesDestinationInfo.png)
+    ![plot](./images/rules-servicekey.png)
 
-3. In the SAP BTP cockpit, navigate to your subaccount and choose **Connectivity > Destinations**.
+3. Copy the values of **clientid**, **clientsecret**, **url** and **rule_runtime_url**.
+
+    ![plot](./images/rulekeydetails.png)
+
+4. In the SAP BTP cockpit, navigate to your subaccount and choose **Connectivity > Destinations**.
 
     ![plot](./images/BTPCockpitDestinations.png)
 
-4. Create a new destination with the name **ACTION_BUSINESS_RULES** and enter the following configuration values. This is used for calling SAP Business Rules.
+5. Create a new destination with the name **ACTION_BUSINESS_RULES** and enter the following configuration values. This is used for calling SAP Business Rules.
 
     - Copy the values of rule_runtime_url, clientid, clientsecret and url from Step 2 and update it for URL, Client ID, Client Secret and Token Service URL.
 
@@ -38,7 +42,7 @@ In this section, you will define business action in the action-management extens
 
     ![plot](./images/BusinessRulesDestination.png)
 
-5. Create another destination with the name **azure-iot-device-api** and enter the following configuration values. This is used to call Microsoft Azure IoT Device API.
+6. Create another destination with the name **azure-iot-device-api** and enter the following configuration values. This is used to call Microsoft Azure IoT Device API.
 
    - Copy the value of the IoT Central Application URL from IoT Central Application in Microsoft Azure Portal and append the url with /api/devices/. Update this value for URL parameter.
    - For **URL.headers.Authorization** parameter, refer [Authentication and authorization](https://learn.microsoft.com/en-us/rest/api/iotcentral/authentication) to generate API Token.
@@ -61,7 +65,7 @@ In this section, you will define business action in the action-management extens
 
     ![plot](./images/AzureDeviceAPIDestination.png)
 
-6. Create destination with the name **ACTION_MODELER_S4** and enter the following configuration values. 
+7. Create destination with the name **ACTION_MODELER_S4** and enter the following configuration values. 
 
     Change host name in URL, User, Password as per your SAP S/4HANA system details.
     
