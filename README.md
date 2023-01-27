@@ -64,7 +64,10 @@ The services used from SAP BTP are the Cloud Foundry Runtime, SAP Event Mesh, SA
 
 SAP Private Link service is used for connectivity between SAP BTP and SAP S/4HANA when both the systems are running on Microsoft Azure Infrastructure, you can use Private Link service in the case of AWS as well, in this tutorial you will find implementation steps for SAP BTP Private Link service and Microsoft Azure Private Link service. Alternatively you can use SAP Connectivity service and Cloud Connector for integration of SAP BTP and SAP S/4HANA as well. 
 
-![plot](./images/eventprocessingarch.png)
+![plot](./images/eventprocessingarch.png) **Figure-1: High-level architecture (with SAP S/4HANA on Azure)**
+
+    
+![plot](./images/eventprocessingarch-onpremise.png) **Figure-2: High-level architecture with SAP S/4HANA on-premise and private cloud**
 
 The following steps depicts the information flow across systems (in both the scenarios) 
 
@@ -72,7 +75,7 @@ The following steps depicts the information flow across systems (in both the sce
 
 (2) Event-to-Business-Action framework(extension app) processor module's endpoint is subscribed to SAP Event Mesh, hence receives this event. 
 
-(3) Event-to-Business-Action framework (extension app) processor module leverages the Business Rules capability of SAP Build Process Automation to derive business action (for example, Purchase Order Requisition creation in SAP S/4HANA system) based on certain characteristics of incoming event.
+(3) Event-to-Business-Action framework(extension app) processor module leverages the Business Rules capability of SAP Build Process Automation to derive business action (for example, Purchase Order Requisition creation in SAP S/4HANA system) based on certain characteristics of incoming event.
 
 (4), (5), (6) (7) and (8) Event-to-Business-Action framework (extension app) processor module triggers the defined action in the SAP S/4HANA system by using the SAP Destination Service and SAP Private Link Service.  
 
