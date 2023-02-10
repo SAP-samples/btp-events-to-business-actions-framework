@@ -98,7 +98,7 @@ In this section, you will create an Microsoft Azure IoT Central application and 
 
     ![plot](./images/import-template.png)
 
-    **Note**: **Container.json** file is available in devicetemplate folder. Upload this model file.
+    **Note**: **Container-Data.json** file is available in [devicetemplate](./devicetemplate/) folder. Upload this model file.
 
     ![plot](./images/model-imported.png)
 
