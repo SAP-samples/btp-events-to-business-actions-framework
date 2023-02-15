@@ -193,7 +193,7 @@ In this section, you will configure the different business actions that needs to
                         "PurchaseRequisition": "",
                         "PurchaseRequisitionItem": "10",
                         "PurchaseRequisitionType": "NB",
-                        "PurchaseRequisitionItemText": "Fill Level ${{event.data.enrichments.FillingLevel}}",
+                        "PurchaseRequisitionItemText": "Fill Level ${{event.data.telemetry.FillingLevel}}",
                         "Material": "TG10",
                         "MaterialGroup": "L001",
                         "RequestedQuantity": "1",
