@@ -50,9 +50,9 @@ In this section, you will create an Microsoft Azure IoT Central application and 
     
     - In the **Resource group**  dropdown menu, select the resource group created in Step 1.
 
-    - In the **Resource name** field, enter  **iot-events**. This is a unique name you can choose.
+    - In the **Resource name** field, enter  **wastemgmt-iotapp**. This is a unique name you can choose.
 
-    - In the **Application URL** field, enter **iot-events**.
+    - In the **Application URL** field, enter **wastemgmt-iotapp**.
 
     - In the **Template** dropdown menu, select **Connected Waste Management**. In this scenario, you are using the template from list of industry-relevant template to get started quickly.
 
@@ -80,7 +80,7 @@ In this section, you will create an Microsoft Azure IoT Central application and 
 
     ![plot](./images/iot-app.png)
 
-3. In this scenario, you will create a new device template based on your custom capabilities. Choose **Device templates** > **Select type** and then choose **Create a custom device template**.
+3. In this scenario, you will create a new device template based on your custom capabilities. Choose **Device templates** and then select **New**. In the **Select type** > **Create a custom device template**, select **IoT Device** to create a custom device template.
 
 4. Choose **Next:Customize** to create a new device template.
 
@@ -125,7 +125,7 @@ In this section, you will create an Microsoft Azure IoT Central application and 
 
 ### 4. Configure Data Export
 
-1. Choose **Data export** to create new Data export.
+1. Choose **Data export** and then choose **+ New Data Export** to create new Data export.
 
     ![plot](./images/iot-dataexport.png)
 
