@@ -18,7 +18,7 @@ In this section, you will configure SAP Business Rule project which will be used
 4. In the **DETAILS** tab, 
 
     - Choose a name and description of your choice for **Name** and **Description** field. 
-    - In the **Destination** dropdown menu, choose **action-management-srv-dest**.
+    - In the **Destination** field, enter **action-management-srv-dest**.
     
     ![plot](./images/NewSystem.png)
 

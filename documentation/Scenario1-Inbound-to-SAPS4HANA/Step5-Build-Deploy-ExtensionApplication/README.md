@@ -155,7 +155,7 @@ Note: For example, if the Subscribed Topic Name is "orgname/industry/event/raise
     Note: URL format -  **uri**/messagingrest/v1/topics/**encoded subscribed topic name**/messages
     For example,if uri is "https://enterprise-messaging-pubsub.cfapps.eu20.hana.ondemand.com" and encoded subscribed topic name is "orgname%2Findustry%2Fevent%2Fraised", then the callback URL is "https://enterprise-messaging-pubsub.cfapps.eu20.hana.ondemand.com/messagingrest/v1/topics/orgname%2Findustry%2Fevent%2Fraised/messages"
 
-13. From the **Authorization** dropdown menu, select **OAuth**.
+13. From the **Authorization** dropdown menu, select **OAuth 2.0**.
 
 14. In the **Token URL**, **Client ID** and **Client secret** field, enter the value of the tokenendpoint, clientid, and clientsecret field you copied in Step 3.
 

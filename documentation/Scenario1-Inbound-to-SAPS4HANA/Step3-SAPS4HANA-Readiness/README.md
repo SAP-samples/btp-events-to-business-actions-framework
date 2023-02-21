@@ -10,3 +10,5 @@ In this section, you will activate the APIs related to purchase requisition for 
 ![Activate](./images/s4pr-service.png)
 
 Based on your business scenario, expose the respective APIs (For example, Plant maintainence Workorder, Purchase Order, Sales Order etc.).
+
+In the next step, you can choose to either setup cloud connector or SAP Private Link Service based on the SAP S/4HANA installation.

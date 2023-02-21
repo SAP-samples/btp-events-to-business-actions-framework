@@ -58,3 +58,4 @@ In this section, you will update decision table and activate business rule proje
     ![plot](./images/SelectSystem.png)
 
 
+You will see a message **Your rule service is deployed successfully.**

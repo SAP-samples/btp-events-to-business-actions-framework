@@ -70,6 +70,7 @@ In this section, you will define business action in the action-management extens
     Change host name in URL, User, Password as per your SAP S/4HANA system details.
     
     - In case of SAP S/4HANA system on Azure Private Cloud, choose **Proxy Type** as **PrivateLink** and the private link **hostname** copied from [Step4b-Setup-SAPPrivateLinkService](../Step4b-Setup-SAPPrivateLinkService/README.md) in the **hostname** field.
+
     - In case of SAP S/4HANA On-Premise system, choose **Proxy Type** as **OnPremise** and use the **Virtual Host**:**Virtual Port** in the **hostname** placeholder below created at [Step4a-SetupCloudConnector](../Step4a-SetupCloudConnector/README.md) to connect using Cloud Connector.
 
     ```
@@ -217,6 +218,5 @@ In this section, you will configure the different business actions that needs to
 
     ![plot](./images/CreatePurchaseRequisitionAction.png)
 
-    You will see a message **Your rule service is deployed successfully.**
 
 
