@@ -2,17 +2,17 @@
 
 [![REUSE status](https://api.reuse.software/badge/github.com/SAP-samples/btp-events-to-business-actions-framework)](https://api.reuse.software/info/github.com/SAP-samples/btp-events-to-business-actions-framework)
 
-This repository contains code samples and instructions for developing an extension application in SAP BTP. The sample application has been developed in a partner collaboration to help customers integrate any type of events from systems into SAP ecosystem via SAP BTP. This application helps to configure  actions that needs to be taken in SAP LoB systems based on the events that is received in SAP Event Mesh. The application scenario you will develop leverages Event-To-Business actions framework (extension application). 
+This repository contains code samples and instructions for developing an extension application in SAP BTP. The sample application has been developed in a partner collaboration to help customers integrate any type of events from systems into SAP ecosystem via SAP BTP. This application helps to configure  actions that needs to be taken in SAP LoB systems based on the events that is received in SAP Event Mesh. The application scenario you will develop in this tutorial leverages Event-To-Business actions framework (extension application). 
 
 There are two scenarios described in this repository. In this tutorial, the events are received from Azure IoT Platform and the actions for these events are taken in SAP S/4HANA. You can use this application to further customize it for other systems as well.
 
 1. Inbound to SAP S/4HANA
 
-    In this scenario, Azure IoT Events are sent to SAP Event Mesh using the Data Export functionality in Azure IoT Central Application. The Node.js extension application subscribes to SAP Event Mesh queue and executes the action that is required to be taken based on the event details. In this case, SAP Event Mesh is used. 
+    In this scenario, Azure IoT Events are sent to SAP Event Mesh using the Data Export functionality in Azure IoT Central Application. The Node.js extension application subscribes to SAP Event Mesh queue and executes the action that is required to be taken based on the event details.  
 
 2. Outbound from SAP S/4HANA
 
-    In this scenario, any event that is triggerred from SAP S/4HANA is sent to SAP Event Grid. With the latest Beta Releease of SAP Event Mesh - Connectivity Plan, event is propogated to Azure Event Grid with direct connectivity. As the Connecivity Plan is currently available for only SAP Event Mesh to Azure Event Grid flow, the event consumption from Azure Event Grid to outlook notification to the user is implemented.You can further extend this scenario to communicate back to device from the event info received from SAP S/4HANA. This is not covered in this tutorial.
+    In this scenario, any event that is triggerred from SAP S/4HANA is sent to SAP Event Grid Connectivity Bridge. With the latest Beta releease of SAP Event Mesh Connectivity Bridge plan, event is propogated to Azure Event Grid with direct connectivity. This service plan is currently available for only events from SAP S/4HANA to Azure Event Grid. In this scenario, the events from Azure Event Grid is consumed in Azure Function app to send outlook notification to the user. You can further enhance the scenario as per your requirement.
 
 > **Important Note** : Please be aware that this GitHub repository is still work in progress for improvements and additional scenarios. Make sure you're pulling the repository from time to time and redeploying it in SAP BTP.
 
@@ -34,9 +34,9 @@ There are two scenarios described in this repository. In this tutorial, the even
 [License](#license)
 
 ## Scenario:
-The business scenario you will be implementing here is to integrate real time events generated from Microsoft Azure IoT Platform into SAP business processes to enrich the outcome of enterprise operations and facilitate rapid decision making. In this use-case you will see how an IoT Event from Azure IoT Central is handled for performing business operations in SAP S/4HANA. The framework can be extended to any platform and to any kind of event.
+The business scenario you will be implementing here is to integrate real time events generated from Microsoft Azure IoT Platform into SAP business processes to enrich the outcome of enterprise operations and facilitate rapid decision making. The framework can be extended to any platform and to any kind of event.
 
-The example configured here focuses on using Microsoft Azure IoT Central, SAP Event Mesh, SAP CAP, SAP Workflow Management integrating with SAP S/4HANA. You can choose to configure and integrate with any SAP LoB solutions which exposes business services as OData APIs.
+You can choose to configure and integrate events with any SAP LoB solution.
 
 ## Business Process Flow 
 
@@ -46,15 +46,15 @@ In this event-driven scenario, based on the real-time status of the IoT Devices 
 
 1. Data from IoT Devices are sent to Microsoft Azure IoT Central.
 
-2. Rules in Microsoft Azure IoT triggers an call to SAP Event Mesh in case of any actions which needs attention.
+2. Rules in Microsoft Azure IoT triggers an call to SAP Event Mesh in case of any actions which needs attention. This is defined in IoT Rules for devices.
 
 3. SAP Event Mesh receives the events.
 
-4. Extension application is configured with all necessary actions (call SAP Business Rules to read the decision tables to decide on action to be taken, configure the OData API call to be executed , service call back to the device etc) to be taken.
+4. Extension application is configured with all necessary actions (For example, calling SAP Business Rules API to read the decision tables to decide on action to be taken, configure the OData API call to be executed , service call back to the device) to be taken.
 
 5. Extension application executes the business actions.
 
-6. For this sample application, Purchase Requisition is created in SAP S/4HANA. 
+6. For this sample application, based on the fill level of waste container a new Purchase Order Requisition is created in SAP S/4HANA.
 
 ## Solution Architecture
 
@@ -120,7 +120,7 @@ These are the technical prerequistics for an integration between Microsoft Azure
     > - Required for configuring device template, event producer and event routing.
 
 - An Azure Storage Account
-    > - Required for storing the events received from Azure Event Grid in case of outbound from SAP S/4HANA scenario using SAP EVent Mesh Connecivity service.
+    > - Required for storing the events received from Azure Event Grid in case of outbound from SAP S/4HANA scenario using SAP Event Mesh Connecivity service.
 
 - An Azure Communication Service
     >- Required to send email notificiations and SMS to users.
