@@ -8,7 +8,7 @@ In this section, you will define business action in the action-management extens
 
     ![plot](./images/btp-instances.png)
 
-2. Choose **action-management-rules** and then choose the three dots next to **action-management-rules-key** and then choose **View** to open the service key. 
+2. Choose **action-management-rules** and then choose the three dots next to **action-management-rules-key** and then choose **View** to open the service key.
 
     ![plot](./images/rules-servicekey.png)
 
@@ -38,6 +38,7 @@ In this section, you will define business action in the action-management extens
     Additional Properties:
     HTML5.DynamicDestination: true
     ```
+
     Your destination configuration should look like this:
 
     ![plot](./images/BusinessRulesDestination.png)
@@ -46,7 +47,6 @@ In this section, you will define business action in the action-management extens
 
    - Copy the value of the IoT Central Application URL from IoT Central Application in Microsoft Azure Portal and append the url with /api/devices/. Update this value for URL parameter.
    - For **URL.headers.Authorization** parameter, refer [Authentication and authorization](https://learn.microsoft.com/en-us/rest/api/iotcentral/authentication) to generate API Token.
-   
 
     ```
     Name: azure-iot-device-api
@@ -65,33 +65,52 @@ In this section, you will define business action in the action-management extens
 
     ![plot](./images/AzureDeviceAPIDestination.png)
 
-7. Create destination with the name **ACTION_MODELER_S4** and enter the following configuration values. 
+7. Create destination with the name **ACTION_MODELER_S4** and enter the following configuration values.
 
     Change host name in URL, User, Password as per your SAP S/4HANA system details.
-    
+
     - In case of SAP S/4HANA system on Azure Private Cloud, choose **Proxy Type** as **PrivateLink** and the private link **hostname** copied from [Step4b-Setup-SAPPrivateLinkService](../Step4b-Setup-SAPPrivateLinkService/README.md) in the **hostname** field.
+
+        ```
+        Name: ACTION_MODELER_S4
+        Type: HTTP
+        URL: https://<hostname>/sap/opu/odata/sap
+        Proxy Type: PrivateLink
+        Authentication: BasicAuthentication
+        User: <SAP S4HANA User>
+        Password: <SAP S4HANA Password>
+
+        Additional Properties:
+        HTML5.DynamicDestination: true
+        WebIDEEnabled: true
+        WebIDEUsage: odata_abap
+        TrustAll: true
+        ```
+
+        Your destination configuration should look like this:
+
+        ![plot](./images/S4HANAPLDestination.png)
 
     - In case of SAP S/4HANA On-Premise system, choose **Proxy Type** as **OnPremise** and use the **Virtual Host**:**Virtual Port** in the **hostname** placeholder below created at [Step4a-SetupCloudConnector](../Step4a-SetupCloudConnector/README.md) to connect using Cloud Connector.
 
-    ```
-    Name: ACTION_MODELER_S4
-    Type: HTTP
-    URL: https://<hostname>/sap/opu/odata/sap
-    Proxy Type: PrivateLink
-    Authentication: BasicAuthentication
-    User: <SAP S4HANA User>
-    Password: <SAP S4HANA Password>
+        ```
+        Name: ACTION_MODELER_S4
+        Type: HTTP
+        URL: https://<hostname>/sap/opu/odata/sap
+        Proxy Type: OnPremise
+        Authentication: BasicAuthentication
+        User: <SAP S4HANA User>
+        Password: <SAP S4HANA Password>
 
-    Additional Properties:
-    HTML5.DynamicDestination: true
-    WebIDEEnabled: true
-    WebIDEUsage: odata_abap
-    TrustAll: true (Only for connecting using PrivateLink)
-    ```
+        Additional Properties:
+        HTML5.DynamicDestination: true
+        WebIDEEnabled: true
+        WebIDEUsage: odata_abap
+        ```
 
-    Your destination configuration should look like this:
+        Your destination configuration should look like this:
 
-    ![plot](./images/S4HANAPLDestination.png)
+        ![plot](./images/S4HANAOnPremiseDestination.png)
 
 ### 2. Configure Business Actions in  Manage Actions application
 
@@ -109,11 +128,9 @@ In this section, you will configure the different business actions that needs to
 
     ![plot](./images/createaction.png)
 
-
     ![plot](./images/createaction1.png)
 
-
-4. In the **Basic Information** section, enter the following configuration values. 
+4. In the **Basic Information** section, enter the following configuration values.
 
     ```
     Action Name: Determine Action from Event Information
@@ -122,7 +139,7 @@ In this section, you will configure the different business actions that needs to
     Action Type: Service Integration
     ```
 
-5. In the **HTTP Information** section, enter the following configuration values. 
+5. In the **HTTP Information** section, enter the following configuration values.
 
     **Note**: Replace **Rule Service ID** with the value copied from Create Business Rules Project section of the **Step6-Configure-BusinessRules-Part1** page.
 
@@ -161,12 +178,11 @@ In this section, you will configure the different business actions that needs to
     Relative Path: ${{event.data.deviceId}}/properties?api-version=2022-07-31
     Payload: {  "Status": "Under Maintainence"  }
     ```
-    
+
     Your configuration should look like this:
 
     ![plot](./images/UpdateDeviceAction.png)
 
-    
 8. Create another business action with name **Create Purchase Requisition** and enter the following  configuration values.
 
     ```
@@ -217,6 +233,3 @@ In this section, you will configure the different business actions that needs to
     Your configuration should look like this:
 
     ![plot](./images/CreatePurchaseRequisitionAction.png)
-
-
-
