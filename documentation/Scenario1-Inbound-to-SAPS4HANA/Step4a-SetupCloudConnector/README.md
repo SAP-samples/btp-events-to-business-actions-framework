@@ -1,18 +1,18 @@
-# Connect SAP BTP and SAP S/4HANA Using Cloud Connector
+## Connect SAP BTP and SAP S/4HANA Using Cloud Connector
 
-Follow these steps to set up the Cloud Connector and the SAP Connectivity service to establish secured communication between SAP BTP and SAP S/4HANA. Choose this configuration if you have SAP S/4HANA on-premise/private cloud. 
+Follow these steps to set up the Cloud Connector and the SAP Connectivity service to establish secured communication between SAP BTP and SAP S/4HANA. Choose this configuration if you have SAP S/4HANA on-premise/private cloud.If you have SAP BTP and SAP S/4HANA running on Azure, then you can skip this step and proceed to [next step](../Step4b-Setup-SAPPrivateLinkService/README.md) to setup connectivity between SAP BTP and SAP S/4HANA using Private Link.
 
-### 1. Download and Install the Cloud Connector 
+### 1. Download and Install the Cloud Connector
 
 1. Download the Cloud Connector from [SAP Development Tools](https://tools.hana.ondemand.com/#cloud) for your operating system. If you don't have Java installed on the server, download and install it.
 
     ![plot](./images/scc_download.png)
 
-    You need an administrator access to install the Cloud Connector. 
+    You need an administrator access to install the Cloud Connector.
 
 2. Run the installation package and follow the on-screen installation guide. If the installation is successful, the  Cloud Connector will be started automatically.
 
-### 2. Configure the Cloud Connector 
+### 2. Configure the Cloud Connector
 
 1. To configure the Cloud Connector, open https://hostname:port, replace **hostname** with the hostname of the machine on which the Cloud Connector is installed, and the **port** with the port number mentioned during the installation. The default port number is 8443.
 
@@ -20,7 +20,7 @@ Follow these steps to set up the Cloud Connector and the SAP Connectivity servic
 
     Enter below credentials (case sensitive) and choose Login.
 
-    Username: **Administrator** 
+    Username: **Administrator**
     Password: **manage**
 
     **Note**: The first time you log in, you must change the password and choose Master as the installation type. Click **Save**.
@@ -34,7 +34,7 @@ Follow these steps to set up the Cloud Connector and the SAP Connectivity servic
     ![plot](./images/addsubaccount.png)
 
     1. In the **Region** field, select your subaccount region.
-    
+
     2. In the **Subaccount** field, enter the value of the subaccount ID you copied in the previous step.
 
     3. In the **Display Name** field, enter a unique name of your choice.
@@ -42,7 +42,7 @@ Follow these steps to set up the Cloud Connector and the SAP Connectivity servic
     4. In the **Login E-Mail** and **Password** fields, enter the Global Account Administrator's email ID and password.
 
     Your configuration should look like this:
-    
+
     ![plot](./images/scc_initial_setup.png)
 
     5. Choose **Save**.
@@ -66,7 +66,7 @@ To make the SAP S/4HANA system available to the services and application in SAP 
     5. In the **Principal Type** dropdown menu, select **X.509 Certificate (Strict Usage)**. Choose **Next**.
 
     6. In the **Host In Request Header** dropdown menu, select **Use Virtual Host**. Choose **Next**.
-    
+
     7. Select the **Check Internal Host** checkbox and choose **Finish**.
 
 3. Select the virtual host created in the previous step and in the **Resources** section, choose the **Add** icon.
@@ -77,7 +77,7 @@ To make the SAP S/4HANA system available to the services and application in SAP 
 
     3. In the **Access Policy** field, select the **Path and All Sub-Paths** radio button.
 
-    4. Choose **Save**. 
+    4. Choose **Save**.
 
 4. Your configuration should look like this:
 
