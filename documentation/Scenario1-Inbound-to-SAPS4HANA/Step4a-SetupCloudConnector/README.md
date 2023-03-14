@@ -1,6 +1,8 @@
 ## Connect SAP BTP and SAP S/4HANA Using Cloud Connector
 
-Follow these steps to set up the Cloud Connector and the SAP Connectivity service to establish secured communication between SAP BTP and SAP S/4HANA. Choose this configuration if you have SAP S/4HANA on-premise/private cloud.If you have SAP BTP and SAP S/4HANA running on Azure, then you can skip this step and proceed to [next step](../Step4b-Setup-SAPPrivateLinkService/README.md) to setup connectivity between SAP BTP and SAP S/4HANA using Private Link.
+Follow these steps to set up the Cloud Connector and the SAP Connectivity service to establish secured communication between SAP BTP and SAP S/4HANA. 
+### Note:
+Choose this configuration if you have SAP S/4HANA on-premise/private cloud.If you have SAP BTP and SAP S/4HANA running on Azure, then you can skip this step and proceed to [next step](../Step4b-Setup-SAPPrivateLinkService/README.md) to setup connectivity between SAP BTP and SAP S/4HANA using Private Link.
 
 ### 1. Download and Install the Cloud Connector
 
