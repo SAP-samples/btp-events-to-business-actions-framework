@@ -1,5 +1,7 @@
 ## Set Up Connectivity Between SAP BTP and SAP S/4HANA Using SAP Private Link Service
 
+>Note: Choose this configuration if you have SAP BTP subaccount and SAP S/4HANA running on Azure. If you have already established the connectivity between SAP BTP and SAP S/4HANA using Cloud Connector then you can skip this step.
+
 ### Prerequisites
 These are the prerequisities that you need to consider if you have SAP BTP and SAP S/4HANA on Microsoft Azure. 
 
