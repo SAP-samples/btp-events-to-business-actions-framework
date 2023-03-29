@@ -11,7 +11,11 @@ async function createLogHeader(initialStatus){
 async function createLogItem(logHeadId, level, msg, data){
     LOG[level.toLowerCase()](msg);
     LOG[level.toLowerCase()](JSON.stringify(data));
-    let logItem = {header_ID: logHeadId, level: level, message: msg, data: data};
+    //get log count for the header
+    let logSeqNo = 1;
+    let logCountResult = await cds.read('AdminService.LogItems').limit(1).where({header_ID: logHeadId}).orderBy({ref:['seqNo'],sort:'desc'}).columns(['seqNo']);
+    logCountResult.length > 0 ? logSeqNo = logCountResult[0].seqNo + 1 : 1;
+    let logItem = {header_ID: logHeadId, level: level, message: msg, data: data, seqNo: logSeqNo};
     let result = await cds.create('AdminService.LogItems', logItem);
     return result.req.data;
 }

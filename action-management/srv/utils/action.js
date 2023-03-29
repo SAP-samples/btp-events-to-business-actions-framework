@@ -3,6 +3,7 @@ const { SELECT } = cds.ql;
 const core = require('@sap-cloud-sdk/http-client');
 const logUtil = require('./logger');
 const xsenv = require('@sap/xsenv');
+const destinationUtil = require('./destination');
 xsenv.loadEnv();
 // const { ActionDetails, PrePostActionDetails } = cds.entities;
 
@@ -107,17 +108,17 @@ async function buildDataAndExecuteAction(eventMessage, actionResponses, reqActio
         payload = replaceTemplateData(eventMessage, actionResponses, templatePayload);
     }
 
-    logUtil.createLogItem(logHeadId, 'INFO', `[${actionCategoryDesc}] For Action:${actionId}, Final Payload`, JSON.stringify(payload));
+    await logUtil.createLogItem(logHeadId, 'INFO', `[${actionCategoryDesc}] For Action:${actionId}, Final Payload`, JSON.stringify(payload));
 
     let path = templatePath;
     if(templatePath && templatePath !== null){
         path = replaceTemplateData(eventMessage, actionResponses, templatePath);
     }
-    logUtil.createLogItem(logHeadId, 'INFO', `[${actionCategoryDesc}] For Action:${actionId}, Final URL path`, JSON.stringify(path));
+    await logUtil.createLogItem(logHeadId, 'INFO', `[${actionCategoryDesc}] For Action:${actionId}, Final URL path`, JSON.stringify(path));
 
     const actionObject = buildActionObject(path, dest, method, payload, contentType);
     const actionResponse = await executeAction(actionObject, destToken, httpsAgent, isTokenNeeded, logHeadId);
-    logUtil.createLogItem(logHeadId, 'INFO', `[${actionCategoryDesc}] For Action:${actionId}, execution is successful`, JSON.stringify(actionResponse.data));
+    await logUtil.createLogItem(logHeadId, 'INFO', `[${actionCategoryDesc}] For Action:${actionId}, execution is successful`, JSON.stringify(actionResponse.data));
     return actionResponse;
 }
 
@@ -146,11 +147,66 @@ async function executeAction(actionObject, destinationToken, httpsAgent, isToken
 
         return actionResponse;
     } catch (error) {
-        if (error.message !== undefined) logUtil.createLogItem(logHeadId, 'ERROR', error.message, '');
-        if (error.cause?.message !== undefined) logUtil.createLogItem(logHeadId, 'ERROR', error.cause?.message, '');
-        if (error.rootCause?.message !== undefined) logUtil.createLogItem(logHeadId, 'ERROR', error.rootCause?.message, '');
-        if (error.rootCause?.response?.data !== undefined) logUtil.createLogItem(logHeadId, 'ERROR', error.rootCause?.response?.data, '');
+        if (error.message !== undefined) await logUtil.createLogItem(logHeadId, 'ERROR', error.message, '');
+        if (error.cause?.message !== undefined) await logUtil.createLogItem(logHeadId, 'ERROR', error.cause?.message, '');
+        if (error.rootCause?.message !== undefined) await logUtil.createLogItem(logHeadId, 'ERROR', error.rootCause?.message, '');
+        if (error.rootCause?.response?.data !== undefined) await logUtil.createLogItem(logHeadId, 'ERROR', error.rootCause?.response?.data, '');
         throw error;
+    }
+}
+
+async function convertEventToBusinessAction(eventMessage, httpsAgent, logHeaderId){
+    let actionResponses = { defaultActionResponses: {}, preActionResponses: {}, mainActionResponses: {}, postActionResponses: {} };
+    let logHeadId = '';
+    if(logHeaderId){
+        logHeadId = logHeaderId;
+        await logUtil.updateLogHeader(logHeadId, { status: 'INPROCESS' });
+    } else {
+        logHeadId = await logUtil.createLogHeader('INPROCESS');
+    }
+    await logUtil.createLogItem(logHeadId, 'INFO', 'Event Received', JSON.stringify(eventMessage));
+
+    try {
+        const destToken = await destinationUtil.getDestinationToken();
+       
+        await logUtil.createLogItem(logHeadId, 'INFO', 'Destination Service Token fetched', '');
+
+        //Get Default Action - To Use it to determine Relevant Action
+        let defaultActionDetails = await getDefaultAction(logHeadId);
+        let defaultActionResponse = await buildDataAndExecuteAction(eventMessage, actionResponses, defaultActionDetails, destToken, httpsAgent, logHeadId);
+        const actionId = getValueByJSONPath(defaultActionResponse.data, defaultActionDetails.defaultActionIdPath);
+        await logUtil.createLogItem(logHeadId, 'INFO', 'Action Determined Successfully', actionId);
+        await logUtil.updateLogHeader(logHeadId, { action_ID: actionId });
+        actionResponses.defaultActionResponses[defaultActionDetails.ID] = defaultActionResponse.data;
+
+
+        //Get Action and Pre/Post Action Details
+        let { mainActionDetails, relatedPreActions, relatedPostActions } = await getActionInformations(actionId, logHeadId);
+
+        //Execute Pre Action Details - One By One
+        if (relatedPreActions && relatedPreActions.length > 0) {
+            for (let i = 0; i < relatedPreActions.length; i++) {
+                let preActionResponse = await buildDataAndExecuteAction(eventMessage, actionResponses, relatedPreActions[i], destToken, httpsAgent, logHeadId);
+                actionResponses.preActionResponses[relatedPreActions[i].prepostAction_ID] = preActionResponse.data;
+            }
+        }
+
+        //Execute Main Action
+        const mainActionResponse = await buildDataAndExecuteAction(eventMessage, actionResponses, mainActionDetails, destToken, httpsAgent, logHeadId);
+        actionResponses.mainActionResponses[mainActionDetails.ID] = mainActionResponse.data;
+
+        //Execute Post Action Dtails - One By One
+        if (relatedPostActions && relatedPostActions.length > 0) {
+            for (let i = 0; i < relatedPostActions.length; i++) {
+                let postActionResponse =await buildDataAndExecuteAction(eventMessage, actionResponses, relatedPostActions[i], destToken, httpsAgent, logHeadId);
+                actionResponses.postActionResponses[relatedPreActions[i].prepostAction_ID] = postActionResponse.data;
+            }
+        }
+
+        await logUtil.updateLogHeader(logHeadId, { status: 'COMPLETE' });
+    }
+    catch (error) {
+        await logUtil.updateLogHeader(logHeadId, { status: 'ERROR' });
     }
 }
 
@@ -159,5 +215,6 @@ module.exports = {
     getActionInformations: getActionInformations,
     getValueByJSONPath: getValueByJSONPath,
     executeAction: executeAction,
-    buildDataAndExecuteAction: buildDataAndExecuteAction
+    buildDataAndExecuteAction: buildDataAndExecuteAction,
+    convertEventToBusinessAction: convertEventToBusinessAction
 };

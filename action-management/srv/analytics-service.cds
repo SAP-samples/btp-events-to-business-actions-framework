@@ -11,12 +11,14 @@ service AnalyticsService {
             TO_DATE(createdAt) as createdDate : Date,
             action.name as actionName,
             action.descr as actionDescr,
+        } actions {
+            action reProcess();
         };
 
     entity LogItems    as
         select from db.LogItems {
             *
-        };
+        } order by seqNo desc;
     entity LogCuntStatus as select from db.LogHeaders distinct{
         status,
         count(ID) as logCount:Integer
