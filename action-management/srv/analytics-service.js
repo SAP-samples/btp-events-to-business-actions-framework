@@ -17,7 +17,7 @@ module.exports = cds.service.impl(async function (srv) {
         let logEventMessage = await cds.read(LogItems).limit(1).where({header_ID: logHeaderId, seqNo: 1}).columns(['data']);
         logEventMessage.length > 0 ? eventMessage = logEventMessage[0].data : "";
         if(eventMessage && eventMessage.length > 0){
-            actionUtil.convertEventToBusinessAction(JSON.parse(eventMessage), httpsAgent, logHeaderId);
+            await actionUtil.convertEventToBusinessAction(JSON.parse(eventMessage), httpsAgent, logHeaderId);
             return [{"message":"Re-Process of this action is initiated"}];
         } else {
             return [{"message":"Failed to get event message"}];
