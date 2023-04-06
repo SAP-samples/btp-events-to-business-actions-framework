@@ -14,7 +14,7 @@ service AnalyticsService {
         } actions {
             @(cds.odata.bindingparameter.name : '_it',
                 Common.SideEffects : {TargetProperties : ['_it/status'], TargetEntities:['_it/items']})
-            action reProcess();
+            action reProcess() returns Boolean;
         };
 
     entity LogItems    as

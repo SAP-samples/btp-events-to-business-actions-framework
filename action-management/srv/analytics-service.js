@@ -22,6 +22,7 @@ module.exports = cds.service.impl(async function (srv) {
             } catch(error){
                 throw error;
             }
+            return true;
         } else {
             throw new Error("Event message not found");
         }
