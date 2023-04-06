@@ -11,9 +11,6 @@ annotate service.LogHeaders with @(
             'groupby',
             'filter',
             'expand',
-            'top',
-            'skip',
-            'orderby',
             'search'
         ],
         Rollup                 : #None,

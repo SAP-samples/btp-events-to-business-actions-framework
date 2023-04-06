@@ -12,6 +12,8 @@ service AnalyticsService {
             action.name as actionName,
             action.descr as actionDescr,
         } actions {
+            @(cds.odata.bindingparameter.name : '_it',
+                Common.SideEffects : {TargetProperties : ['_it/status'], TargetEntities:['_it/items']})
             action reProcess();
         };
 
