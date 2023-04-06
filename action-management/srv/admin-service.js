@@ -36,7 +36,7 @@ module.exports = cds.service.impl(async function (srv) {
         if ((req._.event === 'READ' || req._.event === 'EDIT') && !Array.isArray(data)) {
             if (data.actionCategory_id == undefined) {
                 let actionId = data.ID === undefined ? req.data.ID : data.ID;
-                let result = await cds.read(Actions.drafts).limit(1).where({ ID: actionId }).columns(count['actionCategory_id']);
+                let result = await cds.read(Actions.drafts).limit(1).where({ ID: actionId }).columns(['actionCategory_id']);
                 result.length > 0 ? actionCategoryID = result[0].actionCategory_id : '';
             } else {
                 actionCategoryID = data.actionCategory_id;
