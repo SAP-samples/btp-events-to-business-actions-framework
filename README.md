@@ -1,6 +1,5 @@
 # Build Events-to-Business Actions Scenarios with SAP BTP and Microsoft Azure
 
-> **Important Note** : This branch is work in progress. For ready to use code, please use "main" branch.
 
 [![REUSE status](https://api.reuse.software/badge/github.com/SAP-samples/btp-events-to-business-actions-framework)](https://api.reuse.software/info/github.com/SAP-samples/btp-events-to-business-actions-framework)
 
