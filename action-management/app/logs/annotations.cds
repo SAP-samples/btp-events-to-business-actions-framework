@@ -11,9 +11,6 @@ annotate service.LogHeaders with @(
             'groupby',
             'filter',
             'expand',
-            'top',
-            'skip',
-            'orderby',
             'search'
         ],
         Rollup                 : #None,
@@ -56,6 +53,12 @@ annotate service.LogHeaders with @UI.PresentationVariant : {
     Visualizations : [
         '@UI.Chart',
         '@UI.LineItem',
+    ],
+    SortOrder : [
+        {
+            Property : createdAt,
+            Descending : true
+        }
     ]
 };
 
@@ -264,7 +267,14 @@ annotate service.LogHeaders with {
     createdAt @Common.Label : 'Created On';
 };
 
+annotate service.LogHeaders with @(readonly: true);
+
 annotate service.LogItems with @(UI.LineItem #LogItems : [
+    {
+        $Type : 'UI.DataField',
+        Value : seqNo,
+        Label : 'Seq. No',
+    },
     {
         $Type                 : 'UI.DataField',
         Value                 : ID,
@@ -305,8 +315,18 @@ annotate service.LogHeaders with @(UI.HeaderInfo : {
     Description    : {
         $Type : 'UI.DataField',
         Value : status,
-    },
+    }
 });
+
+annotate service.LogHeaders with @(UI.Identification : [
+    {
+        $Type : 'UI.DataFieldForAction',
+        Label : 'Re-Process',
+        Action : 'AnalyticsService.reProcess',
+        ![@UI.Importance] : #High,
+        ![@UI.Hidden] : {$edmJson : {$Ne : [{$Path : 'status'}, 'ERROR']}}
+    }
+]);
 
 annotate service.LogItems with @(UI.HeaderInfo : {
     TypeName       : 'Log Item Detail',
@@ -316,6 +336,7 @@ annotate service.LogItems with @(UI.HeaderInfo : {
         Value : ID,
     },
 });
+
 
 annotate service.LogItems with @(
     UI.Facets                  : [
@@ -359,7 +380,7 @@ annotate service.LogItems with @(UI.FieldGroup #Data : {
         $Type : 'UI.DataField',
         Value : data,
         Label : 'data',
-    }, ],
+    }]
 });
 
 annotate service.LogItems with {

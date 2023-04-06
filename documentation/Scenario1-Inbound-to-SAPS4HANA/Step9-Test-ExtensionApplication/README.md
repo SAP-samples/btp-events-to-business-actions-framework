@@ -38,7 +38,7 @@ Now that you have successfully deployed the extension application in SAP BTP and
 
     ![plot](./images/LogsListView.png)
 
-10. Choose any entry from analytical table in Log Details Section.
+10. Choose any entry from analytical table in Log Details Section. Click on **Re-Process** button to re-process the failed events.
 
     ![plot](./images/LogsDetailView.png)
 

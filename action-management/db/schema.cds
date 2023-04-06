@@ -89,6 +89,7 @@ entity LogHeaders : cuid, managed {
 }
 
 entity LogItems : cuid, managed {
+    seqNo        : Integer;
     level         : String(10);
     message       : String(200);
     data          : LargeString;

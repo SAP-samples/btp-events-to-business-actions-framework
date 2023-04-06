@@ -4,6 +4,7 @@ const destinationUtil = require('./utils/destination');
 // const businessRulesUtil = require('./utils/businessrules');
 const actionUtil = require('./utils/action');
 const logUtil = require('./utils/logger');
+const action = require("./utils/action");
 
 module.exports = cds.service.impl(async function (srv) {
 
@@ -12,51 +13,7 @@ module.exports = cds.service.impl(async function (srv) {
     const httpsAgent = new https.Agent({ rejectUnauthorized: false });
 
     emMessaging.on('com/sap/paa/industry/event/raised', async (eventMessage) => {
-        let actionResponses = { defaultActionResponses: {}, preActionResponses: {}, mainActionResponses: {}, postActionResponses: {} };
-        const logHeadId = await logUtil.createLogHeader('INPROCESS');
-        await logUtil.createLogItem(logHeadId, 'INFO', 'Event Received', JSON.stringify(eventMessage));
-
-        try {
-            const destToken = await destinationUtil.getDestinationToken();
-            await logUtil.createLogItem(logHeadId, 'INFO', 'Destination Service Token fetched', '');
-
-            //Get Default Action - To Use it to determine Relevant Action
-            let defaultActionDetails = await actionUtil.getDefaultAction(logHeadId);
-            let defaultActionResponse = await actionUtil.buildDataAndExecuteAction(eventMessage, actionResponses, defaultActionDetails, destToken, httpsAgent, logHeadId);
-            const actionId = actionUtil.getValueByJSONPath(defaultActionResponse.data, defaultActionDetails.defaultActionIdPath);
-            await logUtil.createLogItem(logHeadId, 'INFO', 'Action Determined Successfully', actionId);
-            await logUtil.updateLogHeader(logHeadId, { action_ID: actionId });
-            actionResponses.defaultActionResponses[defaultActionDetails.ID] = defaultActionResponse.data;
-
-
-            //Get Action and Pre/Post Action Details
-            let { mainActionDetails, relatedPreActions, relatedPostActions } = await actionUtil.getActionInformations(actionId, logHeadId);
-
-            //Execute Pre Action Details - One By One
-            if (relatedPreActions && relatedPreActions.length > 0) {
-                for (let i = 0; i < relatedPreActions.length; i++) {
-                    let preActionResponse = await actionUtil.buildDataAndExecuteAction(eventMessage, actionResponses, relatedPreActions[i], destToken, httpsAgent, logHeadId);
-                    actionResponses.preActionResponses[relatedPreActions[i].prepostAction_ID] = preActionResponse.data;
-                }
-            }
-
-            //Execute Main Action
-            const mainActionResponse = await actionUtil.buildDataAndExecuteAction(eventMessage, actionResponses, mainActionDetails, destToken, httpsAgent, logHeadId);
-            actionResponses.mainActionResponses[mainActionDetails.ID] = mainActionResponse.data;
-
-            //Execute Post Action Dtails - One By One
-            if (relatedPostActions && relatedPostActions.length > 0) {
-                for (let i = 0; i < relatedPostActions.length; i++) {
-                    let postActionResponse =await actionUtil.buildDataAndExecuteAction(eventMessage, actionResponses, relatedPostActions[i], destToken, httpsAgent, logHeadId);
-                    actionResponses.postActionResponses[relatedPreActions[i].prepostAction_ID] = postActionResponse.data;
-                }
-            }
-
-            await logUtil.updateLogHeader(logHeadId, { status: 'COMPLETE' });
-        }
-        catch (error) {
-            await logUtil.updateLogHeader(logHeadId, { status: 'ERROR' });
-        }
+        await actionUtil.convertEventToBusinessAction(eventMessage, httpsAgent);
     })
 
 
