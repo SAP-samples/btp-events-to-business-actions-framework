@@ -157,9 +157,7 @@ Build and deploy the application. Run the following commands:
     | --------|---------|
     | **Name** | sap-eventmesh-destination |
     | **Description** | Send events to SAP Event Mesh |
-    | **API destination endpoint** | This URL is formed by concatenating the **uri** from Step 3, constant rest endpoint path (/messagingrest/v1/topics/) and **encoded subscribed topic name** from Step 8  and (/messages).
-    Note: URL format -  **uri**/messagingrest/v1/topics/**encoded subscribed topic name**/messages
-    For example,if uri is "https://enterprise-messaging-pubsub.cfapps.eu10.hana.ondemand.com" and encoded subscribed topic name is "orgname%2Findustry%2Fevent%2Fraised", then the callback URL is "https://enterprise-messaging-pubsub.cfapps.eu10.hana.ondemand.com/messagingrest/v1/topics/orgname%2Findustry%2Fevent%2Fraised/messages" |
+    | **API destination endpoint** | This URL is formed by concatenating the **uri** from Step 3, constant rest endpoint path (/messagingrest/v1/topics/) and **encoded subscribed topic name** from Step 8  and (/messages). Note: URL format -  **uri**/messagingrest/v1/topics/**encoded subscribed topic name**/messages. For example,if uri is "https://enterprise-messaging-pubsub.cfapps.eu10.hana.ondemand.com" and encoded subscribed topic name is "orgname%2Findustry%2Fevent%2Fraised", then the callback URL is "https://enterprise-messaging-pubsub.cfapps.eu10.hana.ondemand.com/messagingrest/v1/topics/orgname%2Findustry%2Fevent%2Fraised/messages" |
     | **HTTP Method** | POST |
 
     ![plot](./images/eventbridge-destination3.png)
