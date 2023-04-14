@@ -99,7 +99,7 @@ Build and deploy the application. Run the following commands:
 
     ![plot](./images/AddUserToRoleCollection.png)
 
-### 4. Create destination in Microsoft Azure IoT Central application
+### 4. Configure API destination in AWS EventBridge to send events to SAP Event Mesh
 
 1. In the SAP BTP cockpit, navigate to your subaccount and choose **Instances and Subscriptions** and then choose **Instances**.
 
@@ -137,43 +137,80 @@ Build and deploy the application. Run the following commands:
 
 8. Encode the **Subscribed Topic Name** value and notedown as **encoded subscribed topic name**.
 
-Note: For example, if the Subscribed Topic Name is "orgname/industry/event/raised", then the encoded subscribed topic name will be "orgname%2Findustry%2Fevent%2Fraised".
+    Note: For example, if the Subscribed Topic Name is "orgname/industry/event/raised", then the encoded subscribed topic name will be "orgname%2Findustry%2Fevent%2Fraised".
 
-9. Go to Microsoft Azure Portal and choose **Resource Groups**. Select the resource group and then  choose the IoT Central Application you created. 
+9. Go to Amazon AWS Portal. In the AWS portal, search for **event bridge** and choose **Amazon EventBridge**.
 
-    Select the **IoT Central Application URL** to open the application. Choose **Data Export** and then choose **Destinations** tab to create new destination. Choose **Add a destination**.
+    ![plot](./images/eventbridge-search.png)
 
-    ![plot](./images/create-destination.png)
+10. In **Amazon EventBridge**, under **Integration** section, choose **API destinations**.
 
-10. Enter **Send to SAP Event Mesh** as value for name of the destination.
+    ![plot](./images/eventbridge-destination1.png)
 
-11. In the **Destination Type** dropdown menu, select **Webhook**.
+11. Choose **Create API destination**
 
-12. In the **Callback URL** field, enter the value of the url as below.
-    The callback URL is formed by concatenating the **uri** from Step 3, constant rest endpoint path (/messagingrest/v1/topics/) and **encoded subscribed topic name** from Step 8  and (/messages).
-    
+    ![plot](./images/eventbridge-destination2.png)
+
+12. In **API destination detail** section, enter the following details
+
+    | Field | Value |
+    | --------|---------|
+    | **Name** | sap-eventmesh-destination |
+    | **Description** | Send events to SAP Event Mesh |
+    | **API destination endpoint** | This URL is formed by concatenating the **uri** from Step 3, constant rest endpoint path (/messagingrest/v1/topics/) and **encoded subscribed topic name** from Step 8  and (/messages).
     Note: URL format -  **uri**/messagingrest/v1/topics/**encoded subscribed topic name**/messages
-    For example,if uri is "https://enterprise-messaging-pubsub.cfapps.eu20.hana.ondemand.com" and encoded subscribed topic name is "orgname%2Findustry%2Fevent%2Fraised", then the callback URL is "https://enterprise-messaging-pubsub.cfapps.eu20.hana.ondemand.com/messagingrest/v1/topics/orgname%2Findustry%2Fevent%2Fraised/messages"
+    For example,if uri is "https://enterprise-messaging-pubsub.cfapps.eu10.hana.ondemand.com" and encoded subscribed topic name is "orgname%2Findustry%2Fevent%2Fraised", then the callback URL is "https://enterprise-messaging-pubsub.cfapps.eu10.hana.ondemand.com/messagingrest/v1/topics/orgname%2Findustry%2Fevent%2Fraised/messages" |
+    | **HTTP Method** | POST |
 
-13. From the **Authorization** dropdown menu, select **OAuth 2.0**.
+    ![plot](./images/eventbridge-destination3.png)
 
-14. In the **Token URL**, **Client ID** and **Client secret** field, enter the value of the tokenendpoint, clientid, and clientsecret field you copied in Step 3.
+13. In the Connection section, choose **Create a new connection** and then enter the **Connection name** as "sap-event-mesh-connection". In the **Destination type** select "Other" and in the **Authorization type** select "OAuth Client Credentials"
 
-15. In the **Scope** field, enter **uaa.resource**.
+    ![plot](./images/eventbridge-destination4.png)
 
-16. In the **Token request content type​** dropdown menu, choose **Auto**.
+14. Enter/select the following values
 
-17. In the **Headers** section, choose **+Header** and enter the below key-value pair.
+    | Field | Value |
+    | --------|---------|
+    | **Authorization endpoint** | **tokenendpoint** from step 3 |
+    | **HTTP method** | POST |
+    | **HTTP method** | POST |
+    | **Client ID** | **clientid** from step 3 |
+    | **Client secret** | **client secret** from step 3 |
 
-    ![plot](./images/update-dest.png)
+    ![plot](./images/eventbridge-destination5.png)
 
-18. Choose **Save**.
+15. Under **OAuth Http Parameters**, choose **Add parameter**. In the **Parameter** dropdown, select "Query string", in the **Key** field, enter "grant_type" and in the **Value** field, enter "client_credentials". Under **Invocation Http Parameters**, choose **Add parameter**. In the **Parameter** dropdown, select "Header", in the **Key** field, enter "x-qos" and in the **Value** field, enter "1" and then choose **Create**.
 
-19. Navigate back to **Data Exports**, and choose **Exports** tab and choose the Export configuration that you had created (**Waste Container Export**).
+    ![plot](./images/eventbridge-destination6.png)
 
-    ![plot](./images/iot-dataexport.png)
+16. API destination is created successfully. Click on Refresh button. If the Status is shown as **Active**, then the connection to SAP event Mesh is configured correctly else you need to recheck the credentials.
 
-20. In the **Destination** dropdown, choose the destination that you have created in Step 9 and then choose **Save**.
+### 5. Configure pipe AWS EventBridge to send events to SAP Event Mesh from Amazon SQS queue
 
-    ![plot](./images/iot-dataexport-destination.png)
+1. In **Amazon EventBridge**, under **Pipes** section, choose **Pipes**.
 
+    ![plot](./images/eventbridge-pipes1.png)
+
+2. Choose **Create pipe**
+
+    ![plot](./images/eventbridge-pipes2.png)
+
+3. In the **Pipe name** field, enter the value as "sqs-sap-eventmesh-pipe"
+
+    ![plot](./images/eventbridge-pipes3.png)
+
+4. In the **Source** dropdown, select "SQS" and in the **SQS Queue** dropdown, select queue that we created earlier(iot-core-queue). Scroll down and choose **Next**
+
+    ![plot](./images/eventbridge-pipes4.png)
+
+5. Skip the **Filtering** and **Enrichment** sections by choosing **Next**
+
+6. In the **Target** section, in the **Target service** dropdown, select **API Destination** and in **API destination** dropdown, select 
+the destination that is created in the above step(sap-eventmesh-destination) and then choose **Create pipe**.
+
+    ![plot](./images/eventbridge-pipes5.png)
+
+7. "Pipe sqs-sap-eventmesh-pipe was created Successfully" message is displayed and check that the status is **Running**.
+
+    ![plot](./images/eventbridge-pipes6.png)
