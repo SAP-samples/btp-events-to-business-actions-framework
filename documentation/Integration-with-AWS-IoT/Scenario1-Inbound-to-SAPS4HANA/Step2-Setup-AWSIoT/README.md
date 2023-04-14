@@ -1,6 +1,6 @@
 ## Configure AWS IoT
 
-In this tutorial, you will configure Microsoft Azure IoT Central Application. These are the Microsoft Azure services and components you will need for this scenario:
+In this tutorial, you will configure AWS components. These are the AWS services and components you will need for this scenario:
 
     - Valid AWS Subscription
     - AWS IoT Core
