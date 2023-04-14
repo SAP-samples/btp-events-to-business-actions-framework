@@ -81,41 +81,66 @@ In this section, you will use Amazon AWS account to provision the resources need
 
     ![plot](./images/iot-thing-certificates.png)
 
-### 4. Configure Data Export
+### 4. Create Queue in Amazon SQS
 
-1. Choose **Data export** and then choose **+ New Data Export** to create new Data export.
+1. In the AWS portal, search for **sqs** and choose **Simple Queue Service**.
 
-    ![plot](./images/iot-dataexport.png)
+    ![plot](./images/sqs-search.png)
 
-2. Enter **Waste Container Export** as value. 
+2. Choose **Create queue**
 
-    In the **Type of data to export** dropdown menu, select **Telemetry** and then choose **+Message property filter**.
+    ![plot](./images/sqs-queue-create1.png)
 
-    ![plot](./images/dataexport-new.png)
+3. In the **Create queue** screen, enter the **Name** of the queue (Ex: iot-core-queue).
 
-3. In the **Export the data if** dropdown menu, select **all of the conditions are true**. You can configure this as per your requirement.
+    ![plot](./images/sqs-queue-create2.png)
 
-4. In the **Name** field, enter **Device template** as value.
+4. Scroll down and choose **Create queue**
 
-5. In the **Operator** dropdown menu, select **Equals** and in the **Value**, enter **Waste Container v2**.
+    ![plot](./images/sqs-queue-create3.png)
 
-    ![plot](./images/dataexport-new1.png)
+5. Queue create successfully is displayed.
 
-6. Choose **+Filter**.
+    ![plot](./images/sqs-queue-create4.png)
 
-    ![plot](./images/dataexport-new2.png)
+### 5. Create rule in AWS IoT Core to send events to SQS topic
 
-    Enter the details as shown in the below screen shot.
+1. In AWS IoT Core, under **Manage** section, choose **Message routing** and then choose **Rules**.
 
-    ![plot](./images/dataexport-new3.png)
+    ![plot](./images/iot-rules1.png)
 
-    
-7. In the **Enrichments** section, choose **+Custom String** and enter the below key value pairs as shown below.
+2. Under the **Rules** section, choose **Create rule**
 
-    ![plot](./images/enrichment-custom.png)
+    ![plot](./images/iot-rules2.png)
 
-8. Choose **+Property** and enter the below key value pairs as shown below.
+3. In the **Specify rule properties** step, enter the **Rule name** as "LowStock_Rule" and then choose **Next**.
 
-    ![plot](./images/enrichment-property.png)
+    ![plot](./images/iot-rules3.png)
 
-9. Choose **Save**.
+4. In the **Configure SQL statement** step, enter the **SQL statement** as "SELECT * FROM 'iot/topic/silo' WHERE FillingLevel < 20" and then choose **Next**.
+
+    ![plot](./images/iot-rules4.png)
+
+5. In the **Attach rule actions** step, under **Rule actions**, select **Simple Queue Service**
+
+    ![plot](./images/iot-rules5.png)
+
+6. In the **Queue name** dropdown, select the queue that is created in Section 4 - Create Queue in Amazon SQS above (iot-core-queue) and then choose **Create new role**
+
+    ![plot](./images/iot-rules6.png)
+
+7. Enter the role name as then choose **Create**
+
+    ![plot](./images/iot-rules-role.png)
+
+8. **Successfully created role** message is displayed. Scroll down and choose **Next**
+
+    ![plot](./images/iot-rules7.png)
+
+9. In the **Review and create** step, choose **Create**
+
+    ![plot](./images/iot-rules8.png)
+
+10. **Successfully created rule** message is displayed.
+
+    ![plot](./images/iot-rules9.png)
