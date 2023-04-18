@@ -75,7 +75,7 @@ These are the technical prerequistics for an integration between AWS IoT Core, S
     >- Required to receive events from Amazon AWS IoT
 - SAP HANA Cloud 
     >- Required to store action configuration and logs for CAP application
-- SAP Workflow Management
+- SAP Process Automation - Business Rules capability
     >- Business Rules service to configure business decisions that needs to be taken based on the type of event received from AWS IoT Platform.
 
 **Amazon AWS**
