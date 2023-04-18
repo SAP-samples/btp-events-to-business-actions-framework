@@ -43,33 +43,11 @@ In this section, you will define business action in the action-management extens
 
     ![plot](./images/BusinessRulesDestination.png)
 
-6. Create another destination with the name **azure-iot-device-api** and enter the following configuration values. This is used to call Microsoft Azure IoT Device API.
-
-   - Copy the value of the IoT Central Application URL from IoT Central Application in Microsoft Azure Portal and append the url with /api/devices/. Update this value for URL parameter.
-   - For **URL.headers.Authorization** parameter, refer [Authentication and authorization](https://learn.microsoft.com/en-us/rest/api/iotcentral/authentication) to generate API Token.
-
-    ```
-    Name: azure-iot-device-api
-    Type: HTTP
-    URL: <IoT Central Application URL>/api/devices/
-    Proxy: Internet
-    Authentication: NoAuthentication
-
-    Additional Properties:
-    HTML5.DynamicDestination: true
-    HTML5.PreserveHostHeader: true
-    URL.headers.Authorization: <API Token>
-    ```
-
-    Your destination configuration should look like this:
-
-    ![plot](./images/AzureDeviceAPIDestination.png)
-
-7. Create destination with the name **ACTION_MODELER_S4** and enter the following configuration values.
+6. Create destination with the name **ACTION_MODELER_S4** and enter the following configuration values.
 
     Change host name in URL, User, Password as per your SAP S/4HANA system details.
 
-    - In case of SAP S/4HANA system on Azure Private Cloud, choose **Proxy Type** as **PrivateLink** and the private link **hostname** copied from [Step4b-Setup-SAPPrivateLinkService](../Step4b-Setup-SAPPrivateLinkService/README.md) in the **hostname** field.
+    - In case of SAP S/4HANA system on AWS Private Cloud, choose **Proxy Type** as **PrivateLink** and the private link **hostname** copied from [Step4b-Setup-SAPPrivateLinkService](../Step4b-Setup-SAPPrivateLinkService/README.md) in the **hostname** field.
 
         ```
         Name: ACTION_MODELER_S4
@@ -161,29 +139,7 @@ In this section, you will configure the different business actions that needs to
 
 6. Choose **Create**.
 
-7. Create another business action with name **Update Device Cloud Property** and enter the following configuration values.
-
-    ```
-    Basic Information:
-    
-    Action Name: Update Device Cloud Property
-    Description: Update Device Cloud Property
-    Category: Pre/Post Action
-    Action Type: Service Integration
-
-    HTTP Information:
-    Destination: azure-iot-device-api
-    Content-Type: application/json
-    Method: PATCH
-    Relative Path: ${{event.data.deviceId}}/properties?api-version=2022-07-31
-    Payload: {  "Status": "Under Maintainence"  }
-    ```
-
-    Your configuration should look like this:
-
-    ![plot](./images/UpdateDeviceAction.png)
-
-8. Create another business action with name **Create Purchase Requisition** and enter the following  configuration values.
+7. Create another business action with name **Create Purchase Requisition** and enter the following  configuration values.
 
     ```
     Basic Information:
