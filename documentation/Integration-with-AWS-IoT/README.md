@@ -20,7 +20,7 @@ You can choose to configure and integrate events with any SAP LoB solution.
 
 In this event-driven scenario, based on the real-time status of the IoT Devices from AWS IoT Core, actionable events are sent to SAP BTP to decide on the critical business actions to be taken in the SAP Enteprise Business systems based on business rules defined in the system.
 
-![plot](../../images/businessprocess.png)
+![plot](../../images/aws-businessprocess.png)
 
 1. Data from IoT Devices are sent to AWS IoT Core.
 

@@ -1,14 +1,10 @@
 ## Test the Extension Application and Execute the End-to-End Scenario
 
-Now that you have successfully deployed the extension application in SAP BTP and completed the configurations in Microsoft Azure, SAP BTP and SAP S/4HANA, follow these steps to test the application.
+Now that you have successfully deployed the extension application in SAP BTP and completed the configurations in Amazon AWS, SAP BTP and SAP S/4HANA, follow these steps to test the application.
 
-1. Log in to Microsoft Azure Portal and navigate to **Resource Group** and choose your Azure IOT Central Application. Choose **Data Export**. Select to enable data export and wait till status becomes healthy.
+1. Send device telemetry data from device using aws-iot-device-sdk to the device that you have onboarded.
 
-    ![plot](./images/StartDataExport.png)
-
-2. Choose **Devices** and find your device and check the status. It should be in **Connected** state.
-
-    ![plot](./images/DeviceStatusWorking.png)
+2. Once the filllevel is less than the threshold(20) configured in the AWS IoT Core rules, "Low-stock" event is triggered and sent to SAP Event Mesh and a Purchase Requisition for re-filling the material is created in SAP S/4 HANA.
 
 3. Log into SAP S/4HANA System and Search for **Manage Purchase Requisition** app.
 
@@ -22,25 +18,21 @@ Now that you have successfully deployed the extension application in SAP BTP and
 
     ![plot](./images/PurchaseRequsitionWithFillLevel.png)
 
-6. Go to Microsoft Azure IOT Central Application and choose **Devices** to verify if the status is **Under Maintenance**.
-
-    ![plot](./images/DeviceStatusUnderMaintenance.png)
-
-7. Open **action-management** application in your cloud foundry space using BTP Cockpit. Click on the url provided under Application Routes section.
+6. Open **action-management** application in your cloud foundry space using BTP Cockpit. Click on the url provided under Application Routes section.
 
     ![plot](./images/ActionManagementApplication.png)
 
-8. Click on **Business Action Logs** tile.
+7. Click on **Business Action Logs** tile.
 
     ![plot](./images/ActionManagementHome.png)
 
-9. View Logs information and you can filter by date and status. 
+8. View Logs information and you can filter by date and status. 
 
     ![plot](./images/LogsListView.png)
 
-10. Choose any entry from analytical table in Log Details Section. Click on **Re-Process** button to re-process the failed events.
+9. Choose any entry from analytical table in Log Details Section. Click on **Re-Process** button to re-process the failed events.
 
     ![plot](./images/LogsDetailView.png)
 
-You have completed the end-to-end integration of events to business actions from Microsoft Azure to SAP S/4HANA with SAP BTP.
+You have completed the end-to-end integration of events to business actions from Amazon AWS to SAP S/4HANA with SAP BTP.
 

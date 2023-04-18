@@ -1,22 +1,22 @@
 ## Set Up Connectivity Between SAP BTP and SAP S/4HANA Using SAP Private Link Service
 
->Note: Choose this configuration if you have SAP BTP subaccount and SAP S/4HANA running on Azure. If you have already established the connectivity between SAP BTP and SAP S/4HANA using Cloud Connector then you can skip this step.
+>Note: Choose this configuration if you have SAP BTP subaccount and SAP S/4HANA running on AWS. If you have already established the connectivity between SAP BTP and SAP S/4HANA using Cloud Connector then you can skip this step.
 
 ### Prerequisites
-These are the prerequisities that you need to consider if you have SAP BTP and SAP S/4HANA on Microsoft Azure. 
+These are the prerequisities that you need to consider if you have SAP BTP and SAP S/4HANA on Amazon AWS. 
 
-- SAP S/4HANA system running on Microsoft Azure
+- SAP S/4HANA system running on Amazon AWS
 
 - SAP Private Link service
-    - Required to connect SAP BTP and Microsoft Azure.
+    - Required to connect SAP BTP and Amazon AWS.
 
 >Note: The SAP BTP Private Link service is currently available only for enterprise accounts in SAP BTP.
 
-- Microsoft Azure Private Link service
-    - Required to connect Microsoft Azure and SAP S/4HANA.
+- Amazon AWS Private Link service
+    - Required to connect Amazon AWS and SAP S/4HANA.
 
 
-### 1. Set Up the SAP Private Link Service and Microsoft Azure Private Link Service 
+### 1. Set Up the SAP Private Link Service and Amazon AWS Private Link Service 
 
 To configure these services for the SAP S/4HANA system, follow the 
  [Enhance core ERP business processes with resilient applications on SAP BTP - SAP Private Link Service](https://github.com/SAP-samples/btp-build-resilient-apps/tree/extension-privatelink/tutorials/05-PrivateLink) tutorial and complete the steps until the **Prepare Extension Application** section.
@@ -43,5 +43,3 @@ In this step, you will create a service key for the SAP Private Link Service Ins
 
 5. Copy the values of the **hostname** and use this while creating the destination **ACTION_MODELER_S4** in [Step7-Configure-BusinessActions](../Step7-Configure-BusinessActions/README.md).
 
-
-For additional details about the SAP Private Link service and the Microsoft Azure Private Link service, refer to the [az-private-linky](https://github.com/MartinPankraz/az-private-linky) GitHub repository.
