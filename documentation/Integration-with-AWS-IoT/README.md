@@ -1,5 +1,7 @@
 # Build Events-to-Business Actions Scenarios with SAP BTP and AWS
 
+> **Important Note** : This branch is work in progress. Please use "main" branch for released code.
+
 In this scenario, AWS IoT Events are sent to SAP Event Mesh using the rules and actions functionality in AWS IoT Core. The Node.js extension application subscribes to SAP Event Mesh queue and executes the action that is required to be taken based on the event details.  
 
 ## Table of Contents
