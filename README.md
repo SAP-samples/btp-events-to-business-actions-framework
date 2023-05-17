@@ -7,12 +7,11 @@ This repository contains code samples and instructions for developing an extensi
 This framework can be used in combination with any hyperscalar/telco IoT.
 
 
-
 There are two scenarios described in this repository. In this tutorial, the events are received from Azure IoT Platform and the actions for these events are taken in SAP S/4HANA. You can use this application to further customize it for other systems as well.
 
 1. Inbound to SAP S/4HANA
 
-    In this scenario, Azure IoT Events are sent to SAP Event Mesh using the Data Export functionality in Azure IoT Central Application. The Node.js extension application subscribes to SAP Event Mesh queue and executes the action that is required to be taken based on the event details.  
+    In this scenario, Events from Azure/AWS IoT are sent to SAP Event Mesh. The Node.js extension application subscribes to SAP Event Mesh queue and executes the action that is required to be taken based on the event details.  
 
 2. Outbound from SAP S/4HANA
 
