@@ -89,7 +89,7 @@ These are the technical prerequistics for an integration between Microsoft Azure
     >- Required to receive events from Azure IoT Platform
 - SAP HANA Cloud 
     >- Required to store action configuration and logs for CAP application
-- SAP Workflow Management
+- SAP Process Automation, Busienss Rules capability
     >- Business Rules service to configure business decisions that needs to be taken based on the type of event received from Azure IoT Platform.
 - SAP Event Mesh Connectivity Plan(Beta)
     >- As of now, this service supports SAP Event Mesh to Azure Event Grid direct connectivity. This is available as Beta for Enterprise accounts only for now.
