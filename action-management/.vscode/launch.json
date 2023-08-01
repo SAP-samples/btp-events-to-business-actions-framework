@@ -10,6 +10,14 @@
       ]
     },
     {
+      "name": "Attach Cloud Foundry on Port 9229",
+      "port": 9229,
+      "request": "attach",
+      "type": "node",
+      "localRoot": "${workspaceFolder}",
+      "remoteRoot": "/home/vcap/app"
+  },
+    {
       "command": "cds run --with-mocks",
       "name": "cds run",
       "request": "launch",

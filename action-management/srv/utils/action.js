@@ -199,7 +199,7 @@ async function convertEventToBusinessAction(eventMessage, httpsAgent, logHeaderI
         if (relatedPostActions && relatedPostActions.length > 0) {
             for (let i = 0; i < relatedPostActions.length; i++) {
                 let postActionResponse =await buildDataAndExecuteAction(eventMessage, actionResponses, relatedPostActions[i], destToken, httpsAgent, logHeadId);
-                actionResponses.postActionResponses[relatedPreActions[i].prepostAction_ID] = postActionResponse.data;
+                actionResponses.postActionResponses[relatedPostActions[i].prepostAction_ID] = postActionResponse.data;
             }
         }
 
