@@ -28,7 +28,7 @@
     "sqlite3": "^5.1.2"
   },
   "scripts": {
-    "start": "cds run",
+    "start": "npm rebuild && npx cds run",
     "watch-actions": "cds watch --open actions/webapp/index.html?sap-ui-xx-viewCache=false",
     "undeploy": "cf undeploy action-management --delete-services --delete-service-keys --delete-service-brokers",
     "build": "rimraf resources mta_archives && mbt build --mtar archive",
@@ -36,7 +36,7 @@
     "deploy": "cf deploy mta_archives/archive.mtar --retries 1"
   },
   "engines": {
-    "node": "^14.18.0"
+    "node": "^16.20.0"
   },
   "eslintConfig": {
     "extends": "eslint:recommended",
