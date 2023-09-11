@@ -205,10 +205,14 @@ Build and deploy the application. Run the following commands:
 5. Skip the **Filtering** and **Enrichment** sections by choosing **Next**
 
 6. In the **Target** section, in the **Target service** dropdown, select **API Destination** and in **API destination** dropdown, select 
-the destination that is created in the above step(sap-eventmesh-destination) and then choose **Create pipe**.
+the destination that is created in the above step(sap-eventmesh-destination) and then expand **Target Input Transformer**.
 
     ![plot](./images/eventbridge-pipes5.png)
 
-7. "Pipe sqs-sap-eventmesh-pipe was created Successfully" message is displayed and check that the status is **Running**.
+7. In the **Target Input Transformer** section, enter the json as { "data": <$.body> } and then choose **Create pipe**.
 
     ![plot](./images/eventbridge-pipes6.png)
+
+8. "Pipe sqs-sap-eventmesh-pipe was created Successfully" message is displayed and check that the status is **Running**.
+
+    ![plot](./images/eventbridge-pipes7.png)
