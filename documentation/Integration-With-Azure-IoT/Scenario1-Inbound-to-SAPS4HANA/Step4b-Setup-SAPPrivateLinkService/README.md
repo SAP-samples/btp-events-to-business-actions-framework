@@ -19,7 +19,7 @@ These are the prerequisities that you need to consider if you have SAP BTP and S
 ### 1. Set Up the SAP Private Link Service and Microsoft Azure Private Link Service 
 
 To configure these services for the SAP S/4HANA system, follow the 
- [Enhance core ERP business processes with resilient applications on SAP BTP - SAP Private Link Service](https://github.com/SAP-samples/btp-build-resilient-apps/tree/extension-privatelink/tutorials/05-PrivateLink) tutorial and complete the steps until the **Prepare Extension Application** section.
+ [Enhance core ERP business processes with resilient applications on SAP BTP - SAP Private Link Service](https://github.com/SAP-samples/btp-build-resilient-apps/blob/main/tutorials/05_setupconnectivity/privatelink.md) tutorial and complete the steps until the **Prepare Extension Application** section.
 
 ### 2. Create Service Key for SAP Private Link Service Instance in Your Subaccount in SAP BTP
 
