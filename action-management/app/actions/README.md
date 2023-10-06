@@ -12,7 +12,7 @@
 |**Application Title**<br>Manage Actions|
 |**Namespace**<br>sap.paa.action.mgmt.ui|
 |**UI5 Theme**<br>sap_horizon|
-|**UI5 Version**<br>1.102.1|
+|**UI5 Version**<br>1.108.15|
 |**Enable Code Assist Libraries**<br>True|
 |**Enable TypeScript**<br>False|
 |**Add Eslint configuration**<br>False|

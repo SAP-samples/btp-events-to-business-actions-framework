@@ -52,6 +52,7 @@ entity Actions : cuid, managed {
     actionCategory           : Association to ActionCategories;
     isCsrfTokenNeeded        : Boolean;
     defaultActionIdPath      : String;
+    apidescription           : String;
     virtual hideChildActions : Boolean default false;
     virtual hideDefaultActionIdPath: Boolean default true;
 }

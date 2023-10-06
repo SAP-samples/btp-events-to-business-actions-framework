@@ -8,13 +8,6 @@
                     "groups": [
                         {
                             "id": "MyHome",
-                            "title": "Home",
-                            "isPreset": false,
-                            "isVisible": true,
-                            "isGroupLocked": false
-                        },
-                        {
-                            "id": "ActionAdmin",
                             "title": "Transform Events to Business Actions",
                             "isPreset": false,
                             "isVisible": true,
