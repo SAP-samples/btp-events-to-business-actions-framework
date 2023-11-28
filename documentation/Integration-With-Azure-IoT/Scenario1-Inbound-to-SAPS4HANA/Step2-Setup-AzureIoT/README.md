@@ -70,94 +70,86 @@ In this section, you will create an Microsoft Azure IoT Central application and 
 
 ### 3. Create a new device template in IoT Central application
 
-1. Select the created IoT Central Application to view the details. Choose the created IoT Central Application URL to open the application.
+1. Choose **Devices** and then choose **+ New** to create a new device. 
 
-    ![plot](./images/created-app.png)
+    <img src="./images/newdevice00.jpg" width="90%" height="90%" />
+    <!-- ![plot](./images/newdevice.png) -->
 
-2. Select the IoT Central Application URL to open the application.
+2. Fill the **Device name** as WC IN263-050  **Device ID** is auto-populated. In the **Device Template** dropdown menu, choose the device template named **Waste Container v2**. Set the **Simulate this device** toggle to **yes**  and then choose **Create**.
 
-    Your application should have two devices added for the device template type **Connected Waste Bin** as shown in the screenshot.
+    <img src="./images/newdevice01.jpg" width="90%" height="90%" />
 
-    ![plot](./images/iot-app.png)
+3. Once your device is created, Under the **Form** tab, configure the following values: (value of Container ID could be of your choice)
+    ```
+    Container ID: Container-IN263-050
+    Location Id: Plant A
+    Status: Working
+    ```
+    Your configuration should like as shown below, and then **Save**
 
-3. In this scenario, you will create a new device template based on your custom capabilities. Choose **Device templates** and then select **New**. In the **Select type** > **Create a custom device template**, select **IoT Device** to create a custom device template.
+    <img src="./images/newdevice02.jpg" width="90%" height="90%" />
 
-4. Choose **Next:Customize** to create a new device template.
+4. As we have enabled simulation, the device now simulates real-time IoT device events, you can see the generated events under **Raw Data** tab.
+5. 
+    <img src="./images/newdevice03.jpg" width="90%" height="90%" />
 
-    ![plot](./images/newdevice-template1.png)
-
-5. In the **Device template name** field, enter **Waste Container v2**. Choose **Next: Review**.
-
-   ![plot](./images/newdevice-template2.png)
-
-6. Review and choose **Create**. 
-
-   ![plot](./images/newdevice-template3.png)
-
-7. Choose the created device template and choose **Import a model** to import model file.
-
-    ![plot](./images/import-template.png)
-
-    **Note**: **Container-Data.json** file is available in [devicetemplate](./devicetemplate/) folder. Upload this model file.
-
-    ![plot](./images/model-imported.png)
-
-8. Choose **Views** and the choose **Editing device and cloud data** to add a test view.
-
-    ![plot](./images/addview.png)
-
-9. Select the fields as per your requirement. For a sample view, you can choose **Container ID**, **Container Type**, **Location ID** and **Status** fields and choose **Save**.
-
-    ![plot](./images/addview1.png)
-
-10. Choose **Publish**.
-
-    ![plot](./images/publish.png)
-
-11. Choose **Devices** and then choose **+ New** to create a new device. 
-
-    ![plot](./images/newdevice.png)
-
-12. In the **Device Template** dropdown menu, choose the device template you created and then choose **Create**.
-
-    ![plot](./images/newdevice1.png)
 
 
 ### 4. Configure Data Export
 
-1. Choose **Data export** and then choose **+ New Data Export** to create new Data export.
+During this step, you'll initially establish a Destination, outlining the connection specifics for the Advanced Event Mesh. Afterward, you'll configure a Data Export to transmit event information when the device's Fill Level drops below 30.
 
-    ![plot](./images/iot-dataexport.png)
+1. Choose **Data export**, navigate to **Destinations** and then choose **New destination**
 
-2. Enter **Waste Container Export** as value. 
+    <img src="./images/data-export00.jpg" width="90%" height="90%" />
 
-    In the **Type of data to export** dropdown menu, select **Telemetry** and then choose **+Message property filter**.
+2. Enter following values:
+    - **Name: DEST-AEM-IN263-050**
+    - **Destination type: Webhook**
+    - **Callback URL: https://{Username}:{Password}@{Secured Rest HOST}/{Topic Subscription}** where Username, Password, Secured Rest HOST, Topic Subscription are noted in exercise 2. **Note:** remove the https:// from the Secured Rest HOST before pasting. Then choose **Save**.
 
-    ![plot](./images/dataexport-new.png)
+    <img src="./images/data-export01.jpg" width="90%" height="90%" />
+       
 
-3. In the **Export the data if** dropdown menu, select **all of the conditions are true**. You can configure this as per your requirement.
 
-4. In the **Name** field, enter **Device template** as value.
+3. Choose **Data export** and then choose **+ New Data Export** to create new Data export.
 
-5. In the **Operator** dropdown menu, select **Equals** and in the **Value**, enter **Waste Container v2**.
+    <img src="./images/data-export02.jpg" width="90%" height="90%" />
 
-    ![plot](./images/dataexport-new1.png)
+4. Enter **EXPORT-IN263-050** as value. 
+   - Disable the Data export by switiching of the status 
+   - In the **Type of data to export** dropdown menu, select **Telemetry** and then choose **+Filter**. 
 
-6. Choose **+Filter**.
+    <img src="./images/data-export03.jpg" width="90%" height="90%" />
 
-    ![plot](./images/dataexport-new2.png)
+6. In the **Export the data if** dropdown menu, select **all of the conditions are true**. Add following filters as shown in following image:
 
-    Enter the details as shown in the below screen shot.
+    | Name | Operator |Value | 
+    |---------|-------------|---------|
+    | Device Template  | Equals |Waste Container v2  | 
+    | Filling Level  | is less than |30  |
+    | Waste Container / Status  | Equals |Working  |
+    | Device name  | Equals |WC-IN263-050  | 
+   
+    <img src="./images/data-export04.jpg" width="90%" height="90%" />
 
-    ![plot](./images/dataexport-new3.png)
+    <!-- ![plot](./images/dataexport-new.png) -->
 
-    
-7. In the **Enrichments** section, choose **+Custom String** and enter the below key value pairs as shown below.
+7.  In the **Enrichments** section, choose **+Custom String** and enter the below key value pairs as shown below.
+    - Application: **Industry-40**
+    - System: **Azure**     
+    <img src="./images/data-export05.jpg" width="90%" height="90%" />
 
-    ![plot](./images/enrichment-custom.png)
+8. In the **Enrichments** section, choose **+Property** and enter the below key value pairs as shown below.
+    - ContainerID: **Waste Container v2 / Container ID**
+    - DeviceName: **Device name**
+    - DeviceTemplate: **Device template name**
+    - Location: **Waste Container v2 / Location Id**     
+    <img src="./images/data-export06.jpg" width="90%" height="90%" />
 
-8. Choose **+Property** and enter the below key value pairs as shown below.
+9. In the **Destinations** section, choose **+Destination** 
 
-    ![plot](./images/enrichment-property.png)
+    <img src="./images/data-export07.jpg" width="90%" height="90%" />       
 
-9. Choose **Save**.
+    Then select the detination created earlier in step 2 of part 4 and choose **Save**. 
+    <img src="./images/data-export08.jpg" width="90%" height="90%" />    
