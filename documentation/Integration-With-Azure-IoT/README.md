@@ -4,11 +4,11 @@ There are two scenarios described in this section. In this tutorial, the events 
 
 1. Inbound to SAP S/4HANA
 
-    In this scenario, Azure IoT Events are sent to SAP Event Mesh using the Data Export functionality in Azure IoT Central Application. The Node.js extension application subscribes to SAP Event Mesh queue and executes the action that is required to be taken based on the event details.  
+    In this scenario, Azure IoT Events are sent to SAP Integration Suite, Advanced Event Mesh using the Data Export functionality in Azure IoT Central Application. The Node.js extension application subscribes to SAP Integration Suite, Advanced Event Mesh queue and executes the action that is required to be taken based on the event details.  
 
 2. Outbound from SAP S/4HANA
 
-    In this scenario, any event that is triggerred from SAP S/4HANA is sent to SAP Event Grid Connectivity Bridge. With the latest Beta releease of SAP Event Mesh Connectivity Bridge plan, event is propogated to Azure Event Grid with direct connectivity. This service plan is currently available for only events from SAP S/4HANA to Azure Event Grid. In this scenario, the events from Azure Event Grid is consumed in Azure Function app to send outlook notification to the user. You can further enhance the scenario as per your requirement.
+    In this scenario, any event that is triggerred from SAP S/4HANA is sent to SAP Event Grid Connectivity Bridge. With the latest Beta release of SAP Event Mesh Connectivity Bridge plan, event is propogated to Azure Event Grid with direct connectivity. This service plan is currently available for only events from SAP S/4HANA to Azure Event Grid. In this scenario, the events from Azure Event Grid is consumed in Azure Function app to send outlook notification to the user. You can further enhance the scenario as per your requirement.
 
 ## Table of Contents
 
@@ -16,7 +16,7 @@ There are two scenarios described in this section. In this tutorial, the events 
 [Business Process Flow](#business-process-flow)\
 [Solution Architecture](#solution-architecture)\
 [Requirements](#requirements)\
-[Implementation: Configuration and Development](#configuration-and-development)\
+[Implementation: Configuration and Development](#configuration-and-development)
 
 ## Scenario
 
@@ -26,17 +26,23 @@ You can choose to configure and integrate events with any SAP LoB solution.
 
 ## Business Process Flow
 
-In this event-driven scenario, based on the real-time status of the IoT Devices from Microsoft Azure IoT Central, actionable events are sent to SAP BTP to decide on the critical business actions to be taken in the SAP Enteprise Business systems based on business rules defined in the system.
+In this event-driven scenario, based on the real-time status of the IoT Devices , actionable events are sent to Events-to-Business-Actions framework built on SAP BTP via SAP Integration Suite Advanced Event Mesh to decide on the critical business actions to be taken in the SAP Enteprise Business systems such as SAP S/4HANA System.
 
 ![plot](../../images/businessprocess.png)
 
 1. Data from IoT Devices are sent to Microsoft Azure IoT Central.
 
-2. Rules in Microsoft Azure IoT triggers an call to SAP Event Mesh in case of any actions which needs attention. This is defined in IoT Rules for devices.
+2. Rules in Microsoft Azure IoT triggers n call to SAP Integration Suite, Advanced Event Mesh in case of any actions which needs attention. This is defined in IoT Rules for devices.
 
-3. SAP Event Mesh receives the events.
+3. SAP Integration Suite, Advanced Event Mesh receives the events and triggers webhook to send the events to extension application of Events-to-Business-Actions framework running on SAP BTP.
 
-4. Extension application is configured with all necessary actions (For example, calling SAP Business Rules API to read the decision tables to decide on action to be taken, configure the OData API call to be executed , service call back to the device) to be taken.
+4. Extension application of Events-To-Business-Actions framework is configured with all necessary actions to be taken.
+  
+    - (Default Action) Calling SAP Build Process Automation - Decision capability API to determine which business action to be taken.   
+    - (Main Action) execute the business action OData API call to trigger business process in ERP system.   
+    - (Pre Action) call api to get master data required for business action api (Main Action).  
+    - (Post Action) After business action is executed, call Microsoft Azure IoT device api to update it's status.   
+   Extension application executes the business actions and any pre or post actions.
 
 5. Extension application executes the business actions.
 
@@ -46,22 +52,22 @@ In this event-driven scenario, based on the real-time status of the IoT Devices 
 
 The key services used from Microsoft Azure are the Azure IoT Central, Azure Blob Storage, Azure Communication Service, Azure Event Grid and Azure Active Directory.
 
-The services used from SAP BTP are the Cloud Foundry Runtime, SAP Event Mesh, SAP Connectivity service, SAP Private Link service, SAP Workflow Management, SAP Event Mesh Connectivity Plan(Beta) and SAP Destination service. 
+The services used from SAP BTP are the Cloud Foundry Runtime, SAP Integration Suite, Advanced Event Mesh, SAP Connectivity service, SAP Private Link service, SAP Business Application Studio, SAP Build Process Automation-Decision capability, SAP Event Mesh Connectivity Plan(Beta) and SAP Destination service. 
 
 SAP Private Link service is used for connectivity between SAP BTP and SAP S/4HANA when both the systems are running on Microsoft Azure Infrastructure, you can use Private Link service in the case of AWS as well, in this tutorial you will find implementation steps for SAP BTP Private Link service and Microsoft Azure Private Link service. Alternatively you can use SAP Connectivity service and Cloud Connector for integration of SAP BTP and SAP S/4HANA as well. 
 
-![plot](../../images/eventprocessingarch.png) **Figure-1: High-level architecture (with SAP S/4HANA on Azure)**
+![plot](../../images/Azure-IoTC-PL.png) **Figure-1: High-level architecture (with SAP S/4HANA on Azure)**
 
     
-![plot](../../images/eventprocessingarch-onpremise.png) **Figure-2: High-level architecture with SAP S/4HANA on-premise and private cloud**
+![plot](../../images/AzureIoTC-CC.png) **Figure-2: High-level architecture with SAP S/4HANA on-premise and private cloud**
 
 The following steps depicts the information flow across systems (in both the scenarios)
 
-(1) Event is triggered from Microsoft Azure and sent to SAP Event Mesh.
+(1) Event is triggered from Microsoft Azure and sent to SAP Integration Suite, Advanced Event Mesh.
 
-(2) Event-to-Business-Action framework(extension app) processor module's endpoint is subscribed to SAP Event Mesh, hence receives this event.
+(2) Event-to-Business-Action framework(extension app) processor module's endpoint is subscribed to SAP Integration Suite, Advanced Event Mesh, hence receives this event.
 
-(3) Event-to-Business-Action framework(extension app) processor module leverages the Business Rules capability of SAP Build Process Automation to derive business action (for example, Purchase Order Requisition creation in SAP S/4HANA system) based on certain characteristics of incoming event.
+(3) Event-to-Business-Action framework(extension app) processor module leverages the Decision capability of SAP Build Process Automation to derive business action (for example, Purchase Order Requisition creation in SAP S/4HANA system) based on certain characteristics of incoming event.
 
 (4), (5), (6) (7) and (8) Event-to-Business-Action framework (extension app) processor module triggers the defined action in the SAP S/4HANA system by using the SAP Destination Service and SAP Private Link Service.  
 
@@ -78,37 +84,31 @@ For outbound from SAP S/4HANA scenario using SAP Event Mesh Connectivity Plan(Be
 These are the technical prerequistics for an integration between Microsoft Azure IoT Central, SAP BTP and SAP S/4HANA. 
 
 **Services in SAP BTP**
-- Cloud Foundry Runtime
-    > - Foundation for running the CAP extension application for translating events to business actions.
-    > - Required for the trust between Microsoft Azure Active Directory and SAP BTP
-- Memory/Runtime quota
-    > - Required for deploying and running the extension application in SAP BTP
-- Authorization & Trust Management Service
-    > - Required for securing the extension application in SAP BTP
-- SAP Event Mesh 
-    >- Required to receive events from Azure IoT Platform
-- SAP HANA Cloud 
-    >- Required to store action configuration and logs for CAP application
-- SAP Process Automation, Business Rules capability
-    >- Business Rules service to configure business decisions that needs to be taken based on the type of event received from Azure IoT Platform.
-- SAP Event Mesh Connectivity Plan(Beta)
-    >- As of now, this service supports SAP Event Mesh to Azure Event Grid direct connectivity. This is available as Beta for Enterprise accounts only for now.
+- **Cloud Foundry Runtime** - Foundation for running the CAP extension application for translating events to business actions.
+- **Authorization & Trust Management Service** - Required for securing the extension application in SAP BTP
+- **SAP Integration Suite,Advanced Event Mesh** - Required to receive events from Amazon Rekognition
+- **SAP HANA Cloud** - Required to store action configuration and logs for CAP application
+- **SAP HANA Schemas & HDI Containers** - Application database for CAP Application
+- **SAP Build Process Automation - Decision capability** - SAP Build Process Automation - Decisions service to configure business decisions that needs to be taken based on the type of event received from Amazon Rekognition.
+- **SAP S/4HANA System** - To execute the business action associated with the event received. 
+- **SAP Connectivity Service** - To establish connections between cloud applications and on-premise systems.
+- **SAP Destination Service** - To find the destination information required to access a remote service or system from your extension application.
+- **SAP Private Link Service** - To establishe a private connection between selected SAP BTP services and selected services in your own IaaS provider accounts.
+- **SAP Business Application Studio** - A powerful and modern development environment, tailored for efficient development of business applications for the Intelligent Enterprise.
+- **SAP Event Mesh Connectivity Plan(Beta)** - As of now, this service supports SAP Event Mesh to Azure Event Grid direct connectivity. This is available as Beta for Enterprise accounts only for now.
 
 **Microsoft Azure**
-- A valid Microsoft Azure subscription
-- A Microsoft Azure Active Directory
+- A valid **Microsoft Azure subscription**
+- A **Microsoft Azure Active Directory**
     > - Required for the trust between Microsoft Azure Active Directory and SAP BTP
     > - User management
     > - Application registrations to allow access to Microsoft Azure IoT Central REST API and SAP BTP
-
-- An Azure IoT Central Service
+- **An Azure IoT Central Service**
     > - Service for configuring Azure IoT Central Application
     > - Required for configuring device template, event producer and event routing.
-
-- An Azure Storage Account
+- **An Azure Storage Account**
     > - Required for storing the events received from Azure Event Grid in case of outbound from SAP S/4HANA scenario using SAP Event Mesh Connecivity service.
-
-- An Azure Communication Service
+- **An Azure Communication Service**
     >- Required to send email notificiations and SMS to users.
 
 
