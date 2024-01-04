@@ -22,11 +22,7 @@ Now that you have successfully deployed the extension application in SAP BTP and
 
     ![plot](./images/DeviceStatusWorking.png) -->
 
-4. Log into [SAP S/4HANA System](https://s4hana.saptfe-demo.com:44300/sap/bc/ui5_ui5/ui2/ushell/shells/abap/FioriLaunchpad.html?sap-client=100&sap-language=EN#Shell-home) and Search for **Purchase Professional**. Choose **Manage Puchase Requisitions Professional** application.
-
-    | Systems | Credentials |
-    |---------|-------------|
-    | **[SAP S/4HANA System](https://s4hana.saptfe-demo.com:44300/sap/bc/ui5_ui5/ui2/ushell/shells/abap/FioriLaunchpad.html?sap-client=100&sap-language=EN#Shell-home)** | **Username:** S4H_PUR_DEM |
+4. Log into your SAP S/4HANA System and Search for **Purchase Professional**. Choose **Manage Puchase Requisitions Professional** application.
 
     <img src="./images/4.png" width="90%" height="90%" />
     <!-- ![plot](./images/S4HANASearchApp.png) -->
