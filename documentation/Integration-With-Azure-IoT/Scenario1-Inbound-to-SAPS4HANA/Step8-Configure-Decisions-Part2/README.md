@@ -1,61 +1,50 @@
-## Update and Activate SAP Business Rule Project
+## Update and Deploy SAP Build Process Automation Decisions Project
 In this section, you will update decision table and activate business rule project.
 
-### 1. Activate all objects in SAP Business Rule Project
+1. In the SAP BTP Cockpit, Navigate to your subaccount -> **Sevices** -> **Instances and Subscriptions** , Open the SAP Build Process Automation Application.
 
-1. In the SAP BTP cockpit, navigate to your subaccount and choose **Cloud Foundry** > **Spaces**.  Choose your space and then choose **action-management** application. Choose the url provided under **Application Routes** section.
+    ![plot](./images/subscriptions.png)
 
-    ![plot](./images/ActionManagementApplication.png)
+2. In the SAP Build Process Automation Application, In the **Lobby** Tab , Click on **Events-to-Business-Actions-Framework** project.
 
-2. Choose **Manage Business Rules** tile.
+    ![plot](./images/lobby.png)
 
-    ![plot](./images/ActionManagementHome.png)
+3. Choose the **E2BDecision** , On the **Rules** Tab, Click the **DecideAction** Decision table.
 
-3. Select **Events to Actions Rules Project** project and choose **Edit** and **Activate**.
+    ![plot](./images/E2BDecision.png)
 
-    ![plot](./images/ActivateBusinessRulesProject.png)
+4. Click on the **ActionId** Field. 
 
-4. Choose **Data Objects** tab. Select **EventInfo** and then choose **Edit** and **Validate**.
+    ![plot](./images/FillActionId.png)
 
-    ![plot](./images/DataObjects.png)
+    Paste the ActionId of the Action Created in Step-7.  
 
-    Choose **Activate**.
+    ![plot](./images/ActionId.png)
 
-    ![plot](./images/ActivateEventInfoDataObject.png)
+5. The Decision is now configured with the Business Rule successfully. To use the decision in our CAP extension application we need to deploy all the latest changes in the Decision. 
 
-5. Repeat above step for **ActionInfo** data object.
+    First click on **Release** to release the Decisions. 
+    
+    ![plot](./images/RuleCreated.png)
 
-6. Choose **Rule Services** tab and select **DetermineAction** and then choose **Edit** and **Activate**..
+    Click on **Release**
 
-    ![plot](./images/ActivateRuleServices.png)
+    ![plot](./images/ProjectRelease.png)
 
-7. Choose **Rules** tab and select **DecideAction** and then choose **Edit**.
+6. Now that the project is released, it is ready for deployment. Click on the **Deploy**
 
-    ![plot](./images/ActivateRules.png)
+    ![plot](./images/Deploy1.png)
 
-8. In the **Decision Table** section, go to **Action Id** column and select **Fixed Value** node.
+    Follow the steps shown in the following screenshots.
 
-    ![plot](./images/ActionIdInput.png)
+    ![plot](./images/Deploy2.png)
 
-9. Select **Create Purchase Requisition** entry in the value help pop up.
+    ![plot](./images/Deploy3.png)
 
-    ![plot](./images/ActionIdValueHelp.png)
+    ![plot](./images/Deploy4.png)
 
-10. Choose **Activate**.
+7. The Project is successfully Redeployed ! 
 
-    ![plot](./images/ActivateDecideActionRule.png)
-
-11. Choose **Rulesets** tab and select **DetermineActionRuleSet** and then choose **Edit** and **Activate**.
-
-    ![plot](./images/ActivateRuleSet.png)
-
-12. Choose **Rule Services** tab and choose **Deploy**.
-
-    ![plot](./images/DeployRuleServices.png)
-
-13. Choose **Cloud Runtime** from the **Select a system to Deploy** list.
-
-    ![plot](./images/SelectSystem.png)
+    ![plot](./images/Deployed.png)
 
 
-You will see a message **Your rule service is deployed successfully.**
