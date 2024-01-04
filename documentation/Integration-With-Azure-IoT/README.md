@@ -135,11 +135,11 @@ Step 4: Connect SAP BTP and SAP S/4HANA
 
 [Step 5: Build and Deploy the Extension Application](./Scenario1-Inbound-to-SAPS4HANA/Step5-Build-Deploy-ExtensionApplication/README.md)
 
-[Step 6: Create SAP Business Rules Project](./Scenario1-Inbound-to-SAPS4HANA/Step6-Configure-BusinessRules-Part1/README.md)
+[Step 6: Create SAP Build Process Automation - Decision Project](./Scenario1-Inbound-to-SAPS4HANA/Step6-Configure-Decisions-Part1/README.md)
 
 [Step 7: Configure SAP S/4HANA Business Actions in the extension application](./Scenario1-Inbound-to-SAPS4HANA/Step7-Configure-BusinessActions/README.md)
 
-[Step 8: Update and Activate SAP Business Rule Project](./Scenario1-Inbound-to-SAPS4HANA/Step8-Configure-BusinessRules-Part2/README.md)
+[Step 8: Update and Activate SAP Build Process Automation - Decision Project](./Scenario1-Inbound-to-SAPS4HANA/Step8-Configure-Decisions-Part2/)
 
 [Step 9: Test the Extension Application](./Scenario1-Inbound-to-SAPS4HANA/Step9-Test-ExtensionApplication/README.md)
 
