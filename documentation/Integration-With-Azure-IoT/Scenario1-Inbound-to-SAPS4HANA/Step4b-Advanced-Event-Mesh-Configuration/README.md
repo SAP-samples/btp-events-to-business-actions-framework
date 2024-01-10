@@ -13,14 +13,14 @@
 
     ![plot](./images/aem-create-service.png)
     
-    Fill the **Service Name** as **PPE** and select **Service Type** as **Standard**. Select **Amazon Web Services** from the drop down menu for **Cloud**, Choose **Frankfurt** as **Region** from the Map, leave the prepopulated version for **Broker Version** , for this tutorial.
+    Fill the **Service Name** of your choice, here we have named it as **events-to-business-actions** and select **Service Type** as **Standard**. Select **Microsoft Azure** from the drop down menu for **Cloud**, Choose the region of your choice, we have chosen **East US 2( Virginia)** as **Region** from the Map, leave the prepopulated version for **Broker Version** , for this tutorial.
 
     Click on **Create Service**
 
     ![plot](./images/aem-service-created.png)
 
 
-4. Click on the created service **PPE**
+4. Click on the created service **events-to-business-actions**
 
     ![plot](./images/aem-service-screen1.png)
 
@@ -59,7 +59,7 @@
 
      ![plot](./images/aem-addtopicsubscription.png)
 
-     In the **Create Subscription** screen, type in the topic name as **ppe/messages** and click **Create**
+     In the **Create Subscription** screen, type in the topic name as **e2b/messages** and click **Create**
 
      ![plot](./images/aem-topic-name.png)    
 
@@ -73,7 +73,7 @@
 
      ![plot](./images/aem-rest-client.png)
 
-     Click on ** + REST Delivery Point** and Fill the **RDP Name** as **rdp1**
+     Click on **+ REST Delivery Point** and Fill the **RDP Name** as **rdp1**
 
      ![plot](./images/aem-rdp-name.png)
 
@@ -85,7 +85,7 @@
      
      ![plot](./images/aem-rdp-created.png)  
 
-     **f.**  Create a Queue Binding object
+6.  Create a Queue Binding object
 
      Create a queue binding to the queue you created previously. This will tell the RDP where to fetch messages from. **Note:** that REST Delivery Points (RDPs) can be bound to multiple queues.
 
@@ -105,17 +105,17 @@
 
      ![plot](./images/aem-binding-completed.png)
 
-     **g.** Create a **REST Consumer** object.
+7. Create a **REST Consumer** object.
 
      Navigate to **REST Consumers** Tab and click on **+ REST Conusmer**
 
      ![plot](./images/aem-rest-consumer.png)
 
-     Fill in the **REST Consumer Name** as **rc1** 
+8. Fill in the **REST Consumer Name** as **rc1** 
 
      ![plot](./images/aem-consumer-name.png)
 
-     Enable the **REST Consumer** and set HOST:PORT details of the message HTTP listener. 
+9. Enable the **REST Consumer** and set HOST:PORT details of the message HTTP listener. 
 
      To Fill the **Host** , Navigate to the Cloud Foundary Space where the application is deployed and Click on **action-management-srv**.
 
@@ -125,39 +125,54 @@
 
      ![plot](./images/aem-consumer-host-link.png)
 
-     Fill in the Value of **Port** as **443**
+10. Fill in the following Value
 
-     Select **POST** as the **HTTP Method**.
+    | Field | Value |
+    |------|------|
+    | Enabled  | Enable toggle |
+    | Port | 443 |
+    | HTTP Method |  POST |
+    | TLS | Enable toggle |
+    | Outgoing Connection Count | 1 |
+    | Max Response Wait Time (sec) | 30 |
+    | Connection Retry Delay (sec) | 300 |
+    | Authentication Scheme | OAuth 2.0 Client Credentials |
+    | Client Id | `clientid`|
+    | Client Secret | `clientsecret`|
+    | Token Endpoint URL | `url`/oauth/token |
+    | Token Exipry Default |900 |
+    | Scope | uaa.resource |
 
-     Enable the TLS.
+    Follow the steps below to fetch the value of Client Id, Client Secret and Token Endpoint URL
 
-     Keep **Outgoing Connection Count** value as **1**.
 
-     Fill the **Max Response Wait Time (sec)** as **30**
+11. Go back to the [SAP BTP Subaccount](https://emea.cockpit.btp.cloud.sap/cockpit/?idp=tdct3ched1.accounts.ondemand.com#/globalaccount/e2a835b0-3011-4c79-818a-d7767c4627cd/subaccount/0e652f06-6ee7-48d1-8877-b84274456b22) 
+    and then to Cloud Foundary Space. Navigate to **Services** > **Instances** and under the **Instances** select **action-management-auth**. 
 
-     Populate **Connection Retry Delay (sec)** field with **300**
+    <!-- <img src="./images/aem-30.png" width="90%" height="90%" /> -->
+    ![plot](./images/aem-30.png)
 
-     From the drop down menu, choose **OAuth 2.0 Client Credentials** as the **Authentication Scheme**.
+    Under the **Service Keys** the key named **action-management-auth-key** is already created. Click on the **View** Option to get the **OAuth 2.0 Client Credentials**.  
 
-     Next, Go to your **BTP subaccount** ,Navigate to **Services** > **Instances and Subscriptions** and under the **Instances** select **action-management-auth**.
+    <!-- <img src="./images/aem-31.png" width="90%" height="90%" /> -->
+    ![plot](./images/aem-31.png)
 
-     ![plot](./images/aem-consumer-oauth.png)
+12. Copy the **clientid**, **clientsecret** and **url** and paste it on the **REST Consumer** configuration as below:
+    - Client ID : ```clientid```
+    - Client Secret: ```clientsecret```
+    - Token Endpoint URL: ```url```/oauth/token 
 
-     Under the **Service Keys** the key named **action-management-auth-key** is already created. Click on the **View** Option to get the **OAuth 2.0 Client Credentials**.  
+    ![plot](./images/aem-32.png)
 
-     ![plot](./images/aem-consumer-oauth-key.png)
+    Make sure to follow step 9 to 13 carefully and Fill the remaining fields as shown in the screenshot below. Then choose **Apply**.
 
-     Copy the **clientid**, **clientsecret** and **url**. Navigate back to the **REST Consumer** configuration and paste the values for **Client ID** and **Client Secret**. Paste the **url** copied earlier in the **Token Endpoint URL** and appened **/oauth/token** at the end of the **url**. 
-     Effective **Token Endpoint URL** is **url/oauth/token**.
+    ![plot](./images/aem-consumer-config.png)  
 
-     Fill the remaining fields as shown in the screenshot below.
-
-     ![plot](./images/aem-consumer-config.png)  
-
-     REST Consumer successfully created
+    
+    REST Consumer successfully created
 
      ![plot](./images/aem-consumer-created.png)  
 
-     A final, configured **RDP settings** would look like this.
+    A final, configured **RDP settings** would look like this.
 
      ![plot](./images/aem-rdp-final.png)

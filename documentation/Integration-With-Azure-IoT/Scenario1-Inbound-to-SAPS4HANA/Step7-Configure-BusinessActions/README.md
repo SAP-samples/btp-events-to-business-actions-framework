@@ -156,10 +156,9 @@ In this section, you will configure the different business actions that needs to
     Content-Type: application/json
     Method: POST
     Relative Path: /v2/rule-services
-    Payload: { "RuleServiceId": "<DecisionID>",
-                "Vocabulary": [ {   "EventInfo":{ "SourceSystem": "${{event.data.enrichments.System}}",
-                                    "DeviceTemple": "${{event.data.enrichments.DeviceTemplate}}",
-                                    "DeviceLocation": "${{event.data.enrichments.Location}}" }  } ] }
+    Payload: { "RuleServiceId": "<E2BDecisionId>","Vocabulary": [ { "EventInfo":{ "SourceSystem": "${{event.data.SourceSystem}}","DeviceLocation": "${{event.data.DeviceLocation}}","DeviceType": "${{event.data.DeviceType}}" } } ] }
+
+
     Action Id Path in Response: Result[0].ActionInfo.ActionId
     ```
 
