@@ -1,8 +1,15 @@
+---
+slug: /
+sidebar_position: 1
+
+---
+# OVERVIEW
+
 # Build Events-to-Business Actions Scenarios with SAP BTP and Microsoft Azure/AWS
 
 [![REUSE status](https://api.reuse.software/badge/github.com/SAP-samples/btp-events-to-business-actions-framework)](https://api.reuse.software/info/github.com/SAP-samples/btp-events-to-business-actions-framework)
 
-This repository contains code samples and instructions for developing an extension application in SAP BTP. SAP Cloud applications enables event-driven architecture. The sample application is an event-driven side-by-side extension which integrates any type of events from systems/applications(providers) into the SAP ecosystem(consumer) via SAP BTP. This application helps to configure actions that needs to be taken in SAP LoB systems based on the events that is received in SAP Event Mesh. The application scenario you will develop in this tutorial leverages Events-To-Business actions framework (extension application). 
+This repository contains code samples and instructions for developing an extension application in SAP BTP. The sample application has been developed in a partner collaboration to help customers integrate any type of events from systems into SAP ecosystem via SAP BTP. This application helps to configure  actions that needs to be taken in SAP LoB systems based on the events that is received in SAP Event Mesh. The application scenario you will develop in this tutorial leverages Event-To-Business actions framework (extension application). 
 
 This framework can be used in combination with any hyperscalar/telco IoT.
 
@@ -45,7 +52,7 @@ You can choose to configure and integrate events with any SAP LoB solution.
 
 In this event-driven scenario, based on the real-time status of the IoT Devices , actionable events are sent to SAP BTP to decide on the critical business actions to be taken in the SAP Enteprise Business systems based on business rules defined in the system.
 
-![plot](./images/businessprocess.png)
+![plot](images/businessprocess.png)
 
 1. Data from IoT Devices are sent to Microsoft Azure IoT Central/AWS IoT.
 
