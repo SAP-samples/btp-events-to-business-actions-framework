@@ -9,22 +9,16 @@ sidebar_position: 1
 
 [![REUSE status](https://api.reuse.software/badge/github.com/SAP-samples/btp-events-to-business-actions-framework)](https://api.reuse.software/info/github.com/SAP-samples/btp-events-to-business-actions-framework)
 
-This repository contains code samples and instructions for developing an extension application in SAP BTP. The sample application has been developed in a partner collaboration to help customers integrate any type of events from systems into SAP ecosystem via SAP BTP. This application helps to configure  actions that needs to be taken in SAP LoB systems based on the events that is received in SAP Event Mesh. The application scenario you will develop in this tutorial leverages Event-To-Business actions framework (extension application). 
+Companies are driving the digitization of the factory, plants, warehouses, and business networks and creating an ecosystem by linking Information Technology (IT) with Operational Technology (OT). Bridging the gaps between different landscapes and processes with integrated frameworks is key for building a seamless, efficient, bi-directional collaborative ecosystem.
 
-This framework can be used in combination with any hyperscalar/telco IoT.
+As businesses expand, their enterprise IT landscapes become more intricate, and they need to automate and optimize daily tasks with various software applications, systems, and processes. To facilitate communication across these landscapes without overburdening the systems, decoupled/asynchronous communication between application endpoints is an effective solution to improve performance and scalability. One of the ways to achieve this  on SAP BTP is to develop and extension applications based on event-driven architecture. 
+
+This repository contains code samples and instructions for developing an event-driven side-by-side extension application that integrates any type of event from systems/applications(providers) into the SAP ecosystem(consumer) via SAP BTP. This application helps to configure actions that need to be executed in SAP LoB systems based on the events that are received in SAP Event Mesh. The application scenario you will develop in this tutorial leverages the Events-To-Business actions framework (extension application). 
+
+In the scenario explained in this repository, the events are published from IoT Platform(Microsoft Azure IOT and AWS IoT) and the actions for these events are triggerred in SAP S/4HANA for a simple purchase order business process using the Events-to-Business Actions framework. You can use this application to further customize it for other systems as well.
 
 
-There are two scenarios described in this repository. In this tutorial, the events are received from Azure IoT Platform and the actions for these events are taken in SAP S/4HANA. You can use this application to further customize it for other systems as well.
-
-1. Inbound to SAP S/4HANA
-
-    In this scenario, Events from Azure/AWS IoT are sent to SAP Event Mesh. The Node.js extension application subscribes to SAP Event Mesh queue and executes the action that is required to be taken based on the event details.  
-
-2. Outbound from SAP S/4HANA
-
-    In this scenario, any event that is triggerred from SAP S/4HANA is sent to SAP Event Grid Connectivity Bridge. With the latest Beta releease of SAP Event Mesh Connectivity Bridge plan, event is propogated to Azure Event Grid with direct connectivity. This service plan is currently available for only events from SAP S/4HANA to Azure Event Grid. In this scenario, the events from Azure Event Grid is consumed in Azure Function app to send outlook notification to the user. You can further enhance the scenario as per your requirement.
-
-> **Important Note** : Please be aware that this GitHub repository is still work in progress for improvements and additional scenarios. Make sure you're pulling the repository from time to time and redeploying it in SAP BTP.
+> **Important Note** : Please be aware that this GitHub repository will be updated for improvements and additional scenarios. Make sure you're pulling the repository from time to time and redeploying it in SAP BTP.
 
 
 ## Table of Contents
@@ -52,19 +46,15 @@ You can choose to configure and integrate events with any SAP LoB solution.
 
 In this event-driven scenario, based on the real-time status of the IoT Devices , actionable events are sent to SAP BTP to decide on the critical business actions to be taken in the SAP Enteprise Business systems based on business rules defined in the system.
 
-![plot](images/businessprocess.png)
+![plot](images/businessprocess_1.png)
 
-1. Data from IoT Devices are sent to Microsoft Azure IoT Central/AWS IoT.
+1. Data from IoT Devices are sent to Microsoft Azure IoT Central/AWS IoT which includes all the streaming data from the devices.
 
-2. Rules in Microsoft Azure IoT/AWS IoT triggers an call to SAP Event Mesh in case of any actions which needs attention. This is defined in IoT Rules for devices.
+2. Based on the rules in Microsoft Azure IoT/AWS IoT, the data is published to SAP Advanced Event Mesh/SAP Event Mesh in case of any actions which needs attention. This is configured in IoT Rules in the IOT Platform. Similar decisions can be configured in other systems and applications as well.
 
-3. SAP Event Mesh receives the events.
+3. SAP BTP acts as consumer. Once the event details are received, the SAP BTP extension application which is configured with all necessary actions (For example, configuring the decisions in SAP Build Process Automation to decide on action to be taken, executing the chain of actions which needs to be taken based on the event received, configure the OData API call to be executed etc) executes the respective chain of actions.
 
-4. Extension application is configured with all necessary actions (For example, calling SAP Business Rules API to read the decision tables to decide on action to be taken, configure the OData API call to be executed , service call back to the device) to be taken.
-
-5. Extension application executes the business actions.
-
-6. For this sample application, based on the fill level of waste container/silo a new Purchase Order Requisition is created in SAP S/4HANA.
+5. The extension application in SAP BTP executes the business actions in respective SAP Enterprise systems.
 
 ## Solution Architecture
 

@@ -2,20 +2,16 @@
 
 [![REUSE status](https://api.reuse.software/badge/github.com/SAP-samples/btp-events-to-business-actions-framework)](https://api.reuse.software/info/github.com/SAP-samples/btp-events-to-business-actions-framework)
 
-This repository contains code samples and instructions for developing an extension application in SAP BTP. SAP Cloud applications enables event-driven architecture. The sample application is an event-driven side-by-side extension which integrates any type of events from systems/applications(providers) into the SAP ecosystem(consumer) via SAP BTP. This application helps to configure actions that needs to be taken in SAP LoB systems based on the events that is received in SAP Event Mesh. The application scenario you will develop in this tutorial leverages Events-To-Business actions framework (extension application). 
+This repository contains code samples and instructions for developing an extension application in SAP BTP. SAP Cloud applications enable event-driven architecture. The sample application is an event-driven side-by-side extension that integrates any type of event from systems/applications(providers) into the SAP ecosystem(consumer) via SAP BTP. This application helps to configure actions that need to be taken in SAP LoB systems based on the events that are received in SAP Event Mesh. The application scenario you will develop in this tutorial leverages the Events-To-Business actions framework (extension application). 
 
-This framework can be used in combination with any hyperscalar/telco IoT.
-
+This framework can be used in combination with any hyperscalar/telco IoT or application.
 
 There are two scenarios described in this repository. In this tutorial, the events are received from Azure IoT Platform and the actions for these events are taken in SAP S/4HANA. You can use this application to further customize it for other systems as well.
 
-1. Inbound to SAP S/4HANA
+Inbound to SAP S/4HANA
 
-    In this scenario, Events from Azure/AWS IoT are sent to SAP Event Mesh. The Node.js extension application subscribes to SAP Event Mesh queue and executes the action that is required to be taken based on the event details.  
+    In this scenario, Events from Azure/AWS IoT are sent to SAP Event Mesh. The Node.js extension application subscribes to the SAP Event Mesh queue and executes the action that is required to be taken based on the event details.  
 
-2. Outbound from SAP S/4HANA
-
-    In this scenario, any event that is triggerred from SAP S/4HANA is sent to SAP Event Grid Connectivity Bridge. With the latest Beta releease of SAP Event Mesh Connectivity Bridge plan, event is propogated to Azure Event Grid with direct connectivity. This service plan is currently available for only events from SAP S/4HANA to Azure Event Grid. In this scenario, the events from Azure Event Grid is consumed in Azure Function app to send outlook notification to the user. You can further enhance the scenario as per your requirement.
 
 > **Important Note** : Please be aware that this GitHub repository is still work in progress for improvements and additional scenarios. Make sure you're pulling the repository from time to time and redeploying it in SAP BTP.
 
@@ -37,13 +33,13 @@ There are two scenarios described in this repository. In this tutorial, the even
 
 ## Scenario
 
-The business scenario you will be implementing here is to integrate real time events generated from Microsoft Azure IoT Platform/AWS IoT into SAP business processes to enrich the outcome of enterprise operations and facilitate rapid decision making. The framework can be extended to any platform and to any kind of event.
+The business scenario you will be implementing here is to integrate real-time events generated from Microsoft Azure IoT Platform/AWS IoT into SAP business processes to enrich the outcome of enterprise operations and facilitate rapid decision-making. The framework can be extended to any platform and any kind of event.
 
 You can choose to configure and integrate events with any SAP LoB solution.
 
 ## Business Process Flow
 
-In this event-driven scenario, based on the real-time status of the IoT Devices , actionable events are sent to SAP BTP to decide on the critical business actions to be taken in the SAP Enteprise Business systems based on business rules defined in the system.
+In this event-driven scenario, based on the real-time status of the IoT Devices, actionable events are sent to SAP BTP to decide on the critical business actions to be taken in the SAP Enterprise Business systems based on business rules defined in the system.
 
 ![plot](./images/businessprocess.png)
 
