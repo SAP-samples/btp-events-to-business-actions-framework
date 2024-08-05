@@ -4,7 +4,7 @@
 
 > **Important Note** : This branch is work in progress. Please use "main" branch for released code.
 
-In this scenario, AWS IoT Events are sent to SAP Event Mesh using the rules and actions functionality in AWS IoT Core. The Node.js extension application subscribes to SAP Event Mesh queue and executes the action that is required to be taken based on the event details.  
+In this scenario, AWS IoT Events are sent to SAP Event Mesh/SAP Advanced Event using the rules and actions functionality in AWS IoT Core. The Node.js extension application subscribes to Event Mesh queue and executes the action that is required to be taken based on the event details.  
 
 ## Table of Contents
 
@@ -16,34 +16,34 @@ In this scenario, AWS IoT Events are sent to SAP Event Mesh using the rules and 
 
 ## Scenario
 
-The business scenario you will be implementing here is to integrate real time events generated from Amazon AWS IoT Platform into SAP business processes to enrich the outcome of enterprise operations and facilitate rapid decision making. The framework can be extended to any platform and to any kind of event.
+The business scenario you will be implementing here is to integrate real-time events that need certain business actions to be triggered are generated from the AWS IoT Platform into SAP business processes to enrich the outcome of enterprise operations and facilitate rapid decision-making. 
 
 You can choose to configure and integrate events with any SAP LoB solution.
 
 ## Business Process Flow
 
-In this event-driven scenario, based on the real-time status of the IoT Devices from AWS IoT Core, actionable events are sent to SAP BTP to decide on the critical business actions to be taken in the SAP Enteprise Business systems based on business rules defined in the system.
+In this event-driven scenario, based on the real-time data from IoT Devices getting captured in AWS IoT Core, actionable events are sent to SAP BTP to decide on the critical business actions to be taken in the SAP Enterprise Business systems based on business rules defined in SAP BTP.
 
 ![plot](../../images/aws-businessprocess.png)
 
 1. Data from IoT Devices are sent to AWS IoT Core.
 
-2. Rules in AWS IoT Core triggers and the event is sent to SAP Event Mesh via Amazon SQS and Amazon EventBridge in case of any actions which needs attention. This is defined in IoT Rules for devices.
+2. Rules in AWS IoT Core triggers and the event is sent to SAP Event Mesh via Amazon SQS and Amazon EventBridge in case of any actions that needs attention. This is defined in IoT Rules for devices.
 
 3. SAP Event Mesh receives the events.
 
-4. Extension application is configured with all necessary actions (For example, calling SAP Business Rules API to read the decision tables to decide on action to be taken, configure the OData API call to be executed , service call back to the device) to be taken.
+4. The extension application is configured with all necessary actions (For example, calling SAP Business Rules API to read the decision tables to decide on the action to be taken, configuring the OData API call to be executed, and service call back to the device) to be taken.
 
-5. Extension application executes the business actions.
+5. The extension application executes the business actions.
 
-6. For this sample application, based on the fill level of waste container a new Purchase Order Requisition is created in SAP S/4HANA.
+6. For this sample application, based on the fill level of the waste container a new Purchase Order Requisition is created in SAP S/4HANA.
 
 ## Solution Architecture
 
-The key services used from Amazon AWS are AWS IoT Core, Amazon SWS and Amazon Event Bridge.
-The services used from SAP BTP are the Cloud Foundry Runtime, SAP Event Mesh, SAP Connectivity service, SAP Private Link service, SAP Workflow Management, SAP Event Mesh Connectivity Plan(Beta) and SAP Destination service.
+The key services used by AWS are AWS IoT Core, Amazon SWS and Amazon Event Bridge.
+The services used by SAP BTP are the Cloud Foundry Runtime, SAP Event Mesh or SAP Advanced Event Mesh, SAP Connectivity service, SAP Private Link service, SAP Build Process Automation and SAP Destination service.
 
-SAP Private Link service is used for connectivity between SAP BTP and SAP S/4HANA when both the systems are running on Amazon AWS Infrastructure, in this tutorial you will find implementation steps for SAP BTP Private Link service and AWS Private Link service. Alternatively you can use SAP Connectivity service and Cloud Connector for integration of SAP BTP and SAP S/4HANA as well.
+SAP Private Link service is used for connectivity between SAP BTP and SAP S/4HANA when both the systems are running on Amazon AWS Infrastructure, in this tutorial you will find implementation steps for SAP BTP Private Link service and AWS Private Link service. Alternatively, you can use SAP Connectivity service and Cloud Connector for integration of SAP BTP and SAP S/4HANA as well.
 
 ![plot](../../images/AWS-SQS.png) **Figure-1: High-level architecture (with SAP S/4HANA on AWS)**
 

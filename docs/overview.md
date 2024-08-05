@@ -58,13 +58,13 @@ In this event-driven scenario, based on the real-time status of the IoT Devices 
 
 ## Solution Architecture
 
-The solution architecture and detailed documentation for integrating with Azure IoT can be found at
+The solution architecture and detailed documentation for integrating with Microsoft Azure IoT can be found at
 
-[Integration-With-Azure-IoT](./documentation/Integration-With-Azure-IoT/README.md).
+[Integration-With-Microsoft Azure-IoT](./project-panel/Integration-With-Azure-IoT/README.md).
 
-The solution architecture and detailed documentation for integrating with Azure IoT can be found at
+The solution architecture and detailed documentation for integrating with AWS IoT can be found at
 
-[Integration-with-AWS-IoT](./documentation/Integration-with-AWS-IoT/README.md).
+[Integration-with-AWS-IoT](./project-panel/Integration-With-AWS-IoT/README.md).
 
 ## Additional Resources
 
