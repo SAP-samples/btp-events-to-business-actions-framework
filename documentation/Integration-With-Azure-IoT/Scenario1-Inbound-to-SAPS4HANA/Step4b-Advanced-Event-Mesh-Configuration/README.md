@@ -164,7 +164,7 @@
 
     ![plot](./images/aem-32.png)
 
-    Make sure to follow step 9 to 13 carefully and Fill the remaining fields as shown in the screenshot below. Then choose **Apply**.
+    Make sure to follow step 9 to 12 carefully and Fill the remaining fields as shown in the screenshot below. Then choose **Apply**.
 
     ![plot](./images/aem-consumer-config.png)  
 
