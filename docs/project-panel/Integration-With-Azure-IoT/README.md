@@ -105,8 +105,7 @@ These are the technical prerequisites for integration between Microsoft Azure Io
 ## Configuration and Development
 
 This repository is documented for below scenario:
-
-1. Inbound to SAP S/4HANA from Azure IoT Central.
+Inbound to SAP S/4HANA from Azure IoT Central.
 
 
 These are the steps to configure SAP S/4HANA, SAP BTP and Microsoft Azure for **Scenario 1 - Inbound to SAP S/4HANA from Azure IoT Central**.
