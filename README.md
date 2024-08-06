@@ -1,4 +1,4 @@
-# Build Events-to-Business Actions Scenarios with SAP BTP and Microsoft Azure/AWS
+# Build Events-to-Business Actions Scenarios with SAP BTP and Microsoft Azure
 
 [![REUSE status](https://api.reuse.software/badge/github.com/SAP-samples/btp-events-to-business-actions-framework)](https://api.reuse.software/info/github.com/SAP-samples/btp-events-to-business-actions-framework)
 
@@ -49,9 +49,9 @@ In this event-driven scenario, based on the real-time status of the IoT Devices 
 
 1. Data from IoT Devices are sent to Microsoft Azure IoT Central/AWS IoT.
 
-2. Rules in Microsoft Azure IoT/AWS IoT triggers an call to SAP Event Mesh in case of any actions which needs attention. This is defined in IoT Rules for devices.
+2. Rules in Microsoft Azure IoT/AWS IoT triggers an call to SAP Integration Suite, Advanced Event Mesh in case of any actions which needs attention. This is defined in IoT Rules for devices.
 
-3. SAP Event Mesh receives the events.
+3. SAP Integration Suite, Advanced Event Mesh receives the events.
 
 4. Extension application is configured with all necessary actions (For example, calling SAP Business Rules API to read the decision tables to decide on action to be taken, configure the OData API call to be executed , service call back to the device) to be taken.
 
@@ -67,7 +67,7 @@ The solution architecture and detailed documentation for integrating with Azure 
 
 The solution architecture and detailed documentation for integrating with Azure IoT can be found at
 
-[Integration-with-AWS-IoT](./documentation/Integration-with-AWS-IoT/README.md).
+[Integration-with-AWS-IoT](https://github.com/SAP-samples/btp-aws-monitron).
 
 ## Additional Resources
 

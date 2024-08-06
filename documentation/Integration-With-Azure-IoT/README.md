@@ -143,5 +143,3 @@ Step 4: Connect SAP BTP and SAP S/4HANA
 
 [Step 9: Test the Extension Application](./Scenario1-Inbound-to-SAPS4HANA/Step9-Test-ExtensionApplication/README.md)
 
-For **Scenario 2 - Outbound from SAP S/4HANA to Azure Event Grid**, please refer to 
-[Receiving events from SAP S/4HANA in Microsoft Azure Event Grid using SAP Event Mesh](./Scenario2-Outbound-from-SAPS4HANA/README.md) link.
