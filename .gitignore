@@ -105,3 +105,5 @@ dist
 .tern-port
 nttapp/app/deployer/**
 nttapp/app/deployer/resources/nttappui.zip
+
+.docusaurus
