@@ -1,0 +1,20 @@
+{
+    "env": {
+        "account": "782110148236",
+        "region": "eu-west-1"
+    },
+    "vpcId": "vpc-c80dd1b1",
+    "subnet": "subnet-05ab827f9a556a73c",
+    "stackName": "monitronsaptest",
+    "sapenv": {
+        "SAP_EM_OAUTH_SECRET": "arn:aws:secretsmanager:eu-west-1:782110148236:secret:sapemauth-pnyaRN",
+        "SAP_EM_OAUTH_URL": "https://tfe-dev-eu10-004.authentication.eu10.hana.ondemand.com/oauth/token",
+        "SAP_EM_OAUTH_CLIENT_ID": "sb-default-85d8f3d8-255c-4122-b170-17f93ee9db4e-clone!b156115|xbem-service-broker-!b2436",
+        "SAP_EM_REST_URL": "https://enterprise-messaging-pubsub.cfapps.eu10.hana.ondemand.com/messagingrest/v1/topics/com%2Fsap%2Fpaa%2Findustry%2Fevent%2Fraised/messages"
+    },
+    "s3":{
+        "bucketname": "awspihe2ab",
+        "inferencefolder":"monitron"
+    },
+     "lambdaTimeout": 900
+}
