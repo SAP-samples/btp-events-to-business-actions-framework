@@ -2,7 +2,7 @@
 
 Follow these steps to set up the Cloud Connector and the SAP Connectivity service to establish secured communication between SAP BTP and SAP S/4HANA. 
 
->Note: Choose this configuration if you have SAP S/4HANA on-premise/private cloud.If you have SAP BTP and SAP S/4HANA running on Azure, then you can skip this step and proceed to [next step](../Step4b-Setup-SAPPrivateLinkService/README.md) to setup connectivity between SAP BTP and SAP S/4HANA using Private Link.
+>Note: Choose this configuration if you have SAP S/4HANA on-premise/private cloud.If you have SAP BTP and SAP S/4HANA running on Azure, then you can skip this step and proceed to [next step](../Step3b-Setup-SAPPrivateLinkService/README.md) to setup connectivity between SAP BTP and SAP S/4HANA using Private Link.
 
 ### 1. Download and Install the Cloud Connector
 
@@ -10,28 +10,28 @@ Follow these steps to set up the Cloud Connector and the SAP Connectivity servic
 
     ![plot](./images/scc_download.png)
 
-    You need an administrator access to install the Cloud Connector.
+    You need administrator access to install the Cloud Connector.
 
 2. Run the installation package and follow the on-screen installation guide. If the installation is successful, the  Cloud Connector will be started automatically.
 
 ### 2. Configure the Cloud Connector
 
-1. To configure the Cloud Connector, open https://hostname:port, replace **hostname** with the hostname of the machine on which the Cloud Connector is installed, and the **port** with the port number mentioned during the installation. The default port number is 8443.
+1. To configure the Cloud Connector, open https://hostname:port, replace the **hostname** with the hostname of the machine on which the Cloud Connector is installed, and the **port** with the port number mentioned during the installation. The default port number is 8443.
 
     ![plot](./images/scc_logon.png)
 
-    Enter below credentials (case sensitive) and choose Login.
+    Enter the below credentials (case sensitive) and choose Login.
 
     Username: **Administrator**
     Password: **manage**
 
     **Note**: The first time you log in, you must change the password and choose Master as the installation type. Click **Save**.
 
-2. Log in to SAP BTP cockpit, navigate to your subaccount and choose **Overview**. In the **General** tab, copy the value of **Subaccount ID**.
+2. Log in to SAP BTP cockpit, navigate to your subaccount and choose **Overview**. In the **General** tab, copy the value of the **Subaccount ID**.
 
     ![plot](./images/btpsubacc.png)
 
-3. Log in to Cloud Connector Administration cockpit and choose **Add Subaccount**.
+3. Log in to the Cloud Connector Administration cockpit and choose **Add Subaccount**.
 
     ![plot](./images/addsubaccount.png)
 
@@ -51,7 +51,7 @@ Follow these steps to set up the Cloud Connector and the SAP Connectivity servic
 
 ### 3. Create a Cloud to On-Premise Connection
 
-To make the SAP S/4HANA system available to the services and application in SAP BTP, you need to create a mapping between the Cloud Connector and the SAP S/4HANA system.
+To make the SAP S/4HANA system available to the services and applications in SAP BTP, you need to create a mapping between the Cloud Connector and the SAP S/4HANA system.
 
 1. Log in to the Cloud Connector Administration cockpit and choose the name of your subaccount in SAP BTP in the **Subaccount** field.
 
@@ -63,7 +63,7 @@ To make the SAP S/4HANA system available to the services and application in SAP 
 
     3. In the **Internal Host** and **Internal Port** fields, enter the hostname or IP address of the SAP S/4HANA system and the corresponding ICM port. Choose **Next**.
 
-    4. In the **Virtual Host** and **Virtual Port** fields, enter a hostname of your choice and the **443** port. The value for virtual port can be updated if required. Choose **Next**.
+    4. In the **Virtual Host** and **Virtual Port** fields, enter a hostname of your choice and the **443** port. The value for the virtual port can be updated if required. Choose **Next**.
 
     5. In the **Principal Type** dropdown menu, select **X.509 Certificate (Strict Usage)**. Choose **Next**.
 
@@ -86,6 +86,6 @@ To make the SAP S/4HANA system available to the services and application in SAP 
     ![plot](./images/cloudconnector.png)
 
 
-5. In SAP BTP cockpit, navigate to your subaccount. Choose **Connectivity** > **Cloud Connectors**. The state of the Cloud Connector configurations should be **Connected**.
+5. In the SAP BTP cockpit, navigate to your subaccount. Choose **Connectivity** > **Cloud Connectors**. The state of the Cloud Connector configurations should be **Connected**.
 
     ![plot](./images/btp-cc.png)

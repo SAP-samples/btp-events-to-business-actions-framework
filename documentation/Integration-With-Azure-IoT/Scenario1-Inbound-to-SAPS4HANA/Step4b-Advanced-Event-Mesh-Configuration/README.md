@@ -13,7 +13,7 @@
 
     ![plot](./images/aem-create-service.png)
     
-    Fill the **Service Name** of your choice, here we have named it as **events-to-business-actions** and select **Service Type** as **Standard**. Select **Microsoft Azure** from the drop down menu for **Cloud**, Choose the region of your choice, we have chosen **East US 2( Virginia)** as **Region** from the Map, leave the prepopulated version for **Broker Version** , for this tutorial.
+    Fill in the **Service Name** of your choice, here we have named it as **events-to-business-actions** and select **Service Type** as **Standard**. Select **Microsoft Azure** from the dropdown menu for **Cloud**, Choose the region of your choice, we have chosen **East US 2( Virginia)** as the **Region** from the Map, and leave the prepopulated version for **Broker Version**, for this tutorial.
 
     Click on **Create Service**
 
@@ -47,7 +47,7 @@
 
      ![plot](./images/aem-queue2.png)    
 
-     Queue successfully created
+     Queue successfully created.
 
      ![plot](./images/aem-queue-created.png)    
 
@@ -107,7 +107,7 @@
 
 7. Create a **REST Consumer** object.
 
-     Navigate to **REST Consumers** Tab and click on **+ REST Conusmer**
+     Navigate to the **REST Consumers** Tab and click on **+ REST Conusmer**
 
      ![plot](./images/aem-rest-consumer.png)
 
@@ -115,13 +115,13 @@
 
      ![plot](./images/aem-consumer-name.png)
 
-9. Enable the **REST Consumer** and set HOST:PORT details of the message HTTP listener. 
+9. Enable the **REST Consumer** and set HOST: PORT details of the message HTTP listener. 
 
-     To Fill the **Host** , Navigate to the Cloud Foundary Space where the application is deployed and Click on **action-management-srv**.
+     To Fill the **Host**, Navigate to the Cloud Foundry Space where the application is deployed and Click on **action-management-srv**.
 
      ![plot](./images/aem-consumer-host.png)
 
-     Copy the link under **Application Routes**,. **Note:** Strip the **https://** before pasting the value in the **Host** field
+     Copy the link under **Application Routes**. **Note:** Strip the **https://** before pasting the value in the **Host** field.
 
      ![plot](./images/aem-consumer-host-link.png)
 
@@ -146,8 +146,7 @@
     Follow the steps below to fetch the value of Client Id, Client Secret and Token Endpoint URL
 
 
-11. Go back to the [SAP BTP Subaccount](https://emea.cockpit.btp.cloud.sap/cockpit/?idp=tdct3ched1.accounts.ondemand.com#/globalaccount/e2a835b0-3011-4c79-818a-d7767c4627cd/subaccount/0e652f06-6ee7-48d1-8877-b84274456b22) 
-    and then to Cloud Foundary Space. Navigate to **Services** > **Instances** and under the **Instances** select **action-management-auth**. 
+11. Go back to the SAP BTP Cockpit and then to Cloud Foundry Space. Navigate to **Services** > **Instances** and under the **Instances** select **action-management-auth**. 
 
     <!-- <img src="./images/aem-30.png" width="90%" height="90%" /> -->
     ![plot](./images/aem-30.png)
@@ -164,12 +163,12 @@
 
     ![plot](./images/aem-32.png)
 
-    Make sure to follow step 9 to 13 carefully and Fill the remaining fields as shown in the screenshot below. Then choose **Apply**.
+    Make sure to follow steps 9 to 13 carefully and Fill the remaining fields as shown in the screenshot below. Then choose **Apply**.
 
     ![plot](./images/aem-consumer-config.png)  
 
     
-    REST Consumer successfully created
+    REST Consumer was successfully created.
 
      ![plot](./images/aem-consumer-created.png)  
 

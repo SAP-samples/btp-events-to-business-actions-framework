@@ -5,7 +5,7 @@ In this section, you will clone the codebase and deploy the extension applicatio
 ### 1. Clone the GitHub Repository
     
 
-Access the [Event To Action Framework](https://github.com/SAP-samples/btp-events-to-business-actions-framework/tree/advanced-event-mesh) GitHub repository to download the project.
+Access the [Events To Action Framework](https://github.com/SAP-samples/btp-events-to-business-actions-framework/tree/advanced-event-mesh) GitHub repository to download the project.
 
 ### 2. Check the Prerequisites for Deployment
 
@@ -19,7 +19,7 @@ Build and deploy the application. Run the following commands:
 
 1. Open the Cloud Foundry command line interface (cf CLI).
 
-2. Navigate to **action-management** directory.
+2. Navigate to the **action-management** directory.
 
     ```
     cd action-management
@@ -49,7 +49,7 @@ Build and deploy the application. Run the following commands:
 
     ![plot](./images/SAPBTPCockpit.png)
 
-8. In the SAP BTP cockpit, navigate to your subaccount and choose **Services** > **Instances and Subscriptions**. Check if you have all of the instances created post deployment as shown below. Make sure the status of all of the instances are **Created**.
+8. In the SAP BTP cockpit, navigate to your subaccount and choose **Services** > **Instances and Subscriptions**. Check if you have all of the instances created post-deployment as shown below. Make sure the status of all of the instances are **Created**.
 
     ![plot](./images/postdeploy.png)
 

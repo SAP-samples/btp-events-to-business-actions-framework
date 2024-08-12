@@ -9,20 +9,20 @@ Now that you have successfully deployed the extension application in SAP BTP and
     <img src="./images/1.png" width="90%" height="90%" />
     <!-- ![plot](./images/1.png) -->
 
-2. Click on disabled toggle button to **Enable** the data export.
+2. Click on the disabled toggle button to **Enable** the data export.
 
     <img src="./images/2.png" width="90%" height="90%" />
 
-3. Upon enabling your screen will look as shown below. This might take couple of minutes to send an event. You can wait for 3-5 minutes.
+3. Upon enabling your screen will look as shown below. This might take couple a of minutes to send an event. You can wait for 3-5 minutes.
 
     <img src="./images/3.png" width="90%" height="90%" />
     <!-- ![plot](./images/2.png) -->
 
-<!-- 2. Choose **Devices** and find your device and check the status. It should be in **Connected** state.
+<!-- 2. Choose **Devices** and find your device and check the status. It should be in the **Connected** state.
 
     ![plot](./images/DeviceStatusWorking.png) -->
 
-4. Log into your SAP S/4HANA System and Search for **Purchase Professional**. Choose **Manage Puchase Requisitions Professional** application.
+4. Log into your SAP S/4HANA System and Search for **Purchase Professional**. Choose the **Manage Puchase Requisitions Professional** application.
 
     <img src="./images/4.png" width="90%" height="90%" />
     <!-- ![plot](./images/S4HANASearchApp.png) -->
@@ -32,7 +32,7 @@ Now that you have successfully deployed the extension application in SAP BTP and
     <img src="./images/5.png" width="90%" height="90%" />
     <!-- ![plot](./images/PurchaseRequisitionList.png) -->
 
-6. Choose the latest purchase requsition.
+6. Choose the latest purchase requisition.
 
     <img src="./images/6.png" width="90%" height="90%" />
 
@@ -59,11 +59,11 @@ Now that you have successfully deployed the extension application in SAP BTP and
 
 ### 2. Explore the Action Logs
 
-1. Open **action-management** application in your cloud foundry space using BTP Cockpit. Click on the url provided under Application Routes section.
+1. Open **action-management** application in your cloud foundry space using BTP Cockpit. Click on the URL provided under the Application Routes section.
 
     <img src="./images/10.5.png" width="90%" height="90%" />
 
-2. Click on **Business Action Logs** tile.
+2. Click on the **Business Action Logs** tile.
 
     <img src="./images/11.png" width="90%" height="90%" />
     <!-- ![plot](./images/ActionManagementHome.png) -->
@@ -83,11 +83,11 @@ Now that you have successfully deployed the extension application in SAP BTP and
 
 Congratulations on completing your Exercise 7! You have successfully completed the end-to-end integration of events to business actions from Microsoft Azure IoT Central to SAP S/4HANA with SAP BTP.
 
-#### For Additional Information on this use case you can refer following resources:
+#### For Additional Information on this use-case you can refer following resources:
 
-- Use Case: [Build Events-to-Business Actions Scenarios with SAP BTP and Microsoft Azure/AWS](https://github.com/SAP-samples/btp-events-to-business-actions-framework)
+- Use Case: [Build Events-to-Business Actions scenarios with SAP BTP and Microsoft Azure/AWS](https://github.com/SAP-samples/btp-events-to-business-actions-framework)
 - DC mission: [Build Events-to-Business Actions Apps with SAP BTP and MS Azure/AWS](https://discovery-center.cloud.sap/missiondetail/4172/4422/)
 - 5 Part Blog Series: [“Events-to-Business Actions”: An event-driven architecture on SAP BTP to implement Industry 4.0 scenarios with Microsoft Azure Services](https://blogs.sap.com/2023/01/27/part-1-events-to-business-actions-architecture-an-event-driven-framework-on-sap-btp-to-implement-industry-4.0-scenarios-with-microsoft-azure-services/)
-- [Set Up Connectivity Between SAP BTP and SAP S/4HANA Using Cloud Connector](https://github.com/SAP-samples/btp-events-to-business-actions-framework/tree/main/documentation/Integration-With-Azure-IoT/Scenario1-Inbound-to-SAPS4HANA/Step4a-SetupCloudConnector)
-- [Set Up Connectivity Between SAP BTP and SAP S/4HANA Using SAP Private Link Service](https://github.com/SAP-samples/btp-events-to-business-actions-framework/blob/main/documentation/Integration-With-Azure-IoT/Scenario1-Inbound-to-SAPS4HANA/Step4b-Setup-SAPPrivateLinkService/README.md)
+- [Set Up Connectivity Between SAP BTP and SAP S/4HANA Using Cloud Connector](https://github.com/SAP-samples/btp-events-to-business-actions-framework/blob/main/documentation/Integration-With-Azure-IoT/Scenario1-Inbound-to-SAPS4HANA/Step3a-SetupCloudConnector/README.md)
+- [Set Up Connectivity Between SAP BTP and SAP S/4HANA Using SAP Private Link Service](https://github.com/SAP-samples/btp-events-to-business-actions-framework/blob/main/documentation/Integration-With-Azure-IoT/Scenario1-Inbound-to-SAPS4HANA/Step3b-Setup-SAPPrivateLinkService/README.md)
 

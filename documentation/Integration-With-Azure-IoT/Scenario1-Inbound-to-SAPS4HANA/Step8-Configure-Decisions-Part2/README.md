@@ -1,15 +1,15 @@
 ## Update and Deploy SAP Build Process Automation Decisions Project
-In this section, you will update decision table and activate business rule project.
+In this section, you will update the decision table and activate the business rule project.
 
-1. In the SAP BTP Cockpit, Navigate to your subaccount -> **Sevices** -> **Instances and Subscriptions** , Open the SAP Build Process Automation Application.
+1. In the SAP BTP Cockpit, Navigate to your subaccount -> **Sevices** -> **Instances and Subscriptions** and open the SAP Build Process Automation Application.
 
     ![plot](./images/subscriptions.png)
 
-2. In the SAP Build Process Automation Application, In the **Lobby** Tab , Click on **Events-to-Business-Actions-Framework** project.
+2. In the SAP Build Process Automation Application, In the **Lobby** Tab, Click on **Events-to-Business-Actions-Framework** project.
 
     ![plot](./images/lobby.png)
 
-3. Choose the **E2BDecision** , On the **Rules** Tab, Click the **DecideAction** Decision table.
+3. Choose the **E2BDecision**, On the **Rules** Tab, Click the **DecideAction** Decision table.
 
     ![plot](./images/E2BDecision.png)
 
@@ -21,9 +21,9 @@ In this section, you will update decision table and activate business rule proje
 
     ![plot](./images/ActionId.png)
 
-5. The Decision is now configured with the Business Rule successfully. To use the decision in our CAP extension application we need to deploy all the latest changes in the Decision. 
+5. The Decision is now configured with the Business Rule successfully. To use the decision in our CAP extension application we need to deploy all the latest changes in the Decision.
 
-    First click on **Release** to release the Decisions. 
+    First, click on **Release** to release the Decisions. 
     
     ![plot](./images/RuleCreated.png)
 
@@ -43,7 +43,7 @@ In this section, you will update decision table and activate business rule proje
 
     ![plot](./images/Deploy4.png)
 
-7. The Project is successfully Redeployed ! 
+7. The Project is successfully Redeployed! 
 
     ![plot](./images/Deployed.png)
 

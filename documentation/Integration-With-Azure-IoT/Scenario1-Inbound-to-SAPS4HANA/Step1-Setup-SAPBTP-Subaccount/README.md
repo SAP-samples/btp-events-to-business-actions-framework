@@ -46,13 +46,14 @@ To set up SAP Integration Suite, Advanced Event Mesh for this scenario, follow t
     ![plot](./images/aem-btp-create.png)
 
 3. In the **New Instance or Subscription** dialog box, leave the prepopulated **Service** and **Plan** settings and choose **Next**.
+
     ![plot](./images/aem-btp-plan.png)
         
 
 4. Add the email address for the user who is the subaccount administrator, and then choose **Next**.
 **Note** The user must be a valid user in the Identity Authentication tenant that has a trust configuration established with the subaccount. Refer to Managing Security Administrators in Your Subaccount.(https://help.sap.com/docs/btp/sap-business-technology-platform/managing-security-administrators-in-your-subaccount-fsa)
 
-    ![plot](./images/aem-btp-adminemail.png)
+![plot](./images/aem-btp-adminemail.png)
 
 
 5. Review the details and choose **Create**.

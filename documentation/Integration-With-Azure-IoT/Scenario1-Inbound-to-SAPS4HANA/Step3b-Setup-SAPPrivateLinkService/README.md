@@ -3,7 +3,7 @@
 >Note: Choose this configuration if you have SAP BTP subaccount and SAP S/4HANA running on Azure. If you have already established the connectivity between SAP BTP and SAP S/4HANA using Cloud Connector then you can skip this step.
 
 ### Prerequisites
-These are the prerequisities that you need to consider if you have SAP BTP and SAP S/4HANA on Microsoft Azure. 
+These are the prerequisites that you need to consider if you have SAP BTP and SAP S/4HANA on Microsoft Azure. 
 
 - SAP S/4HANA system running on Microsoft Azure
 
@@ -21,9 +21,9 @@ These are the prerequisities that you need to consider if you have SAP BTP and S
 To configure these services for the SAP S/4HANA system, follow the 
  [Enhance core ERP business processes with resilient applications on SAP BTP - SAP Private Link Service](https://github.com/SAP-samples/btp-build-resilient-apps/blob/main/tutorials/05_setupconnectivity/privatelink.md) tutorial and complete the steps until the **Prepare Extension Application** section.
 
-### 2. Create Service Key for SAP Private Link Service Instance in Your Subaccount in SAP BTP
+### 2. Create the Service Key for the SAP Private Link Service Instance in Your Subaccount in SAP BTP
 
-In this step, you will create a service key for the SAP Private Link Service Instance. This service key holds the private hostname that needs to be used to configure destination to connect to SAP S/4HANA system using Private Link.
+In this step, you will create a service key for the SAP Private Link Service Instance. This service key holds the private hostname that needs to be used to configure the destination to connect to the SAP S/4HANA system using Private Link.
 
 1. Go to the SAP BTP cockpit, navigate to your subaccount and choose **Services** > **Instances and Subscriptions** and in the dropdown for **All Services**, select **Private Link Service**.
 

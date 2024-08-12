@@ -1,10 +1,10 @@
-## Configure SAP S/4HANA Business Actions in the extension application
+a ## Configure SAP S/4HANA Business Actions in the extension application
 
 In this section, you will define business action in the action-management extension application in SAP BTP.
 
 ### 1. Create Build Process Automation Instance
 
-1. In the SAP BTP cockpit, navigate to your subaccount and choose **Instances and Subscriptions** and then choose **Create** to create a instance of **SAP Build Process Automation**.
+1. In the SAP BTP cockpit, navigate to your subaccount, choose **Instances and Subscriptions** and then choose **Create** to create an instance of **SAP Build Process Automation**.
 
     ![plot](./images/CreateInstance1.png) 
 
@@ -13,21 +13,21 @@ In this section, you will define business action in the action-management extens
 
     ![plot](./images/CreateInstance2.png)
 
-3. Fill the **Instance Name** as **BPA_Decision** , and Click **Create** button.
+3. Fill in the **Instance Name** as **BPA_Decision**, and Click the **Create** button.
 
 
     ![plot](./images/CreateInstance3.png)
 
-4. In a couple of seconds the instance will be created. **Click** on the instance as shown below.
+4. In a couple of seconds, the instance will be created. **Click** on the instance as shown below.
 
     ![plot](./images/CreateInstance4.png)
 
-5. Under **Service Keys**, Click on **Create** button, to create a service key for the SAP Build Process Automation instance created.
+5. Under **Service Keys**, Click on the **Create** button, to create a service key for the SAP Build Process Automation instance created.
 
 
     ![plot](./images/CreateInstance5.png)
 
-6. Fill the **Service Key Name** as **default** and then click on **Create** button.
+6. Fill in the **Service Key Name** as **default** and then click on **Create** button.
 
 
     ![plot](./images/CreateInstance6.png)
@@ -40,7 +40,7 @@ In this section, you will define business action in the action-management extens
 
     ![plot](./images/CreateInstance8.png)
 
-9. Click on **Form** Tab to get the structured display of values as shown below. Copy the values of **api**, **clientid**, **clientsecret**, **url** as you will use them while configuring the destination for SAP Build Process Automation.
+9. Click on the **Form** Tab to get the structured display of values as shown below. Copy the values of the **api**, **clientid**, **clientsecret**, **url** as you will use them while configuring the destination for SAP Build Process Automation.
 
     ![plot](./images/rulekeydetails.png)
 
@@ -73,11 +73,11 @@ In this section, you will define business action in the action-management extens
 
     ![plot](./images/BusinessRulesDestination.png)
 
-6. Create destination with the name **ACTION_MODELER_S4** and enter the following configuration values.
+6. Create the destination with the name **ACTION_MODELER_S4** and enter the following configuration values.
 
-    Change host name in `URL`, `User`, `Password` as per your SAP S/4HANA system details.
+    Change the hostname in `URL`, `User`, `Password` as per your SAP S/4HANA system details.
 
-    - In case of SAP S/4HANA system on AWS Private Cloud, choose **Proxy Type** as **PrivateLink** and the private link **hostname** copied from [Step3b-Setup-SAPPrivateLinkService](../Step3b-Setup-SAPPrivateLinkService/README.md) in the **hostname** field.
+    - In the case of SAP S/4HANA system on AWS Private Cloud, choose **Proxy Type** as **PrivateLink** and the private link **hostname** copied from [Step3b-Setup-SAPPrivateLinkService](../Step3b-Setup-SAPPrivateLinkService/README.md) in the **hostname** field.
 
         ```
         Name: ACTION_MODELER_S4
@@ -99,7 +99,7 @@ In this section, you will define business action in the action-management extens
 
         ![plot](./images/S4HANAPLDestination.png)
 
-    - In case of SAP S/4HANA On-Premise system, choose **Proxy Type** as **OnPremise** and use the **Virtual Host**:**Virtual Port** in the **hostname** placeholder below created at [Step3a-SetupCloudConnector](../Step3a-SetupCloudConnector/README.md) to connect using Cloud Connector.
+    - In the case of SAP S/4HANA On-Premise system, choose **Proxy Type** as **OnPremise** and use the **Virtual Host**: **Virtual Port** in the **hostname** placeholder below created at [Step3a-SetupCloudConnector](../Step3a-SetupCloudConnector/README.md) to connect using Cloud Connector.
 
         ```
         Name: ACTION_MODELER_S4
@@ -120,19 +120,19 @@ In this section, you will define business action in the action-management extens
 
         ![plot](./images/S4HANAOnPremiseDestination.png)
 
-### 3. Configure Business Actions in  Manage Actions application
+### 3. Configure Business Actions in  the Manage Actions application
 
-In this section, you will configure the different business actions that needs to be executed based on the event received.
+In this section, you will configure the different business actions that need to be executed based on the event received.
 
-1. In the SAP BTP cockpit, navigate to your subaccount and choose **Cloud Foundry** > **Spaces**.  Choose your space and then choose **action-management** application. Choose the url provided under **Application Routes** section.
+1. In the SAP BTP cockpit, navigate to your subaccount and choose **Cloud Foundry** > **Spaces**.  Choose your space and then choose the **action-management** application. Choose the URL provided under the **Application Routes** section.
 
     ![plot](./images/ActionManagementApplication.png)
 
-2. Choose **Manage Actions** tile.
+2. Choose the **Manage Actions** tile.
 
     ![plot](./images/ActionManagementHome.png)
 
-3. Choose **Create** to create default action entry.
+3. Choose **Create** to create a default action entry.
 
     ![plot](./images/createaction.png)
 
@@ -149,7 +149,7 @@ In this section, you will configure the different business actions that needs to
 
 5. In the **HTTP Information** section, enter the following configuration values.
 
-    **Note**: Replace **ID** with the value copied from Create SAP Build Process Automation Decision Project section of the [Step6-Configure Decisions-Part1](../Step6-Configure-BusinessRules-Part1/README.md) page.
+    **Note**: Replace **ID** with the value copied from the Create SAP Build Process Automation Decision Project section of the [Step6-Configure Decisions-Part1](../Step6-Configure-Decisions-Part1/README.md) page.
 
     ```
     Destination: ACTION_DECISIONS
@@ -168,7 +168,7 @@ In this section, you will configure the different business actions that needs to
 
 6. Choose **Create**.
 
-7. Create another business action with name **Update Device Cloud Property** and enter the following configuration values.
+7. Create another business action with the name **Update Device Cloud Property** and enter the following configuration values.
 
     ```
     Basic Information:
@@ -190,7 +190,7 @@ In this section, you will configure the different business actions that needs to
 
     ![plot](./images/UpdateDeviceAction.png)
 
-8. Create another business action with name **Create Purchase Requisition** and enter the following  configuration values.
+8. Create another business action with the name **Create Purchase Requisition** and enter the following configuration values.
 
     ```
     Basic Information:
