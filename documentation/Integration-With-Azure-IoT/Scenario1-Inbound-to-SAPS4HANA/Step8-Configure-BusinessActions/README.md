@@ -1,4 +1,4 @@
-a ## Configure SAP S/4HANA Business Actions in the extension application
+## Configure SAP S/4HANA Business Actions in the extension application
 
 In this section, you will define business action in the action-management extension application in SAP BTP.
 
