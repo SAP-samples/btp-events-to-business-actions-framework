@@ -37,11 +37,11 @@ In this event-driven scenario, based on the real-time status of the IoT Devices 
 
 ## Solution Architecture
 
-The key services used by Microsoft Azure are the Azure IoT Central, Azure Blob Storage, Azure Communication Service, Azure Event Grid and Azure Active Directory.
+The key services leveraged from Microsoft Azure are the Azure IoT Central, Azure Blob Storage, Azure Event Grid and Azure Active Directory.
 
-The services used by SAP BTP are the Cloud Foundry Runtime, SAP Event Mesh, SAP Connectivity service, SAP Private Link service, SAP Workflow Management, SAP Event Mesh Connectivity Plan(Beta) and SAP Destination service. 
+The services used by SAP BTP are the Cloud Foundry Runtime, SAP Integration Suite, advanced event mesh/ SAP Event Mesh, SAP Connectivity service, SAP Private Link service, SAP Build Process Automation and SAP Destination service. 
 
-SAP Private Link service is used for connectivity between SAP BTP and SAP S/4HANA when both the systems are running on Microsoft Azure Infrastructure, you can use Private Link service in the case of AWS as well, in this tutorial you will find implementation steps for SAP BTP Private Link service and Microsoft Azure Private Link service. Alternatively, you can use SAP Connectivity service and Cloud Connector for integration of SAP BTP and SAP S/4HANA as well. 
+SAP Private Link service is used for connectivity between SAP BTP and SAP S/4HANA when both systems are running on Microsoft Azure Infrastructure. Alternatively, you can use SAP Connectivity service and Cloud Connector for integration of SAP BTP and SAP S/4HANA as well. 
 
 ![plot](../../images/Azure-IoTC-PL.png) **Figure-1: High-level architecture (with SAP S/4HANA on Azure)**
 
@@ -109,17 +109,16 @@ Step 3: Connect SAP BTP and SAP S/4HANA
 
    - [(Option 2) Using SAP Private Link Service](./Scenario1-Inbound-to-SAPS4HANA/Step3b-Setup-SAPPrivateLinkService/README.md)
 
-[Step 4: Build and Deploy the Extension Application](./Scenario1-Inbound-to-SAPS4HANA/Step4a-Build-Deploy-ExtensionApplication/README.md)
+[Step 4: Build and Deploy the Extension Application](./Scenario1-Inbound-to-SAPS4HANA/Step4-Build-Deploy-ExtensionApplication/README.md)
 
-[Step 5: Configure SAP Advanced Event Mesh](./Scenario1-Inbound-to-SAPS4HANA/Step4b-Advanced-Event-Mesh-Configuration/README.md)
+[Step 5: Configure SAP Advanced Event Mesh](./Scenario1-Inbound-to-SAPS4HANA/Step5-Advanced-Event-Mesh-Configuration/README.md)
 
-[Step 6: Setup Microsoft Azure IoT](./Scenario1-Inbound-to-SAPS4HANA/Step5-Setup-AzureIoT/README.md)
+[Step 6: Setup Microsoft Azure IoT](./Scenario1-Inbound-to-SAPS4HANA/Step6-Setup-AzureIoT/README.md)
 
-[Step 7: Configure  Decisions Project in SAP Build Process Automation](./Scenario1-Inbound-to-SAPS4HANA/Step6-Configure-Decisions-Part1/README.md)
+[Step 7: Configure  Decisions Project in SAP Build Process Automation](./Scenario1-Inbound-to-SAPS4HANA/Step7-Configure-Decisions-Part1/README.md)
 
-[Step 8: Configure SAP S/4HANA Business Actions in the extension application](./Scenario1-Inbound-to-SAPS4HANA/Step7-Configure-BusinessActions/README.md)
+[Step 8: Configure SAP S/4HANA Business Actions in the extension application](./Scenario1-Inbound-to-SAPS4HANA/Step8-Configure-BusinessActions/README.md)
 
-[Step 9: Update Decisions Project in SAP Build Process Automation](./Scenario1-Inbound-to-SAPS4HANA/Step8-Configure-Decisions-Part2/README.md)
+[Step 9: Update Decisions Project in SAP Build Process Automation](./Scenario1-Inbound-to-SAPS4HANA/Step9-Configure-Decisions-Part2/README.md)
 
-[Step 10: Test the Extension Application](./Scenario1-Inbound-to-SAPS4HANA/Step9-Test-ExtensionApplication/README.md)
-
+[Step 10: Test the Extension Application](./Scenario1-Inbound-to-SAPS4HANA/Step10-Test-ExtensionApplication/README.md)
