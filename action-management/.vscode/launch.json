@@ -16,7 +16,7 @@
       "type": "node",
       "localRoot": "${workspaceFolder}",
       "remoteRoot": "/home/vcap/app"
-  },
+    },
     {
       "command": "cds run --with-mocks",
       "name": "cds run",

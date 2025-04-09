@@ -1,6 +1,6 @@
 using {sap.paa.action.mgmt as db} from '../db/schema';
 
-@path : 'service/admin'
+@path : '/service/admin'
 service AdminService {
 
     entity Methods              as projection on db.Methods;
@@ -53,4 +53,6 @@ service AdminService {
     entity LogHeaders           as projection on db.LogHeaders;
     entity LogItems             as projection on db.LogItems;
     function getActionsDefaults() returns Actions;
+    function getSummary() returns String;
+    function makeAuthenticatedRequest(accessToken:String) returns String;
 }
