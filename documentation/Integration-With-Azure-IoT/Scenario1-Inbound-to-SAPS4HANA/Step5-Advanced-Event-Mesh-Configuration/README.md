@@ -1,11 +1,11 @@
-## SAP Integration Suite, Advanced Event Mesh Configuration
+## SAP Integration Suite, advanced event mesh Configuration
 
- 1. To access the SAP Integration Suite, Advanced Event Mesh, navigate to **Services** > and choose **Instances and Subscriptions**.
-    Choose the row for the SAP Integration Suite, Advanced Event Mesh subscription and choose **Go to Application**
+ 1. To access the SAP Integration Suite, advanced event mesh, navigate to **Services** > and choose **Instances and Subscriptions**.
+    Choose the row for the SAP Integration Suite, advanced event mesh subscription and choose **Go to Application**
 
     ![plot](./images/access-aem.png)
 
-2. Choose **Cluster Manager** in the SAP Integration Suite, Advanced Event Mesh Application. 
+2. Choose **Cluster Manager** in the SAP Integration Suite, advanced event mesh Application. 
 
     ![plot](./images/aem-application.png)
 

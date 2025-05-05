@@ -2,9 +2,7 @@
 
 In this event-driven scenario, based on the real-time status of the IoT Devices, actionable events are sent to SAP BTP to decide on the critical business actions to be taken in the SAP Enterprise Business systems based on business rules defined in the system.
 
-Inbound to SAP S/4HANA
-
-In this scenario, Azure IoT Events are sent to SAP Advanced Event Mesh using the Data Export functionality in Azure IoT Central Application. The Node.js extension application subscribes to the SAP Advanced Event Mesh queue and executes the action that is required to be taken based on the event details. In this case, SAP Advanced Event Mesh is used. SAP Event Mesh can also be leveraged for integration. The choice of the eventing service can be based on the scenario and volume of events to be handled. 
+In this scenario, Microsoft Azure IoT Events are sent to SAP Integration Suite, advanced event mesh using the Data Export functionality in Azure IoT Central Application. The Node.js extension application subscribes to the SAP Integration Suite, advanced event mesh queue and executes the action that is required to be taken based on the event details.
 
 
 ## Table of Contents
@@ -39,7 +37,7 @@ In this event-driven scenario, based on the real-time status of the IoT Devices 
 
 The key services leveraged from Microsoft Azure are the Azure IoT Central, Azure Blob Storage, Azure Event Grid and Azure Active Directory.
 
-The services used by SAP BTP are the Cloud Foundry Runtime, SAP Integration Suite, advanced event mesh/ SAP Event Mesh, SAP Connectivity service, SAP Private Link service, SAP Build Process Automation and SAP Destination service. 
+The services used by SAP BTP are the Cloud Foundry Runtime, SAP Integration Suite, advanced event mesh, SAP Connectivity service, SAP Private Link service, SAP Build Process Automation and SAP Destination service. 
 
 SAP Private Link service is used for connectivity between SAP BTP and SAP S/4HANA when both systems are running on Microsoft Azure Infrastructure. Alternatively, you can use SAP Connectivity service and Cloud Connector for integration of SAP BTP and SAP S/4HANA as well. 
 
@@ -72,7 +70,7 @@ These are the technical prerequisites for integration between Microsoft Azure Io
     > - Required for deploying and running the extension application in SAP BTP
 - Authorization & Trust Management Service
     > - Required for securing the extension application in SAP BTP
-- SAP Integration Suite, advanced event mesh / SAP Event Mesh 
+- SAP Integration Suite, advanced event mesh 
     >- Required to receive events from Azure IoT Platform
 - SAP HANA Cloud 
     >- Required to store action configuration and logs for CAP application
@@ -93,9 +91,7 @@ These are the technical prerequisites for integration between Microsoft Azure Io
 
 ## Configuration and Development
 
-This repository is documented for 2 scenarios:
-
-1. Inbound to SAP S/4HANA from Azure IoT Central.
+This repository is documented for Inbound to SAP S/4HANA from Azure IoT Central scenarios:
 
 These are the steps to configure SAP S/4HANA, SAP BTP and Microsoft Azure for **Scenario 1 - Inbound to SAP S/4HANA from Azure IoT Central**.
 
