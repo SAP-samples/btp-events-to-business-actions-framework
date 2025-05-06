@@ -1,0 +1,21 @@
+GET https://localhost:4004/service/admin/getSummary()
+
+
+
+####
+
+@apiEndpoint = https://api.ai.prod.eu-central-1.aws.ml.hana.ondemand.com/v2/inference/deployments/{deployment_id}/invoke
+@btpXsuaaClient={client_id}
+@btpXsuaaSecret={client_secret}
+
+##########################################
+# @name getXsuaaToken
+
+POST {url}/oauth/token
+Accept: application/json
+Content-Type: application/x-www-form-urlencoded
+Authorization: Basic {{btpXsuaaClient}}:{{btpXsuaaSecret}}
+
+client_id={{btpXsuaaClient}}
+&client_secret={{btpXsuaaSecret}}
+&grant_type=client_credentials

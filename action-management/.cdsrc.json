@@ -1,5 +1,25 @@
+
 {
+    "requires": {
+        "db": "hana",
+        "cap-llm-plugin": {
+        "impl": "cap-llm-plugin/srv/cap-llm-plugin.js"
+        },
+        "GENERATIVE_AI_HUB": {
+        "CHAT_MODEL_DESTINATION_NAME": "AWSBedrockDestination",
+        "CHAT_MODEL_DEPLOYMENT_URL": "/inference/deployments/da2f6587d7312192",
+        "CHAT_MODEL_RESOURCE_GROUP": "default",
+        "CHAT_MODEL_API_VERSION": "bedrock-2023-05-31"
+        },
+        "AWSBedrockDestination": {
+        "kind": "rest",
+        "credentials": {
+            "destination": "GENAI_HUB_NEW",
+            "requestTimeout": "300000"
+        }
+        }
+    },
     "build": {
         "target": "dbsrv-build"
     }
-}
+    }
