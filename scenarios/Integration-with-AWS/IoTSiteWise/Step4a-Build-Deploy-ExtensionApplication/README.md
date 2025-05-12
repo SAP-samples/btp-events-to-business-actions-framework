@@ -28,6 +28,38 @@ Build and deploy the application. Run the following commands:
     ```
     cd Code\BTP\action-management
     ```
+
+3. To enable the SAP CAP application to interact with the Generative AI Hub and AWS Bedrock, please maintain the following configuration in your `.cdsrc.json` file: Note: Paste the model deployement ID which is copied at [Step-1](../Step1-Setup-SAPBTP-Subaccount/README.md). The destination creation `AWS_BEDROCK_MODEL` is documented at [Step-7](../Step7-Configure-BusinessActions/README.md)
+
+```
+{
+  "requires": {
+    "db": "hana",
+    "cap-llm-plugin": {
+      "impl": "cap-llm-plugin/srv/cap-llm-plugin.js"
+    },
+    "GENERATIVE_AI_HUB": {
+      "CHAT_MODEL_DESTINATION_NAME": "AWSBedrockDestination",
+      "CHAT_MODEL_DEPLOYMENT_URL": "/inference/deployments/<your_model_deployment_ID>",
+      "CHAT_MODEL_RESOURCE_GROUP": "default",
+      "CHAT_MODEL_API_VERSION": "bedrock-2023-05-31"
+    },
+    "AWSBedrockDestination": {
+      "kind": "rest",
+      "credentials": {
+        "destination": "AWS_BEDROCK_MODEL",
+        "requestTimeout": "300000"
+      }
+    }
+  },
+  "build": {
+    "target": "dbsrv-build"
+  }
+}
+
+```
+
+
 3. Fetch the dependencies.
 
     ```
