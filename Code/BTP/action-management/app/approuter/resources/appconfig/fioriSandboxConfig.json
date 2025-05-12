@@ -7,7 +7,7 @@
                     "catalogs": [],
                     "groups": [
                         {
-                            "id": "MyHome",
+                            "id": "My Home",
                             "title": "Transform Events to Business Actions",
                             "isPreset": false,
                             "isVisible": true,

@@ -1,0 +1,19 @@
+{
+	"type": "PropertyValueUpdate",
+	"payload": {
+		"assetId": "e9ada664-7a1d-41db-a9ce-f3bc403d1c5d",
+		"propertyId": "f2026b37-0f00-439e-9589-49c96d3301f2",
+		"values": [
+			{
+				"timestamp": {
+					"timeInSeconds": 1731295458,
+					"offsetInNanos": 0
+				},
+				"quality": "GOOD",
+				"value": {
+					"stringValue": "{\"stateName\":\"LATCHED\",\"ruleEvaluation\":{\"simpleRule\":{\"inputProperty\":34.25,\"operator\":\"GREATER\",\"threshold\":40.0}}}"
+				}
+			}
+		]
+	}
+}

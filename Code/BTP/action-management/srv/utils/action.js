@@ -24,7 +24,19 @@ function replaceTemplateData(eventData, actionResponses, actionTemplateData) {
         for (let i = 0; i < actionData.length; i++) {
             if (actionData[i].includes('}}')) {
                 templatePath = actionData[i].split('}}')[0];
+
+                let shouldStringify = false;
+
+                // Check if the placeholder starts with 'stringify'
+                if (templatePath.startsWith('stringify(') && templatePath.endsWith(')')) {
+                    shouldStringify = true;
+                    // Remove 'stringify(' prefix and closing parenthesis
+                    templatePath = templatePath.slice(10, -1);
+                }
+
+                // Split the remaining path into subpathList
                 subpathList = templatePath.split('.');
+
                 switch ((subpathList[0]).toUpperCase()) {
                     case 'EVENT':
                         jsonData = eventData;
@@ -47,16 +59,56 @@ function replaceTemplateData(eventData, actionResponses, actionTemplateData) {
                         subpathList.splice(0, 2);
                         break;
                 }
-                parsedValue = getValueByJSONPath(jsonData, subpathList.join('.'));
-                actionTemplateData = actionTemplateData.replace('${{' + templatePath + '}}', parsedValue);
+
+                // If the placeholder started with 'stringify', ensure proper JSON formatting
+                if (shouldStringify) {
+                    let parsedJsonData = deepParse(jsonData.data.eventData);
+
+                    // Handle nested stringified JSON in `stringValue`
+                    if (parsedJsonData?.payload?.values) {
+                        parsedJsonData.payload.values.forEach(value => {
+                            if (typeof value.value?.stringValue === 'string') {
+                                try {
+                                    // If it's valid JSON, parse it first to prevent double escaping
+                                    value.value.stringValue = JSON.parse(value.value.stringValue);
+                                } catch (e) {
+                                    // If it fails, it means it's already a string and doesn't need parsing
+                                }
+                            }
+                        });
+                    }
+
+                    parsedValue = JSON.stringify(parsedJsonData).replace(/"/g, '\\"');
+                    actionTemplateData = actionTemplateData.replace('${{' + 'stringify(' + templatePath + ')' + '}}', parsedValue);
+                } else {
+                    parsedValue = getValueByJSONPath(jsonData, subpathList.join('.'));
+                    actionTemplateData = actionTemplateData.replace('${{' + templatePath + '}}', parsedValue);
+                }
             }
         }
     }
     return actionTemplateData;
-
-    // actionData = actionData.replace('INFO', eventData.telemetry.FillingLevel);
-    // return actionData;
 }
+
+
+function deepParse(obj) {
+    let parsedObj = obj;
+    for (const key in parsedObj) {
+      if (typeof parsedObj[key] === 'string' && isValidJSON(parsedObj[key])) {
+        parsedObj[key] = JSON.parse(parsedObj[key]);
+      }
+    }
+    return parsedObj;
+  }
+   
+  function isValidJSON(str) {
+    try {
+      JSON.parse(str);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
 
 async function getDefaultAction(logHeadId) {
     // let { ActionDetails } = cds.entities;
@@ -139,7 +191,7 @@ async function executeAction(actionObject, destinationToken, httpsAgent, isToken
         //Execute [Pre/Post] Action Call
         if(actionObject.data && actionObject.data !=null){
             actionHeaders["Content-Type"] = actionObject.contentType;
-            actionRequestConfig = { method: actionObject.method, url: actionObject.url, data: actionObject.data, headers: actionHeaders, httpsAgent: httpsAgent }
+            actionRequestConfig = { method: actionObject.method, url: actionObject.url, data: JSON.parse(actionObject.data), headers: actionHeaders, httpsAgent: httpsAgent }
         } else {
             actionRequestConfig = { method: actionObject.method, url: actionObject.url, httpsAgent: httpsAgent }
         }

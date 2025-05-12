@@ -1,0 +1,20 @@
+{
+    "env": {
+        "account": "<your_aws_account_id>",
+        "region":"<your_aws_account_region>"
+    },
+    "vpcId": "<your_vpc_id>",
+    "subnet": "<your_private_subnet>",
+    "stackName": "PPEtest",
+    "sapenv": {
+        "SAP_AEM_CREDENTIALS":"<your_secret_arn>",
+        "SAP_AEM_REST_URL": "<your_aem_rest_url>"
+    },
+    "s3":{
+        "bucketname": "<your_S3_bucket_name>",
+        "camera": "CAM-01",
+        "location": "CB-FL-001",
+        "plant": "1710"
+       },
+     "lambdaTimeout": 900
+   }

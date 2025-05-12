@@ -1,6 +1,6 @@
 using {sap.paa.action.mgmt as db} from '../db/schema';
 
-@path : 'service/analytics'
+@path : '/service/analytics'
 service AnalyticsService {
     entity LogStatuses as projection on db.LogStatuses;
 

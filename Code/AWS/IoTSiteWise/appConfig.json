@@ -1,0 +1,18 @@
+{
+    "env": {
+        "account": "<your_account_ID>",
+        "region": "<your_aws_region>"
+    },
+    "vpcId": "<your_Vpc_Id>",
+    "subnet": "<your_subnet>",
+    "stackName": "<stackname_of_your_choice>",
+    "sapenv": {
+        "SAP_AEM_CREDENTIALS": "<your_aem_credentials>",
+        "SAP_AEM_REST_URL": "<your_aem_rest_url>"
+    },
+    "s3":{
+        "bucketname": "<your_s3_bucket_name>",
+        "inferencefolder":"<your_inference_folder_name>"
+    },
+     "lambdaTimeout": 900
+}

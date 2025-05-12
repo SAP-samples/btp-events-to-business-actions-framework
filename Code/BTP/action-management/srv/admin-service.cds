@@ -1,6 +1,6 @@
 using {sap.paa.action.mgmt as db} from '../db/schema';
 
-@path : 'service/admin'
+@path : '/service/admin'
 service AdminService {
 
     entity Methods              as projection on db.Methods;

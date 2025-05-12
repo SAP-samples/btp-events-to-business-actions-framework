@@ -1,21 +1,11 @@
 const cds = require("@sap/cds");
-const https = require('https');
 const destinationUtil = require('./utils/destination');
-// const businessRulesUtil = require('./utils/businessrules');
-const actionUtil = require('./utils/action');
-const logUtil = require('./utils/logger');
-const action = require("./utils/action");
+const qs = require('qs');
+
 
 module.exports = cds.service.impl(async function (srv) {
 
     const { Destinations, Actions, Types, LogStatuses } = this.entities;
-    const emMessaging = await cds.connect.to("messaging");
-    const httpsAgent = new https.Agent({ rejectUnauthorized: false });
-
-    emMessaging.on('com/sap/paa/industry/event/raised', async (eventMessage) => {
-        await actionUtil.convertEventToBusinessAction(eventMessage, httpsAgent);
-    })
-
 
     srv.on('READ', Destinations, async (req) => {
         try {
@@ -51,8 +41,8 @@ module.exports = cds.service.impl(async function (srv) {
         try {
             if (req.data.dest !== undefined) {
                 let aDestinationInfo = await destinationUtil.getAllDestinations(req.data.dest);
-                if (aDestinationInfo != undefined){
-                    if(aDestinationInfo.length == 1) req.data.url = aDestinationInfo[0].url
+                if (aDestinationInfo != undefined) {
+                    if (aDestinationInfo.length == 1) req.data.url = aDestinationInfo[0].url
                     else req.data.url = '';
                 }
             }
@@ -65,9 +55,9 @@ module.exports = cds.service.impl(async function (srv) {
             } else if (req.data.type_ID === null) {
                 req.data.path = req.data.payload = req.data.method_ID = req.data.contentType_id = '';
             }
-            if(req.data.actionCategory_id == 'DEFAULT' && req.data.ID !== undefined){
-                let result = await cds.read(Actions).where({actionCategory_id: 'DEFAULT'});
-                if(result && result.length>0 && result[0].ID != req.data.ID){
+            if (req.data.actionCategory_id == 'DEFAULT' && req.data.ID !== undefined) {
+                let result = await cds.read(Actions).where({ actionCategory_id: 'DEFAULT' });
+                if (result && result.length > 0 && result[0].ID != req.data.ID) {
                     req.reject(501, 'Only one default action can be created');
                 }
             }
@@ -78,11 +68,8 @@ module.exports = cds.service.impl(async function (srv) {
     });
 
     srv.on('getUrlByDestination', Actions, async (req) => {
-        // console.log('==> POST getUrlByDestination Called')
         const query = SELECT.one.from(Actions.drafts).where(req.params[0]), tx = srv.tx(req);
         let response = await tx.run(query);
-        // console.log(JSON.stringify(response));
-        // console.log('POST call finished <==')
         return response;
     });
 
@@ -93,12 +80,6 @@ module.exports = cds.service.impl(async function (srv) {
         } else {
             return false;
         }
-    })
-
-    srv.on('postEvent', async (req) => {
-        console.log('event re4ceived from advanced event mesh');
-        console.log(req);
-        console.log(req.data);
     })
 
     srv.on('getActionsDefaults', async () => {

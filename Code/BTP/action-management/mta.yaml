@@ -1,7 +1,7 @@
 _schema-version: "3.1"
 ID: action-management
 description: Action Management Application
-version: 1.0.0
+version: 1.0.1
 modules:
 - name: action-management-srv
   type: nodejs
@@ -10,7 +10,6 @@ modules:
   - name: action-management-db
   - name: action-management-auth
   - name: action-management-dest-srv
-  - name: action-management-eventmesh
   - name: action-management-connectivity-srv
   provides:
   - name: srv-api
@@ -39,7 +38,6 @@ modules:
       name: srv-api
       url: ~{srv-url}
   - name: action-management-auth
-  - name: action-management-rules
   - name: action-management-dest-srv
     group: destinations
     properties:
@@ -61,14 +59,6 @@ modules:
       parameters:
         service-key:
           name: action-management-auth-key
-    - name: action-management-eventmesh
-      parameters:
-        service-key:
-          name: action-management-eventmesh-key
-    - name: action-management-rules
-      parameters:
-        service-key:
-          name: action-management-rules-key
   parameters:
     content:
       subaccount:
@@ -177,18 +167,6 @@ resources:
     service: destination
     service-name: action-management-dest-srv
     service-plan: lite
-- name: action-management-rules
-  type: org.cloudfoundry.managed-service
-  parameters:
-    service: business-rules
-    service-name: action-management-rules
-    service-plan: standard
-- name: action-management-eventmesh
-  type: org.cloudfoundry.managed-service
-  parameters:
-    service: enterprise-messaging    
-    service-plan: default
-    path: config/em-config.json
 - name: action-management-connectivity-srv
   type: org.cloudfoundry.managed-service
   parameters:
