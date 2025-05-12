@@ -7,12 +7,11 @@ In this section, you will clone the codebase and deploy the extension applicatio
 Use the following command to clone the Repository
 
 ```
-git clone -b advanced-event-mesh https://github.com/SAP-samples/btp-events-to-business-actions-framework.git
+git clone https://github.com/SAP-samples/btp-events-to-business-actions-framework.git
 
 ```
-You can also download the code from the [GitHub Repository](https://github.com/SAP-samples/btp-events-to-business-actions-framework/tree/advanced-event-mesh).
+You can also check the code at this [GitHub Repository](https://github.com/SAP-samples/btp-events-to-business-actions-framework).
 
-**Note:** Make sure to CheckOut and pull the latest code from **advanced-event-mesh** branch from GitHub.
 
 ### 2. Check the Prerequisites for Deployment
 
@@ -26,37 +25,69 @@ Build and deploy the application. Run the following commands:
 
 1. Open the Cloud Foundry command line interface (cf CLI).
 
-2. Navigate to **action-management** directory.
+2. Navigate to **action-management** directory. Below is the correct directory path once u have cloned the Repository. 
 
     ```
-    cd action-management
+    cd Code\BTP\action-management
+
     ```
-3. Fetch the dependencies.
+
+3. To enable the SAP CAP application to interact with the Generative AI Hub and AWS Bedrock, please maintain the following configuration in your `.cdsrc.json` file: Note: Paste the model deployement ID which is copied at [Step-1](../Step1-Setup-SAPBTP-Subaccount/README.md). The destination creation `AWS_BEDROCK_MODEL` is documented at [Step-7](../Step7-Configure-BusinessActions/README.md)
+
+```
+{
+  "requires": {
+    "db": "hana",
+    "cap-llm-plugin": {
+      "impl": "cap-llm-plugin/srv/cap-llm-plugin.js"
+    },
+    "GENERATIVE_AI_HUB": {
+      "CHAT_MODEL_DESTINATION_NAME": "AWSBedrockDestination",
+      "CHAT_MODEL_DEPLOYMENT_URL": "/inference/deployments/<your_model_deployment_ID>",
+      "CHAT_MODEL_RESOURCE_GROUP": "default",
+      "CHAT_MODEL_API_VERSION": "bedrock-2023-05-31"
+    },
+    "AWSBedrockDestination": {
+      "kind": "rest",
+      "credentials": {
+        "destination": "AWS_BEDROCK_MODEL",
+        "requestTimeout": "300000"
+      }
+    }
+  },
+  "build": {
+    "target": "dbsrv-build"
+  }
+}
+
+```
+
+4. Fetch the dependencies.
 
     ```
     npm install
     ```
-4. Build action-management modules.
+5. Build action-management modules.
 
     ```
     npm run build
     ```
-5. Log in to your subaccount in SAP BTP to deploy the extension application.
+6. Log in to your subaccount in SAP BTP to deploy the extension application.
     Check your region and copy the API endpoint accordingly. For example, "https://api.cf.region.hana.ondemand.com"
 
     ```
     cf login -a `<CF API endpoint>`
     ```
-6. Push the application to your subaccount.
+7. Push the application to your subaccount.
 
     ```
     npm run deploy
     ```
-7. You can also check the status of your applications in the SAP BTP cockpit. Copy the value of the extension application URL.
+8. You can also check the status of your applications in the SAP BTP cockpit. Copy the value of the extension application URL.
 
     ![plot](./images/SAPBTPCockpit.png)
 
-8. In the SAP BTP cockpit, navigate to your subaccount and choose **Services** > **Instances and Subscriptions**. Check if you have all of the instances created post deployment as shown below. Make sure the status of all of the instances are **Created**.
+9. In the SAP BTP cockpit, navigate to your subaccount and choose **Services** > **Instances and Subscriptions**. Check if you have all of the instances created post deployment as shown below. Make sure the status of all of the instances are **Created**.
 
     ![plot](./images/postdeploy.png)
 

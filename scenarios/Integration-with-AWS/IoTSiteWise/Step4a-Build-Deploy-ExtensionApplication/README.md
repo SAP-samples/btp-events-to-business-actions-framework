@@ -5,7 +5,7 @@ In this section, you will clone the codebase and deploy the extension applicatio
 ### 1. Clone the GitHub Repository
     
 
-Clone the [Event To Action Framework](https://github.com/SAP-samples/btp-events-to-business-actions-framework/tree/advanced-event-mesh) GitHub repository **advanced-event-mesh** branch. Use the following command to clone the Repo.
+Clone the [Event To Action Framework](https://github.com/SAP-samples/btp-events-to-business-actions-framework) GitHub repository **advanced-event-mesh** branch. Use the following command to clone the Repo.
 
 ```
 git clone https://github.com/SAP-samples/btp-events-to-business-actions-framework.git
@@ -23,10 +23,10 @@ Build and deploy the application. Run the following commands:
 
 1. Open the Cloud Foundry command line interface (cf CLI).
 
-2. Navigate to **action-management** directory.
+2. Navigate to **action-management** directory. Below is the correct directory path once u have cloned the Repository. 
 
     ```
-    cd action-management
+    cd Code\BTP\action-management
     ```
 3. Fetch the dependencies.
 

@@ -19,16 +19,14 @@ This project is set up like a standard Python project.  For an integrated develo
 
 2.  Clone the github repository
 
-```
-git clone https://github.com/SAP-samples/btp-aws-ppe-detection-ehs.git
+   ```
+   git clone https://github.com/SAP-samples/btp-events-to-business-actions-framework.git
+   ```
 
-```
+   ```
+   cd Code/AWS/PPE
+   ```
 
-Navigate to the directory.
-
-```
-cd Code/AWS
-```
 
 The `appConfig.json` file takes the input paramters for the stack. Maintain the following parameters in the `appConfig.json`.
 ## AWS environment details
