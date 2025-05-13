@@ -44,15 +44,17 @@ The following steps depicts the information flow across systems:
 
 (1) An application administrator logs into SAP BTP Extension application based on Events to Business Actions Framework via SAP Build Work Zone, standard edition, to configure the business rules/decisions and the business actions that needs to be triggered in the business systems.
 
-(2) AWS IoT SiteWise Edge at the factory captures the equipment parameters like vibration, temperature and forwars it to AWS IoT SiteWise which then dumps these events into Amazon S3, which triggers an AWS Lambda function that runs inference using Amazon Rekognition’s PPE detection model to identify missing safety gear, and if any safety violation is detected, it publishes an event to the SAP Integration Suite, Advanced Event Mesh.
+(2) AWS IoT SiteWise Edge at the factory captures the equipment parameters like vibration, temperature and forwards it to AWS IoT SiteWise which then dumps these events into Amazon S3, which triggers an AWS Lambda function. It detects anamoly in these events and publishes such events to the SAP Integration Suite, Advanced Event Mesh.
 
 (3) As the processor module's (part of the Events-to-Business-Action framework) subscribes to Advanced event mesh, the event is received.
 
 
-(4) Processor module (part of the Events-to-Business-Action framework) leverages the Decisions capability of SAP Build Process Automation to derive business action (for example, purchase order requisition creation in SAP S/4HANA) based on certain characteristics of incoming event.
+(4) Processor module (part of the Events-to-Business-Action framework) leverages the Decisions capability of SAP Build Process Automation to derive business action (for example, plant Maintenance Notification/purchase order requisition creation in SAP S/4HANA) based on certain characteristics of incoming event.
+
+(5) The framework integrates with SAP AI Core to invoke a deployed Amazon Bedrock Claude 3 Sonnet model. This model processes raw, hard-to-read incoming IoT event data and generates easy-to-read summaries of the event payload. These summaries are then automatically populated into the maintenance notification description, improving readability and providing enhanced clarity for maintenance teams. With this we prepare a complete payload which is used to execute the business action in SAP S/4HANA system (in this PoC we create a Plant Maintenance Notification)
 
 
-(5) The defined action is triggered in SAP S/4HANA using the SAP Destination service and SAP Connectivity service leveraging cloud connector setup. In case SAP S/4HANA and SAP BTP are on same hyperscaler, communication with SAP S/4HANA happens via SAP Private Link service.
+(6) The defined action is triggered in SAP S/4HANA using the SAP Destination service and SAP Connectivity service leveraging Private Link setup. In case SAP S/4HANA and SAP BTP are not on same hyperscaler, communication with SAP S/4HANA happens via SAP Cloud Connector service.
 
 ## Requirements
 
