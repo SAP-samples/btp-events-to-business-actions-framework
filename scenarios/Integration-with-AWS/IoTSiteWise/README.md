@@ -42,7 +42,7 @@ SAP Private Link service is used for connectivity between SAP BTP and SAP S/4HAN
 
 The following steps depicts the information flow across systems:
 
-(1) An application administrator logs into SAP BTP Extension application based on Events to Business Actions Framework via SAP Build Work Zone, advanced edition, to configure the business rules/decisions and the business actions that needs to be triggered in the business systems.
+(1) An application administrator logs into SAP BTP Extension application based on Events to Business Actions Framework via SAP Build Work Zone, standard edition, to configure the business rules/decisions and the business actions that needs to be triggered in the business systems.
 
 (2) AWS IoT SiteWise Edge at the factory captures the equipment parameters like vibration, temperature and forwars it to AWS IoT SiteWise which then dumps these events into Amazon S3, which triggers an AWS Lambda function that runs inference using Amazon Rekognition’s PPE detection model to identify missing safety gear, and if any safety violation is detected, it publishes an event to the SAP Integration Suite, Advanced Event Mesh.
 
