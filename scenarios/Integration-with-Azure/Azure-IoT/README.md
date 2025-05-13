@@ -23,7 +23,7 @@ You can choose to configure and integrate events with any SAP LoB solution.
 
 In this event-driven scenario, based on the real-time status of the IoT Devices from Microsoft Azure IoT Central, actionable events are sent to SAP BTP to decide on the critical business actions to be taken in the SAP Enterprise Business systems based on business rules defined in the system.
 
-![plot](./images/businessprocess.png)
+![plot](../images/businessprocess.png)
 
 1. Data from IoT Devices are sent to Microsoft Azure IoT Central/AWS IoT which includes all the streaming data from the devices.
 
@@ -41,10 +41,10 @@ The services used by SAP BTP are the Cloud Foundry Runtime, SAP Integration Suit
 
 SAP Private Link service is used for connectivity between SAP BTP and SAP S/4HANA when both systems are running on Microsoft Azure Infrastructure. Alternatively, you can use SAP Connectivity service and Cloud Connector for integration of SAP BTP and SAP S/4HANA as well. 
 
-![plot](./images/Azure-IoTC-PL.png) **Figure-1: High-level architecture (with SAP S/4HANA on Azure)**
+![plot](../images/Azure-IoTC-PL.png) **Figure-1: High-level architecture (with SAP S/4HANA on Azure)**
 
     
-![plot](./images/AzureIoTC-CC.png) **Figure-2:High-level architecture with SAP S/4HANA on-premise and private cloud**
+![plot](../images/AzureIoTC-CC.png) **Figure-2:High-level architecture with SAP S/4HANA on-premise and private cloud**
 
 The following steps depict the information flow across systems (in both scenarios)
 
