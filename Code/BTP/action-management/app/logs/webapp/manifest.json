@@ -1,0 +1,275 @@
+{
+    "_version": "1.42.0",
+    "sap.app": {
+        "id": "sap.paa.action.mgmt.ui.logs",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "0.0.1"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "resources": "resources.json",
+        "sourceTemplate": {
+            "id": "@sap/generator-fiori:lrop",
+            "version": "1.8.1",
+            "toolsId": "b83ba461-e4f6-481a-8b6d-11a0862ef418"
+        },
+        "dataSources": {
+            "mainService": {
+                "uri": "/service/analytics/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [
+                        "annotation"
+                    ],
+                    "localUri": "localService/metadata.xml",
+                    "odataVersion": "4.0"
+                }
+            },
+            "annotation": {
+                "type": "ODataAnnotation",
+                "uri": "annotations/annotation.xml",
+                "settings": {
+                    "localUri": "annotations/annotation.xml"
+                }
+            }
+        },
+        "crossNavigation": {
+            "inbounds": {
+                "sap-paa-action-mgmt-ui-logs-inbound": {
+                    "signature": {
+                        "parameters": {},
+                        "additionalParameters": "allowed"
+                    },
+                    "semanticObject": "Logs",
+                    "action": "view",
+                    "title": "{{flpTitle}}",
+                    "subTitle": "{{flpSubtitle}}",
+                    "icon": ""
+                }
+            }
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "flexEnabled": true,
+        "dependencies": {
+            "minUI5Version": "1.120.17",
+            "libs": {
+                "sap.m": {},
+                "sap.ui.core": {},
+                "sap.ushell": {},
+                "sap.fe.templates": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "sap.paa.action.mgmt.ui.logs.i18n.i18n"
+                }
+            },
+            "": {
+                "dataSource": "mainService",
+                "preload": true,
+                "settings": {
+                    "synchronizationMode": "None",
+                    "operationMode": "Server",
+                    "autoExpandSelect": true,
+                    "earlyRequests": true
+                }
+            },
+            "@i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "uri": "i18n/i18n.properties"
+            }
+        },
+        "resources": {
+            "css": []
+        },
+        "routing": {
+            "routes": [
+                {
+                    "pattern": ":?query:",
+                    "name": "LogHeadersList",
+                    "target": "LogHeadersList"
+                },
+                {
+                    "pattern": "LogHeaders({key}):?query:",
+                    "name": "LogHeadersObjectPage",
+                    "target": "LogHeadersObjectPage"
+                },
+                {
+                    "pattern": "LogHeaders({key})/items({key2}):?query:",
+                    "name": "LogItemsObjectPage",
+                    "target": "LogItemsObjectPage"
+                }
+            ],
+            "targets": {
+                "LogHeadersList": {
+                    "type": "Component",
+                    "id": "LogHeadersList",
+                    "name": "sap.fe.templates.ListReport",
+                    "options": {
+                        "settings": {
+                            "entitySet": "LogHeaders",
+                            "variantManagement": "None",
+                            "navigation": {
+                                "LogHeaders": {
+                                    "detail": {
+                                        "route": "LogHeadersObjectPage"
+                                    }
+                                }
+                            },
+                            "initialLoad": true,
+                            "keyPerformanceIndicators": {
+                                "KPI1": {
+                                    "entitySet": "LogHeaders",
+                                    "qualifier": "myKPI1"
+                                }
+                            },
+                            "views": {
+                                "paths": [
+                                    {
+                                        "primary": [
+                                            {
+                                                "annotationPath": "@com.sap.vocabularies.UI.v1.PresentationVariant"
+                                            }
+                                        ],
+                                        "secondary": [
+                                            {
+                                                "annotationPath": "@com.sap.vocabularies.UI.v1.PresentationVariant"
+                                            }
+                                        ],
+                                        "defaultPath": "both"
+                                    }
+                                ]
+                            },
+                            "controlConfiguration": {
+                                "@com.sap.vocabularies.UI.v1.SelectionFields": {
+                                    "layout": "CompactVisual",
+                                    "initialLayout": "visual",
+                                    "filterFields": {
+                                        "status": {
+                                            "label": "Status",
+                                            "availability": "Default",
+                                            "visualFilter": {
+                                                "valueList": "com.sap.vocabularies.Common.v1.ValueList#vlqLogStatus"
+                                            }
+                                        },
+                                        "actionName": {
+                                            "label": "Action",
+                                            "availability": "Default",
+                                            "visualFilter": {
+                                                "valueList": "com.sap.vocabularies.Common.v1.ValueList#vlAction"
+                                            }
+                                        },
+                                        "createdDate": {
+                                            "label": "Created On",
+                                            "availability": "Default",
+                                            "visualFilter": {
+                                                "valueList": "com.sap.vocabularies.Common.v1.ValueList#vlCreatedOn"
+                                            }
+                                        }
+                                    }
+                                },
+                                "@com.sap.vocabularies.UI.v1.LineItem": {
+                                    "tableSettings": {
+                                        "condensedTableLayout": false,
+                                        "selectionMode": "None",
+                                        "type": "AnalyticalTable"
+                                    },
+                                    "columns": {
+                                        "DataField::status": {
+                                            "availability": "Default"
+                                        }
+                                    }
+                                }
+                            },
+                            "hideFilterBar": true
+                        }
+                    }
+                },
+                "LogHeadersObjectPage": {
+                    "type": "Component",
+                    "id": "LogHeadersObjectPage",
+                    "name": "sap.fe.templates.ObjectPage",
+                    "options": {
+                        "settings": {
+                            "editableHeaderContent": false,
+                            "entitySet": "LogHeaders",
+                            "navigation": {
+                                "items": {
+                                    "detail": {
+                                        "route": "LogItemsObjectPage"
+                                    }
+                                }
+                            },
+                            "variantManagement": "None",
+                            "content": {
+                                "header": {
+                                    "visible": true
+                                }
+                            },
+                            "controlConfiguration": {
+                                "items/@com.sap.vocabularies.UI.v1.LineItem#LogItems": {
+                                    "tableSettings": {
+                                        "enableExport": true,
+                                        "enableFullScreen": true,
+                                        "type": "ResponsiveTable",
+                                        "quickVariantSelection": {
+                                            "showCounts": true
+                                        }
+                                    }
+                                }
+                            },
+                            "sectionLayout": "Page"
+                        }
+                    }
+                },
+                "LogItemsObjectPage": {
+                    "type": "Component",
+                    "id": "LogItemsObjectPage",
+                    "name": "sap.fe.templates.ObjectPage",
+                    "options": {
+                        "settings": {
+                            "editableHeaderContent": false,
+                            "entitySet": "LogItems",
+                            "variantManagement": "None",
+                            "content": {
+                                "header": {
+                                    "visible": true
+                                }
+                            },
+                            "sectionLayout": "Page"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "sap.fiori": {
+        "registrationIds": [],
+        "archeType": "transactional"
+    }
+}

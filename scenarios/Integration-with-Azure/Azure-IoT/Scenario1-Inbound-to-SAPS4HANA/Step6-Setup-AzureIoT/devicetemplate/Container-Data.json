@@ -1,0 +1,242 @@
+[
+  {
+    "@id": "dtmi:iotDemo02:Container_6hy;2",
+    "@type": "Interface",
+    "contents": [
+      {
+        "@id": "dtmi:iotDemo02:Container_6hy:ContainerID",
+        "@type": [
+          "Property",
+          "Cloud",
+          "StringValue"
+        ],
+        "displayName": {
+          "en": "Container ID"
+        },
+        "name": "ContainerID",
+        "schema": "string",
+        "maxLength": 120
+      },
+      {
+        "@id": "dtmi:iotDemo02:Container_6hy:ContainerOwner",
+        "@type": [
+          "Property",
+          "Cloud",
+          "StringValue"
+        ],
+        "displayName": {
+          "en": "Container Owner"
+        },
+        "name": "ContainerOwner",
+        "schema": "string",
+        "maxLength": 120
+      },
+      {
+        "@id": "dtmi:iotDemo02:Container_6hy:ContainerType",
+        "@type": [
+          "Property",
+          "Cloud",
+          "StringValue"
+        ],
+        "displayName": {
+          "en": "Container Type"
+        },
+        "name": "ContainerType",
+        "schema": "string",
+        "maxLength": 120
+      },
+      {
+        "@id": "dtmi:iotDemo02:Container_6hy:GatewayID",
+        "@type": [
+          "Property",
+          "Cloud",
+          "StringValue"
+        ],
+        "displayName": {
+          "en": "Container GatewayID"
+        },
+        "name": "GatewayID",
+        "schema": "string",
+        "maxLength": 120
+      },
+      {
+        "@id": "dtmi:iotDemo02:Container_6hy:SensorType",
+        "@type": [
+          "Property",
+          "Cloud",
+          "StringValue"
+        ],
+        "displayName": {
+          "en": "Container SensorType"
+        },
+        "name": "SensorType",
+        "schema": "string",
+        "maxLength": 120
+      },
+      {
+        "@id": "dtmi:iotDemo02:Container_6hy:Dim_Height",
+        "@type": [
+          "Property",
+          "Cloud",
+          "NumberValue"
+        ],
+        "displayName": {
+          "en": "Dimensions Height"
+        },
+        "name": "Dim_Height",
+        "schema": "float",
+        "unit": "millimetre"
+      },
+      {
+        "@id": "dtmi:iotDemo02:Container_6hy:Dim_Length",
+        "@type": [
+          "Property",
+          "Cloud",
+          "NumberValue"
+        ],
+        "displayName": {
+          "en": "Dimensions Length"
+        },
+        "name": "Dim_Length",
+        "schema": "float",
+        "unit": "millimetre"
+      },
+      {
+        "@id": "dtmi:iotDemo02:Container_6hy:Dim_Width",
+        "@type": [
+          "Property",
+          "Cloud",
+          "NumberValue"
+        ],
+        "displayName": {
+          "en": "Dimensions Width"
+        },
+        "name": "Dim_Width",
+        "schema": "float",
+        "unit": "millimetre"
+      },
+      {
+        "@id": "dtmi:iotDemo02:Container_6hy:Dim_Throw_In_Height",
+        "@type": [
+          "Property",
+          "Cloud",
+          "NumberValue"
+        ],
+        "displayName": {
+          "en": "Dimensions Throw_In_Height"
+        },
+        "name": "Dim_Throw_In_Height",
+        "schema": "float",
+        "unit": "millimetre"
+      },
+      {
+        "@id": "dtmi:iotDemo02:Container_6hy:Volume_Max",
+        "@type": [
+          "Property",
+          "Cloud",
+          "NumberValue"
+        ],
+        "displayName": {
+          "en": "Dimensions Volume Max"
+        },
+        "name": "Volume_Max",
+        "schema": "float",
+        "unit": "cubicCentimetre"
+      },
+      {
+        "@id": "dtmi:iotDemo02:Container_6hy:Weight_Max_Load",
+        "@type": [
+          "Property",
+          "Cloud",
+          "NumberValue"
+        ],
+        "displayName": {
+          "en": "Dimensions Weight_Max_Load"
+        },
+        "name": "Weight_Max_Load",
+        "schema": "float",
+        "unit": "kilogram"
+      },
+      {
+        "@id": "dtmi:iotDemo02:Container_6hy:Weight_Tare",
+        "@type": [
+          "Property",
+          "Cloud",
+          "NumberValue"
+        ],
+        "displayName": {
+          "en": "Dimensions Weight_Tare"
+        },
+        "name": "Weight_Tare",
+        "schema": "float",
+        "unit": "kilogram"
+      },
+      {
+        "@id": "dtmi:iotDemo02:Container_6hy:Geo_Data",
+        "@type": [
+          "Property",
+          "Cloud"
+        ],
+        "displayName": {
+          "en": "Geo Data"
+        },
+        "name": "Geo_Data",
+        "schema": "geopoint"
+      },
+      {
+        "@id": "dtmi:iotDemo02:Container_6hy:FillingLevel;2",
+        "@type": [
+          "Telemetry",
+          "NumberValue"
+        ],
+        "displayName": {
+          "en": "FillingLevel"
+        },
+        "name": "FillingLevel",
+        "schema": "float"
+      },
+      {
+        "@id": "dtmi:iotDemo02:Container_6hy:GeoData;2",
+        "@type": "Telemetry",
+        "displayName": {
+          "en": "Geo Data"
+        },
+        "name": "GeoData",
+        "schema": "geopoint"
+      },
+      {
+        "@id": "dtmi:iotDemo02:Container_6hy:LocationId",
+        "@type": [
+          "Property",
+          "Cloud",
+          "StringValue"
+        ],
+        "displayName": {
+          "en": "Location Id"
+        },
+        "name": "LocationId",
+        "schema": "string"
+      },
+      {
+        "@id": "dtmi:iotDemo02:Container_6hy:Status",
+        "@type": [
+          "Property",
+          "Cloud",
+          "StringValue"
+        ],
+        "displayName": {
+          "en": "Status"
+        },
+        "name": "Status",
+        "schema": "string"
+      }
+    ],
+    "displayName": {
+      "en": "Container Data"
+    },
+    "@context": [
+      "dtmi:iotcentral:context;2",
+      "dtmi:dtdl:context;2"
+    ]
+  }
+]

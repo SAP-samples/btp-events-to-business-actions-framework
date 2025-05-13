@@ -1,0 +1,259 @@
+{
+    "_version": "1.40.0",
+    "sap.app": {
+        "id": "sap.paa.action.mgmt.ui.actions",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "0.0.1"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "resources": "resources.json",
+        "sourceTemplate": {
+            "id": "ui5template.fiorielements.v4.lrop",
+            "version": "1.2.0"
+        },
+        "dataSources": {
+            "mainService": {
+                "uri": "/service/admin/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [
+                        "annotation"
+                    ],
+                    "localUri": "localService/metadata.xml",
+                    "odataVersion": "4.0"
+                }
+            },
+            "annotation": {
+                "type": "ODataAnnotation",
+                "uri": "annotations/annotation.xml",
+                "settings": {
+                    "localUri": "annotations/annotation.xml"
+                }
+            }
+        },
+        "crossNavigation": {
+            "inbounds": {
+                "sap-paa-action-mgmt-ui-actions-inbound": {
+                    "signature": {
+                        "parameters": {},
+                        "additionalParameters": "allowed"
+                    },
+                    "semanticObject": "Actions",
+                    "action": "manage",
+                    "title": "{{flpTitle}}",
+                    "subTitle": "{{flpSubtitle}}",
+                    "icon": ""
+                }
+            }
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "flexEnabled": true,
+        "dependencies": {
+            "minUI5Version": "1.120.17",
+            "libs": {
+                "sap.m": {},
+                "sap.ui.core": {},
+                "sap.ushell": {},
+                "sap.fe.templates": {},
+                "sap.f": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "sap.paa.action.mgmt.ui.actions.i18n.i18n"
+                }
+            },
+            "": {
+                "dataSource": "mainService",
+                "preload": true,
+                "settings": {
+                    "synchronizationMode": "None",
+                    "operationMode": "Server",
+                    "autoExpandSelect": true,
+                    "earlyRequests": true
+                }
+            },
+            "@i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "uri": "i18n/i18n.properties"
+            }
+        },
+        "resources": {
+            "css": []
+        },
+        "routing": {
+            "routes": [
+                {
+                    "pattern": ":?query:",
+                    "name": "ActionsList",
+                    "target": "ActionsList"
+                },
+                {
+                    "pattern": "Actions({key}):?query:",
+                    "name": "ActionsObjectPage",
+                    "target": "ActionsObjectPage"
+                },
+                {
+                    "pattern": "Actions({key})/relatedActions({key2}):?query:",
+                    "name": "prepostActionsObjectPage",
+                    "target": "prepostActionsObjectPage"
+                }
+            ],
+            "targets": {
+                "ActionsList": {
+                    "type": "Component",
+                    "id": "ActionsList",
+                    "name": "sap.fe.templates.ListReport",
+                    "options": {
+                        "settings": {
+                            "entitySet": "Actions",
+                            "variantManagement": "None",
+                            "navigation": {
+                                "Actions": {
+                                    "detail": {
+                                        "route": "ActionsObjectPage"
+                                    }
+                                }
+                            },
+                            "hideFilterBar": false,
+                            "initialLoad": "Enabled",
+                            "controlConfiguration": {
+                                "@com.sap.vocabularies.UI.v1.LineItem": {
+                                    "tableSettings": {
+                                        "type": "ResponsiveTable",
+                                        "creationMode": {
+                                            "name": "NewPage"
+                                        },
+                                        "selectionMode": "Single",
+                                        "personalization": {
+                                            "column": true,
+                                            "filter": false,
+                                            "sort": true
+                                        },
+                                        "enableExport": true
+                                    },
+                                    "columns": {
+                                        "DataField::name": {
+                                            "availability": "Default"
+                                        },
+                                        "DataField::method_ID": {
+                                            "availability": "Default"
+                                        },
+                                        "DataField::descr": {
+                                            "availability": "Default"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "ActionsObjectPage": {
+                    "type": "Component",
+                    "id": "ActionsObjectPage",
+                    "name": "sap.fe.templates.ObjectPage",
+                    "options": {
+                        "settings": {
+                            "editableHeaderContent": false,
+                            "entitySet": "Actions",
+                            "navigation": {
+                                "relatedActions": {
+                                    "detail": {
+                                        "route": "prepostActionsObjectPage"
+                                    }
+                                }
+                            },
+                            "content": {
+                                "header": {
+                                    "visible": true,
+                                    "anchorBarVisible": false
+                                }
+                            },
+                            "sectionLayout": "Tabs",
+                            "controlConfiguration": {
+                                "childActions/@com.sap.vocabularies.UI.v1.LineItem#ChildActions": {
+                                    "tableSettings": {
+                                        "enableExport": true,
+                                        "enableFullScreen": true,
+                                        "enablePaste": false,
+                                        "selectAll": true,
+                                        "selectionLimit": 10,
+                                        "selectionMode": "Single",
+                                        "type": "ResponsiveTable",
+                                        "creationMode": {
+                                            "createAtEnd": true,
+                                            "name": "Inline"
+                                        },
+                                        "personalization": {
+                                            "column": false,
+                                            "filter": false,
+                                            "sort": false
+                                        },
+                                        "quickVariantSelection": {
+                                            "hideTableTitle": true,
+                                            "showCounts": true
+                                        }
+                                    },
+                                    "columns": {
+                                        "DataField::ID": {
+                                            "availability": "Default"
+                                        },
+                                        "DataField::flowType_ID": {
+                                            "availability": "Default"
+                                        },
+                                        "DataField::action_ID": {
+                                            "availability": "Default"
+                                        }
+                                    }
+                                }
+                            },
+                            "showRelatedApps": true,
+                            "variantManagement": "None"
+                        }
+                    }
+                },
+                "prepostActionsObjectPage": {
+                    "type": "Component",
+                    "id": "prepostActionsObjectPage",
+                    "name": "sap.fe.templates.ObjectPage",
+                    "options": {
+                        "settings": {
+                            "editableHeaderContent": false,
+                            "entitySet": "prepostActions"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "sap.fiori": {
+        "registrationIds": [],
+        "archeType": "transactional"
+    }
+}

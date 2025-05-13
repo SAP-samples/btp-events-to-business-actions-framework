@@ -1,0 +1,226 @@
+{
+    "_version": "1.42.0",
+    "sap.app": {
+        "id": "sap.paa.action.mgmt.ui.types",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "0.0.1"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "resources": "resources.json",
+        "sourceTemplate": {
+            "id": "@sap/generator-fiori:lrop",
+            "version": "1.8.0",
+            "toolsId": "27659636-b00d-49be-8d3b-7be8c002a373"
+        },
+        "dataSources": {
+            "mainService": {
+                "uri": "/service/admin/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [
+                        "annotation"
+                    ],
+                    "localUri": "localService/metadata.xml",
+                    "odataVersion": "4.0"
+                }
+            },
+            "annotation": {
+                "type": "ODataAnnotation",
+                "uri": "annotations/annotation.xml",
+                "settings": {
+                    "localUri": "annotations/annotation.xml"
+                }
+            }
+        },
+        "crossNavigation": {
+            "inbounds": {
+                "sap-paa-action-mgmt-ui-types-inbound": {
+                    "signature": {
+                        "parameters": {},
+                        "additionalParameters": "allowed"
+                    },
+                    "semanticObject": "ActionTypes",
+                    "action": "manage",
+                    "title": "{{flpTitle}}",
+                    "subTitle": "{{flpSubtitle}}",
+                    "icon": ""
+                }
+            }
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "flexEnabled": true,
+        "dependencies": {
+            "minUI5Version": "1.120.17",
+            "libs": {
+                "sap.m": {},
+                "sap.ui.core": {},
+                "sap.ushell": {},
+                "sap.fe.templates": {},
+                "sap.f": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "sap.paa.action.mgmt.ui.types.i18n.i18n"
+                }
+            },
+            "": {
+                "dataSource": "mainService",
+                "preload": true,
+                "settings": {
+                    "synchronizationMode": "None",
+                    "operationMode": "Server",
+                    "autoExpandSelect": true,
+                    "earlyRequests": true
+                }
+            },
+            "@i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "uri": "i18n/i18n.properties"
+            }
+        },
+        "resources": {
+            "css": []
+        },
+        "routing": {
+            "config": {
+                "flexibleColumnLayout": {
+                    "defaultTwoColumnLayoutType": "TwoColumnsMidExpanded",
+                    "defaultThreeColumnLayoutType": "ThreeColumnsMidExpanded"
+                },
+                "routerClass": "sap.f.routing.Router"
+            },
+            "routes": [
+                {
+                    "pattern": ":?query:",
+                    "name": "TypesList",
+                    "target": [
+                        "TypesList"
+                    ]
+                },
+                {
+                    "pattern": "Types({key}):?query:",
+                    "name": "TypesObjectPage",
+                    "target": [
+                        "TypesList",
+                        "TypesObjectPage"
+                    ]
+                }
+            ],
+            "targets": {
+                "TypesList": {
+                    "type": "Component",
+                    "id": "TypesList",
+                    "name": "sap.fe.templates.ListReport",
+                    "options": {
+                        "settings": {
+                            "entitySet": "Types",
+                            "variantManagement": "None",
+                            "navigation": {
+                                "Types": {
+                                    "detail": {
+                                        "route": "TypesObjectPage"
+                                    }
+                                }
+                            },
+                            "hideFilterBar": false,
+                            "controlConfiguration": {
+                                "@com.sap.vocabularies.UI.v1.LineItem": {
+                                    "tableSettings": {
+                                        "enableExport": true,
+                                        "selectAll": true,
+                                        "selectionMode": "Single",
+                                        "creationMode": {
+                                            "name": "NewPage"
+                                        },
+                                        "personalization": {
+                                            "column": true,
+                                            "sort": true
+                                        },
+                                        "type": "ResponsiveTable"
+                                    },
+                                    "columns": {
+                                        "DataField::name": {
+                                            "availability": "Default"
+                                        },
+                                        "DataField::descr": {
+                                            "availability": "Default"
+                                        },
+                                        "DataField::payload": {
+                                            "formatOptions": {
+                                                "textLinesEdit": "3",
+                                                "textMaxLines": "5",
+                                                "textMaxCharactersDisplay": "400",
+                                                "textExpandBehaviorDisplay": "Popover"
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "initialLoad": "Enabled"
+                        }
+                    },
+                    "controlAggregation": "beginColumnPages",
+                    "contextPattern": ""
+                },
+                "TypesObjectPage": {
+                    "type": "Component",
+                    "id": "TypesObjectPage",
+                    "name": "sap.fe.templates.ObjectPage",
+                    "options": {
+                        "settings": {
+                            "editableHeaderContent": false,
+                            "entitySet": "Types",
+                            "variantManagement": "None",
+                            "content": {
+                                "header": {
+                                    "visible": true,
+                                    "anchorBarVisible": false
+                                }
+                            },
+                            "sectionLayout": "Tabs"
+                        }
+                    },
+                    "controlAggregation": "midColumnPages",
+                    "contextPattern": "/Types({key})"
+                }
+            }
+        },
+        "rootView": {
+            "viewName": "sap.fe.templates.RootContainer.view.Fcl",
+            "type": "XML",
+            "async": true,
+            "id": "appRootView"
+        }
+    },
+    "sap.fiori": {
+        "registrationIds": [],
+        "archeType": "transactional"
+    }
+}

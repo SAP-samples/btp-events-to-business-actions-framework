@@ -1,0 +1,121 @@
+{
+    "timestamp":"{{date.now}}",
+    "eventId": {{random.number(
+        {
+            "min":233300,
+            "max":450000
+        }
+    )}},
+    "version": "1",
+    "projectDisplayName": "sap-monitron",
+    "siteDisplayName": "1017",
+    "assetDisplayName": "Motor",
+    "sensorPositionDisplayName": "Left",
+    "sensor": {
+        "physicalId": "Sensor1",
+        "rssi": 12
+    },
+    "gateway": {
+        "physicalId": "XXXCGH1234"
+    },
+    "measurement": {
+        "features": {
+            "acceleration": {
+                "band0To6000Hz": {
+                    "xAxis": {
+                        "rms": 10
+                    },
+                    "yAxis": {
+                        "rms": 10
+                    },
+                    "zAxis": {
+                        "rms": 10
+                    }
+                },
+                "band10To1000Hz": {
+                    "resultantVector": {
+                        "absMax": 10,
+                        "absMin": 10,
+                        "crestFactor": 10,
+                        "rms": 10
+                    },
+                    "xAxis": {
+                        "rms": 10
+                    },
+                    "yAxis": {
+                        "rms": 10
+                    },
+                    "zAxis": {
+                        "rms": 10
+                    }
+                }
+            },
+            "temperature":  {{random.number(
+        {
+            "min":20,
+            "max":150
+        }
+    )}},
+            "velocity": {
+                "band10To1000Hz": {
+                    "resultantVector": {
+                        "absMax": 10,
+                        "absMin": 10,
+                        "crestFactor": 10,
+                        "rms": 10
+                    },
+                    "xAxis": {
+                        "rms": 10
+                    },
+                    "yAxis": {
+                        "rms": 10
+                    },
+                    "zAxis": {
+                        "rms": 10
+                    }
+                }
+            }
+        },
+        "sequenceNo": 12
+    },
+    "models": {
+        "temperatureML": {
+            "persistentClassificationOutput": "{{random.arrayElement(
+        ["UNKNOWN","HEALTHY","WARNING","ALARM"]
+    )}}",
+            "pointwiseClassificationOutput": "{{random.arrayElement(
+        ["UNKNOWN","HEALTHY","WARNING","ALARM"]
+    )}}"
+        },
+        "vibrationISO": {
+            "isoClass": "{{random.arrayElement(
+        ["CLASS1","CLASS2","CLASS3","CLASS4"]
+    )}}",
+            "mutedThreshold": "{{random.arrayElement(
+        ["WARNING","ALARM"]
+    )}}",
+            "persistentClassificationOutput": "{{random.arrayElement(
+        ["UNKNOWN","HEALTHY","WARNING","ALARM"]
+    )}}",
+            "pointwiseClassificationOutput": "{{random.arrayElement(
+        ["UNKNOWN","HEALTHY","WARNING","ALARM"]
+    )}}"
+        },
+        "vibrationML": {
+            "persistentClassificationOutput": "{{random.arrayElement(
+        ["UNKNOWN","HEALTHY","WARNING","ALARM"]
+    )}}",
+            "pointwiseClassificationOutput":  "{{random.arrayElement(
+        ["UNKNOWN","HEALTHY","WARNING","ALARM"]
+    )}}"
+        }
+    },
+    "assetState": {
+        "newState":  "{{random.arrayElement(
+        ["UNKNOWN","HEALTHY","WARNING","NEEDS_MAINTENANCE","ALARM"]
+    )}}",
+        "previousState": "{{random.arrayElement(
+        ["UNKNOWN","HEALTHY","WARNING","NEEDS_MAINTENANCE","ALARM"]
+    )}}"
+    }
+}
