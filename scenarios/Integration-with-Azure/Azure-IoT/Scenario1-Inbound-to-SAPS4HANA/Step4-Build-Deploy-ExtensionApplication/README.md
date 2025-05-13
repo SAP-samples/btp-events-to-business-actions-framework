@@ -5,7 +5,7 @@ In this section, you will clone the codebase and deploy the extension applicatio
 ### 1. Clone the GitHub Repository
     
 
-Access the [Events To Action Framework](https://github.com/SAP-samples/btp-events-to-business-actions-framework/tree/advanced-event-mesh) GitHub repository to download the project.
+Access the [Events To Action Framework](https://github.com/SAP-samples/btp-events-to-business-actions-framework) GitHub repository to download the project.
 
 ### 2. Check the Prerequisites for Deployment
 
@@ -22,7 +22,7 @@ Build and deploy the application. Run the following commands:
 2. Navigate to the **action-management** directory.
 
     ```
-    cd action-management
+    cd Code\BTP\action-management
     ```
 3. Fetch the dependencies.
 

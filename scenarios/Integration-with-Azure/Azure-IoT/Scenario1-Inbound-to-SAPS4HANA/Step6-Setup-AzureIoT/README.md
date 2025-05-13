@@ -10,7 +10,7 @@ In this tutorial, you will configure the Microsoft Azure IoT Central Application
 
 Create a new Microsoft Azure account and get a free trial subscription. 
 
-Once you have access to the Microsoft Azure account, you will be able to see the list of Azure services on the [Microsoft](http://portal.azure.com) Azure Portal Home Page](http://portal.azure.com).
+Once you have access to the Microsoft Azure account, you will be able to see the list of Azure services on the [Microsoft](http://portal.azure.com) [Azure Portal Home Page](http://portal.azure.com).
 
 ![plot](./images/homepage.png) 
 
