@@ -36,9 +36,9 @@ You can choose to configure and integrate events with any SAP LoB solution.
 
 ## Business Process Flow
 
-In this event-driven scenario, based on the real-time status of the IoT Devices, actionable events are sent to SAP BTP to decide on the critical business actions to be taken in the SAP Enterprise Business systems based on business rules defined in the system.
+In this event-driven scenario, based on the real-time status of the IoT Devices, actionable events are sent to SAP BTP to decide on the critical business actions to be taken in the SAP Enterprise Business systems based on business decisions defined in the system.
 
-![plot](./images/usecase%20scenario.png)
+![plot](./scenarios/Integration-with-Azure/images/usecase%20scenario.png)
 
 1. Data from IoT Devices are sent to Microsoft Azure IoT Central/AWS IoT which includes all the streaming data from the devices.
 
