@@ -60,32 +60,32 @@ Build and deploy the application. Run the following commands:
 ```
 
 
-3. Fetch the dependencies.
+4. Fetch the dependencies.
 
     ```
     npm install
     ```
-4. Build action-management modules.
+5. Build action-management modules.
 
     ```
     npm run build
     ```
-5. Log in to your subaccount in SAP BTP to deploy the extension application.
+6. Log in to your subaccount in SAP BTP to deploy the extension application.
     Check your region and copy the API endpoint accordingly. For example, "https://api.cf.region.hana.ondemand.com"
 
     ```
     cf login -a `<CF API endpoint>`
     ```
-6. Push the application to your subaccount.
+7. Push the application to your subaccount.
 
     ```
     npm run deploy
     ```
-7. You can also check the status of your applications in the SAP BTP cockpit. Copy the value of the extension application URL.
+8. You can also check the status of your applications in the SAP BTP cockpit. Copy the value of the extension application URL.
 
     ![plot](./images/SAPBTPCockpit.png)
 
-8. In the SAP BTP cockpit, navigate to your subaccount and choose **Services** > **Instances and Subscriptions**. Check if you have all of the instances created post deployment as shown below. Make sure the status of all of the instances are **Created**.
+9. In the SAP BTP cockpit, navigate to your subaccount and choose **Services** > **Instances and Subscriptions**. Check if you have all of the instances created post deployment as shown below. Make sure the status of all of the instances are **Created**.
 
     ![plot](./images/postdeploy.png)
 

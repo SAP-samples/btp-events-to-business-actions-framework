@@ -38,21 +38,16 @@ SAP Private Link service is used for connectivity between SAP BTP and SAP S/4HAN
 
 The following steps depicts the information flow across systems:
 
-(1) Equipment (Camera): CCTV cameras at the factory capture images of people and location and pushes them to an Amazon S3 bucket.
+(1) An application administrator logs into SAP BTP Extension application based on Events to Business Actions Framework via SAP Build Work Zone, advanced edition, to configure the business rules/decisions and the business actions that needs to be triggered in the business systems.
 
-(2) Amazon S3 holds the images for model inference. A lambda function can be scheduled or triggered to execute the inference. 
+(2) CCTV cameras at the factory capture images of people and upload them to Amazon S3, which triggers an AWS Lambda function that runs inference using Amazon Rekognition’s PPE detection model to identify missing safety gear, and if any safety violation is detected, it publishes an event to the SAP Integration Suite, Advanced Event Mesh.
 
-(3) The lambda function calls Amazon Rekognition PPE detection model to detect any visual inspection issues with the product.
+(3) As the processor module's (part of the Events-to-Business-Action framework) subscribes to Advanced event mesh, the event is received
 
-(4) Amazon Rekognition – PPE detection evaluated the image for any missing PPE equipment like Hand gloves, Face covers, Head gears and safety visors. if an anomaly is detected, The Lambda function accesses AWS secrets Manager for credential information for SAP BTP
+(4) Processor module (part of the Events-to-Business-Action framework) leverages the Decisions capability of SAP Build Process Automation to derive business action (for example, purchase order requisition creation in SAP S/4HANA) based on certain characteristics of incoming event.
 
-(5) The lambda function calls the SAP Integration Suite, Advanced event mesh and passes the event payload. Event-to-Business-Action framework(extension app) processor module's endpoint is subscribed to SAP Advanced Event Mesh, hence receives this event.
 
-(6) Event-to-Business-Action framework(extension app) processor module leverages the Decision capability of SAP Build Process Automation to derive business action (for example, In this scenario,**EHS Report Incident- Safety Observation** creation in SAP S/4HANA system) based on certain characteristics of incoming event.
-
-(7), (8), (9) (10) and (11) Event-to-Business-Action framework (extension app) processor module triggers the defined action in the SAP S/4HANA system by using the SAP Destination Service and SAP Private Link Service.
-
-For more information, see Set Up Connectivity Between SAP BTP and SAP S/4HANA Using SAP Private Link Service page.
+(5) The defined action is triggered in SAP S/4HANA using the SAP Destination service and SAP Connectivity service leveraging cloud connector setup. In case SAP S/4HANA and SAP BTP are on same hyperscaler, communication with SAP S/4HANA happens via SAP Private Link service.
 
 ## Requirements
 
