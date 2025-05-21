@@ -34,7 +34,10 @@ The key services used from **AWS** are Amazon Rekognition PPE Detection, Amazon 
 SAP Private Link service is used for connectivity between SAP BTP and SAP S/4HANA when both the systems are running on AWS Infrastructure, in this tutorial you will find implementation steps for SAP BTP Private Link service and AWS Private Link service. Alternatively you can use SAP Connectivity service and Cloud Connector for integration of SAP BTP and SAP S/4HANA as well.
 
 
-![plot](Architecture.png) **Figure-1: High-level architecture (with SAP S/4HANA on AWS)**
+![plot](Architecture.png) 
+
+
+**Figure-1: High-level architecture (with SAP S/4HANA on AWS)**
 
 The following steps depicts the information flow across systems:
 
@@ -99,29 +102,29 @@ This scenario talks about the steps needed for translating events from AWS IoT t
 
 These are the steps to configure SAP S/4HANA, SAP BTP and Amazon AWS.
 
-[Step 1: Set Up the Subaccount in SAP BTP](./Documentation/Step1-Setup-SAPBTP-Subaccount/README.md)
+[Step 1: Set Up the Subaccount in SAP BTP](./Step1-Setup-SAPBTP-Subaccount/README.md)
 
-[Step 2: Check SAP S/4HANA Readiness](./Documentation/Step2-SAPS4HANA-Readiness/README.md)
+[Step 2: Check SAP S/4HANA Readiness](./Step2-SAPS4HANA-Readiness/README.md)
 
 Step 3: Connect SAP BTP and SAP S/4HANA
 
-   - [(Option 1) Using SAP BTP Connectivity Service](./Documentation/Step3a-SetupCloudConnector/README.md)
+   - [(Option 1) Using SAP BTP Connectivity Service](./Step3a-SetupCloudConnector/README.md)
 
-   - [(Option 2) Using SAP Private Link Service](./Documentation/Step3b-Setup-SAPPrivateLinkService/README.md)
+   - [(Option 2) Using SAP Private Link Service](./Step3b-Setup-SAPPrivateLinkService/README.md)
 
-[Step 4a: Build and Deploy the Extension Application](./Documentation/Step4a-Build-Deploy-ExtensionApplication/README.md)
+[Step 4a: Build and Deploy the Extension Application](./Step4a-Build-Deploy-ExtensionApplication/README.md)
 
-[Step 4b: SAP Integration Suite, Advanced Event Mesh Configuration](./Documentation/Step4b-Advanced-Event-Mesh-Configuration/README.md)
+[Step 4b: SAP Integration Suite, Advanced Event Mesh Configuration](./Step4b-Advanced-Event-Mesh-Configuration/README.md)
 
-[Step 5: Setup AWS Account](./Documentation/Step5-Setup-AWS/README.md)
+[Step 5: Setup AWS Account](./Step5-Setup-AWS/README.md)
 
-[Step 6: Create SAP Build Process Automation-Decisions Project](./Documentation/Step6-Configure-Decisions-Part1/README.md)
+[Step 6: Create SAP Build Process Automation-Decisions Project](./Step6-Configure-Decisions-Part1/README.md)
 
-[Step 7: Configure SAP S/4HANA Business Actions in the extension application](./Documentation/Step7-Configure-BusinessActions/README.md)
+[Step 7: Configure SAP S/4HANA Business Actions in the extension application](./Step7-Configure-BusinessActions/README.md)
 
-[Step 8: Update and Deploy SAP Build Process Automation Decisions Project](./Documentation/Step8-Configure-Decisions-Part2/README.md)
+[Step 8: Update and Deploy SAP Build Process Automation Decisions Project](./Step8-Configure-Decisions-Part2/README.md)
 
-[Step 9: Test the Extension Application](./Documentation/Step9-Test-ExtensionApplication/README.md)
+[Step 9: Test the Extension Application](./Step9-Test-ExtensionApplication/README.md)
 
 ## Additional Resources
 
