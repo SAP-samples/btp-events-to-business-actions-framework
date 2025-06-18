@@ -6,7 +6,6 @@ from aws_cdk import (
 )
 # import constructs
 from constructs import Construct
-from LambdaLayer.LambdaLayers import LambdaLayers
 from Lambda.Lambda import LambdaConstruct
 from Roles.roles import rolesConstruct
 from AppConfig.config import Config
@@ -17,7 +16,7 @@ from AppConfig.config import Config
 #     PythonLayerVersion
 #     PythonFunction
 # )
-class AwsMonitronSAPStack(Stack):
+class AwsSitewiseSAPStack(Stack):
 
     def __init__(self, scope: Construct, id: str, **kwargs) -> None:
         super().__init__(scope, id, **kwargs)
@@ -37,9 +36,7 @@ class AwsMonitronSAPStack(Stack):
             #if subnet.subnet_id==appConfig.subnet:
                 #lamdbasubnet.append(subnet)
  
-        #2.Layers
-        layers = LambdaLayers(self,'m4slambdalayers')
-        
+
         #3.Roles
         m4srole = rolesConstruct(self, 'm4srole')
 
@@ -72,7 +69,6 @@ class AwsMonitronSAPStack(Stack):
             # 'boto3Layer': layers._boto3,
             # 'pillowLayer': layers._pillow,
             # 'requestsLayer': layers._requests,
-            'lambdaLayer': layers._lambdalayer,
             'vpc': vpc,
             'subnet': lamdbasubnet,
             'config': appConfig,
