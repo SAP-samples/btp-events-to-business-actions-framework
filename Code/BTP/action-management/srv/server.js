@@ -12,15 +12,20 @@ cds.on('bootstrap', app => {
     try{
         const eventMessage = req.body;
         await actionUtil.convertEventToBusinessAction(eventMessage, httpsAgent);
-        return "Event Processed. Please check logs for status.";
-
+        res.status(200).json({ message: "Event Processed. Please check logs for details." });
+        console.log('Event processed successfully. Sent 200 OK.');
     } catch(error){
-        throw error;
-
+        console.error('Error processing event:', error.message);
+        if (error.stack) {
+            console.error(error.stack);
+        }
+        res.status(500).json({
+            error: "Failed to process event.",
+            details: "An internal server error occurred. Please check application logs for more details."
+        });
     }
     });
     app.use(proxy());
-
 })
 
 module.exports = cds.server
