@@ -12,8 +12,8 @@ cds.on('bootstrap', app => {
     try{
         const eventMessage = req.body;
         await actionUtil.convertEventToBusinessAction(eventMessage, httpsAgent);
+        console.log('Event processed successfully. Sending 200 OK.');
         res.status(200).json({ message: "Event Processed. Please check logs for details." });
-        console.log('Event processed successfully. Sent 200 OK.');
     } catch(error){
         console.error('Error processing event:', error.message);
         if (error.stack) {
